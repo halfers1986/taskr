@@ -57,7 +57,7 @@ app.use(cookieParser());
 // Middleware to manage sessions
 app.use(
   session({
-    secret: "bananaheiroglyphsexcitementbuckarooanimatronics158961813151789151311914020194861530.1fv5rvbte1b9105 0eqwg17t8e9n13",
+    secret: "", // Secret password here
     resave: false, // Prevents session from being saved every time a request is made
     saveUninitialized: false, // GDPR compliance (only save cookies when user logs in)
     cookie: {
