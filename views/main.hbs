@@ -15,7 +15,9 @@
   <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.colors.min.css" /> -->
 
   <!-- Personal css -->
-  <link rel="stylesheet" href="/css/mystyles.css" />
+  {{!--
+  <link rel="stylesheet" href="/css/mystyles.css" /> --}}
+  <link rel="stylesheet" href="/css/styles.css" />
 
   <!-- Logo font -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -26,8 +28,8 @@
 </head>
 
 <body>
-  <header class="container app-header">
-    <nav id="nav-small-screen">
+  <header style="margin: 0; padding: 0;">
+    <div class="container app-header"> 
       <div class="logo-wrapper">
         <svg class="logo" id="eFG6uYEB0Sx1" width="400" height="200" preserveAspectRatio="xMidYMid meet"
           viewBox="0 40 100 100" shape-rendering="geometricPrecision" text-rendering="geometricPrecision">
@@ -55,23 +57,21 @@
           </g>
         </svg>
       </div>
-      <ul>
-        <li>
-          <a class="secondary" id="open-sidebar" href="#">
-            <svg width="50" height="50" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-              <path d="M4 18L20 18" stroke-width="2" stroke-linecap="round" />
-              <path d="M4 12L20 12" stroke-width="2" stroke-linecap="round" />
-              <path d="M4 6L20 6" stroke-width="2" stroke-linecap="round" />
-            </svg>
-          </a>
-        </li>
-      </ul>
-    </nav>
-  </header>
-  <main class="container grid main-screen">
-    <section>
-      <aside id="sidebar">
-        <header class="grid" id="sidebar-header-small-screen">
+      <nav id="nav-small-screen">
+        <ul>
+          <li>
+            <a class="secondary" id="open-sidebar" href="#">
+              <svg width="50" height="50" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path d="M4 18L20 18" stroke-width="2" stroke-linecap="round" />
+                <path d="M4 12L20 12" stroke-width="2" stroke-linecap="round" />
+                <path d="M4 6L20 6" stroke-width="2" stroke-linecap="round" />
+              </svg>
+            </a>
+          </li>
+        </ul>
+      </nav>
+      <nav id="main-nav">
+        <header class="flex" id="sidebar-header-small-screen">
           <h2>Menu</h2>
           <a id="close-sidebar" href="#">
             <svg width="24px" height="24px" fill="#FFFFFF" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg">
@@ -80,58 +80,149 @@
             </svg>
           </a>
         </header>
-        <header id="sidebar-header-main">
-          <div class="logo-wrapper">
-            <svg class="logo" id="eFG6uYEB0Sx1" width="400" height="200" preserveAspectRatio="xMidYMid meet"
-              viewBox="0 40 100 100" shape-rendering="geometricPrecision" text-rendering="geometricPrecision">
-              <g>
-                <!--Icon shape-->
-                <rect width="77" height="77" x="-40" y="50.5" rx="13" ry="13" fill="none" stroke-width="6" />
-                <!--Tick-->
-                <path
-                  d="M34.264179,87.977264c5.923501,2.240505,14.069886,12.381528,17.2989,19.275918C58.060229,96.515478,73.388151,78.067343,82.7011,70.678364"
-                  transform="translate(-59.5, 3)" fill="none" stroke-width="8" stroke-linecap="round"
-                  stroke-linejoin="round" />
-              </g>
-              <g>
-                <!--"Taskr" text-->
-                <text dx="-18" dy="1" font-family="Prompt" font-size="12" font-weight="400"
-                  transform="matrix(3.379208 0 0 3.832362 107.691444 91.051542)" stroke-width="0">
-                  <tspan y="0" font-family="Prompt" font-weight="600" stroke-width="0">Taskr</tspan>
-                  <tspan x="0" y="10" font-family="Roboto" font-weight="400" stroke-width="0" />
-                </text>
-                <!--"Get shit done" text-->
-                <text dx="-59.5" dy="0" font-family="Prompt" font-size="11" text-decoration="overline" font-weight="700"
-                  transform="translate(113.355163 110.983429)" stroke-width="0">
-                  <tspan y="4" font-weight="700" stroke-width="0">GET SHIT DONE</tspan>
-                </text>
-              </g>
-            </svg>
+        <ul>
+          <li><a class="secondary" href="#">Tasks</a></li>
+          <li><a class="primary" href="#">Data</a></li>
+          <li><a class="primary" href="#">Settings</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+  <main class="container grid main-screen">
+    <section>
+      <aside id="sidebar">
+        <div id="task-controls">
+          <button class="add-task" style="width: 90%; margin: 0.5rem;">Add Task</button>
+          <div style="padding: 0.5rem;">
+            <details id="filter-tasks">
+              <summary>Filter</summary>
+              <ul>
+                <li>
+                  <details>
+                    <summary>By Type</summary>
+                    <ul>
+                      <li>
+                        <label><input type="checkbox" />To-do</label>
+                      </li>
+                      <li>
+                        <label><input type="checkbox" />Shopping List</label>
+                      </li>
+                      <li>
+                        <label><input type="checkbox" />Note</label>
+                      </li>
+                    </ul>
+                  </details>
+                </li>
+                <li>
+                  <details>
+                    <summary>By Priority</summary>
+                    <ul>
+                      <li>
+                        <label><input type="checkbox" />Low</label>
+                      </li>
+                      <li>
+                        <label><input type="checkbox" />Medium</label>
+                      </li>
+                      <li>
+                        <label><input type="checkbox" />High</label>
+                      </li>
+                    </ul>
+                  </details>
+                </li>
+                <li>
+                  <details>
+                    <summary>By Due Date</summary>
+                    <ul>
+                      <li>
+                        <label><input type="checkbox" /> Today</label>
+                      </li>
+                      <li>
+                        <label><input type="checkbox" /> This Week</label>
+                      </li>
+                      <li>
+                        <label><input type="checkbox" /> This Month</label>
+                      </li>
+                      <li>
+                        <label><input type="checkbox" /> This Year</label>
+                      </li>
+                    </ul>
+                  </details>
+                </li>
+                <li>
+                  <details>
+                    <summary>By Status</summary>
+                    <ul>
+                      <li>
+                        <label><input type="checkbox" /> Completed</label>
+                      </li>
+                      <li>
+                        <label><input type="checkbox" /> In Progress</label>
+                      </li>
+                      <li>
+                        <label><input type="checkbox" /> Not Started</label>
+                      </li>
+                    </ul>
+                  </details>
+                </li>
+                <li>
+                  <details>
+                    <summary>By Category</summary>
+                    <ul>
+                      <li>
+                        <label><input type="checkbox" /> Work</label>
+                      </li>
+                      <li>
+                        <label><input type="checkbox" /> Personal</label>
+                      </li>
+                      <li>
+                        <label><input type="checkbox" /> Urgent</label>
+                      </li>
+                      <li>
+                        <label><input type="checkbox" /> Home</label>
+                      </li>
+                      <li>
+                        <label><input type="checkbox" /> Health</label>
+                      </li>
+                      <li>
+                        <label><input type="checkbox" /> Shopping</label>
+                      </li>
+                      <li>
+                        <label><input type="checkbox" /> Study</label>
+                      </li>
+                      <li>
+                        <label><input type="checkbox" /> Hobby</label>
+                      </li>
+                      <!-- User-defined categories -->
+                      {{#each categories as |category|}}
+                      <li>
+                        <input type="checkbox" id="userCategoryFilter" name="userCategoryFilter" value="{{category}}">
+                      </li>
+                      {{/each}}
+                    </ul>
+                  </details>
+                </li>
+              </ul>
+              <button class="secondary" id="clear-filters">Clear filters</button>
+            </details>
           </div>
-        </header>
+          <div style="padding: 0.5rem;">
+            <details id="sort-tasks">
+              <summary>Sort</summary>
+              <ul>
+                <li>
+                  <label><input type="radio" name="sort" /> Urgent</label>
+                </li>
+                <li>
+                  <label><input type="radio" name="sort" /> Due Date</label>
+                </li>
+                <li>
+                  <label><input type="radio" name="sort" /> Alphabetical</label>
+                </li>
+              </ul>
+            </details>
+          </div>
+        </div>
         <nav class="overflow-auto" id="sidebar-nav">
-          <details>
-            <summary><b>Tasks</b></summary>
-            <ul class="nav-ul">
-              <li><a class="primary" href="#">View Tasks</a></li>
-              <li><a class="secondary add-task" href="#">Add Task</a></li>
-            </ul>
-          </details>
-          <hr />
-          <details>
-            <summary><b>Data</b></summary>
-            <ul class="nav-ul">
-              <li><a class="secondary" href="/data">View Data</a></li>
-            </ul>
-          </details>
-          <hr />
-          <details>
-            <summary><b>My account</b></summary>
-            <ul class="nav-ul">
-              <li><a class="secondary" href="/settings">Edit Profile</a></li>
-            </ul>
-          </details>
-          <hr />
           <li><a id="logout" href="#" class="secondary">Logout</a></li>
           <li>
             <div>
@@ -244,52 +335,12 @@
       </dialog>
     </section>
     <section class="content">
-      <div class="grid" id="task-controls">
-        <div>
-          <details class="dropdown" id="filter-tasks">
-            <summary>Filter</summary>
-            <ul>
-              <li>
-                <label><input type="checkbox" /> Urgent</label>
-              </li>
-              <li>
-                <label><input type="checkbox" /> Today</label>
-              </li>
-              <li>
-                <label><input type="checkbox" /> This Week</label>
-              </li>
-              <li>
-                <label><input type="checkbox" /> This Month</label>
-              </li>
-              <li>
-                <label><input type="checkbox" /> This Year</label>
-              </li>
-            </ul>
-          </details>
-        </div>
-        <div>
-          <details class="dropdown" id="sort-tasks">
-            <summary>Sort</summary>
-            <ul>
-              <li>
-                <label><input type="radio" name="sort" /> Urgent</label>
-              </li>
-              <li>
-                <label><input type="radio" name="sort" /> Due Date</label>
-              </li>
-              <li>
-                <label><input type="radio" name="sort" /> Alphabetical</label>
-              </li>
-            </ul>
-          </details>
-        </div>
-      </div>
-      <div class="primary-content overflow-auto" id="task-list">
+      <div class="primary-content overflow-auto" id="task-list" style="padding-left: 0.5rem; padding-right: 0.5rem;">
         {{!-- If there are tasks, display them --}}
         {{#if tasks.length}}
-          {{#each tasks}}
-            {{> taskItem}} {{!-- for each Task, render the taskItem partial --}}
-          {{/each}}
+        {{#each tasks}}
+        {{> taskItem}} {{!-- for each Task, render the taskItem partial --}}
+        {{/each}}
         {{else}}
         {{!-- If there are no tasks, display a welcome message --}}
         <div class="no-tasks">
@@ -310,7 +361,7 @@
   <!-- Scripts for functionality and dynamic content -->
   <script src="/javascript/handlebars-setup.js"></script>
   <script src="/javascript/theme-switcher.js"></script>
-  <script src="/javascript/sidebar.js"></script>
+  <script src="/javascript/slide-in-nav--mobile.js"></script>
   <script src="/javascript/main.js" type="module"></script>
 
   <!-- Handlebars template for the "task" partial -->

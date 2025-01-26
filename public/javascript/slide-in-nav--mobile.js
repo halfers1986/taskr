@@ -1,11 +1,11 @@
 
 
 function openSidebar() {
-    document.getElementById("sidebar").setAttribute('class', 'displayed');
+    document.getElementById("main-nav").setAttribute('class', 'active');
 }
 
 function closeSidebar() {
-    document.getElementById("sidebar").removeAttribute('class');
+    document.getElementById("main-nav").removeAttribute('class', 'active');
 }
 
 document.addEventListener('DOMContentLoaded', () => {

@@ -509,6 +509,10 @@ nav li :where(a, [role="link"]):not(:hover) {
     padding-top: 0;
   }
 
+  .header-large-screen {
+    display: none; /* Hide header on smaller screens */
+  }
+
   .tile-header-buttons {
     display: grid;
     grid-template-columns: none;

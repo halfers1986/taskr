@@ -36,6 +36,15 @@ exports.getDashboard = async (req, res) => {
         }
       })
     );
+    
+    // Fetch user categories
+    const settingsSQL = "SELECT * FROM category WHERE category_user_id = ?";
+    const [settings] = await conn.query(settingsSQL, [userID]);
+    // Not all users will have categories set up so don't throw an error if none are found
+    // Instead, just send an empty array to the client
+    const categories = settings.length > 0 ? settings : [];
+
+    // Format due dates on the tasks
     results.forEach((task) => {
       if (task.task_due_date !== null) {
         const date = new Date(task.task_due_date);
@@ -46,7 +55,7 @@ exports.getDashboard = async (req, res) => {
       console.log(task);
     });
     // Render the template with the combined data
-    res.render("main", { tasks: results, layout: false });
+    res.render("main", { tasks: results, categories, layout: false });
   } catch (err) {
     console.error("Error fetching tasks or subtasks:", err);
     res.status(500).send("An error occurred");
