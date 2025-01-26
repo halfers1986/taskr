@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Taskr</title>
+
+  <!-- Favicons -->
+  <link rel="icon" type="image/png" href="/imgs/favicon-32x32.png" sizes="32x32" />
+  <link rel="icon" type="image/png" href="/imgs/favicon-16x16.png" sizes="16x16" />
+
+  <!-- Pico.css -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2.0.6/css/pico.blue.min.css" />
+  <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.colors.min.css" /> -->
+
+  <!-- Personal css -->
+  <link rel="stylesheet" href="/css/mystyles.css" />
+
+  <!-- Logo font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Prompt:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+    rel="stylesheet" />
+</head>
+
+<body id="register-body">
+  <main class="container register-page">
+    <article class="register">
+      <div class="logo-container">
+        <svg class="logo" id="eFG6uYEB0Sx1" width="400" height="200" preserveAspectRatio="xMidYMid meet"
+          viewBox="0 40 100 100" shape-rendering="geometricPrecision" text-rendering="geometricPrecision">
+          <g>
+            <!--Icon shape-->
+            <rect width="77" height="77" x="-40" y="50.5" rx="13" ry="13" fill="none" stroke-width="6" />
+            <!--Tick-->
+            <path
+              d="M34.264179,87.977264c5.923501,2.240505,14.069886,12.381528,17.2989,19.275918C58.060229,96.515478,73.388151,78.067343,82.7011,70.678364"
+              transform="translate(-59.5, 3)" fill="none" stroke-width="8" stroke-linecap="round"
+              stroke-linejoin="round" />
+          </g>
+          <g>
+            <!--"Taskr" text-->
+            <text dx="-18" dy="1" font-family="Prompt" font-size="12" font-weight="400"
+              transform="matrix(3.379208 0 0 3.832362 107.691444 91.051542)" stroke-width="0">
+              <tspan y="0" font-family="Prompt" font-weight="600" stroke-width="0">Taskr</tspan>
+              <tspan x="0" y="10" font-family="Roboto" font-weight="400" stroke-width="0" />
+            </text>
+            <!--"Get shit done" text-->
+            <text dx="-59.5" dy="0" font-family="Prompt" font-size="11" text-decoration="overline" font-weight="700"
+              transform="translate(113.355163 110.983429)" stroke-width="0">
+              <tspan y="4" font-weight="700" stroke-width="0">GET SHIT DONE</tspan>
+            </text>
+          </g>
+        </svg>
+      </div>
+      <div>
+        <form id="register" method="POST" action="/main">
+          <h3>Register</h3>
+          <label>Name</label>
+          <fieldset role="group">
+            <input id="firstname" type="text" placeholder="First name" />
+            <input id="lastname" type="text" placeholder="Last name">
+          </fieldset>
+          <label for="username">Username</label>
+          <input id="username" type="text" placeholder="Username">
+          <label>Date of birth</label>
+          <input id="DOB" type="date" placeholder="Your date of birth" />
+          <label>Email</label>
+          <input id="email" type="email" placeholder="Email" />
+          <label>Password</label>
+          <fieldset role="group">
+            <input id="password" type="password" placeholder="Password" />
+            <input id="confirm-password" type="password" placeholder="Confirm password" />
+          </fieldset>
+          <p class="error" id="error"></p>
+          <div><button id="submit-button" class="primary" type="submit">Register</button></div>
+          <!-- <div class="g-signin2" data-onsuccess="onSignIn"></div> -->
+          <p class="secondary">
+            Already have an account?
+            <strong><a href="/login">Login</a></strong>
+          </p>
+        </form>
+      </div>
+    </article>
+  </main>
+  <footer class="container grid front-page-footer"
+    style="display: flex; justify-content: space-between; align-items: center; padding-left: 4rem; padding-right: 4rem">
+    <p class="copy">&copy; 2024 Taskr</p>
+    <div>
+      <form>
+        <input type="checkbox" role="switch" id="theme-switcher" />
+        <label for="theme-switcher"><small> </small></label>
+      </form>
+    </div>
+  </footer>
+  <!-- validator.js -->
+  <script src="https://cdn.jsdelivr.net/npm/validator/validator.min.js"></script>
+  <!-- Include the theme-switcher.js script -->
+  <script src="/javascript/theme-switcher.js"></script>
+  <script src="/javascript/register.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Taskr</title>
+
+  <!-- Favicons -->
+  <link rel="icon" type="image/png" href="/imgs/favicon-32x32.png" sizes="32x32" />
+  <link rel="icon" type="image/png" href="/imgs/favicon-16x16.png" sizes="16x16" />
+
+  <!-- Pico.css -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2.0.6/css/pico.blue.min.css" />
+  <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.colors.min.css" /> -->
+
+  <!-- Personal css -->
+  <link rel="stylesheet" href="/css/mystyles.css" />
+
+  <!-- Logo font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Prompt:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+    rel="stylesheet" />
+</head>
+
+<body>
+  <header class="container app-header">
+    <nav id="nav-small-screen">
+      <div class="logo-wrapper">
+        <svg class="logo" id="eFG6uYEB0Sx1" width="400" height="200" preserveAspectRatio="xMidYMid meet"
+          viewBox="0 40 100 100" shape-rendering="geometricPrecision" text-rendering="geometricPrecision">
+          <g>
+            <!--Icon shape-->
+            <rect width="77" height="77" x="-40" y="50.5" rx="13" ry="13" fill="none" stroke-width="6" />
+            <!--Tick-->
+            <path
+              d="M34.264179,87.977264c5.923501,2.240505,14.069886,12.381528,17.2989,19.275918C58.060229,96.515478,73.388151,78.067343,82.7011,70.678364"
+              transform="translate(-59.5, 3)" fill="none" stroke-width="8" stroke-linecap="round"
+              stroke-linejoin="round" />
+          </g>
+          <g>
+            <!--"Taskr" text-->
+            <text dx="-18" dy="1" font-family="Prompt" font-size="12" font-weight="400"
+              transform="matrix(3.379208 0 0 3.832362 107.691444 91.051542)" stroke-width="0">
+              <tspan y="0" font-family="Prompt" font-weight="600" stroke-width="0">Taskr</tspan>
+              <tspan x="0" y="10" font-family="Roboto" font-weight="400" stroke-width="0" />
+            </text>
+            <!--"Get shit done" text-->
+            <text dx="-59.5" dy="0" font-family="Prompt" font-size="11" text-decoration="overline" font-weight="700"
+              transform="translate(113.355163 110.983429)" stroke-width="0">
+              <tspan y="4" font-weight="700" stroke-width="0">GET SHIT DONE</tspan>
+            </text>
+          </g>
+        </svg>
+      </div>
+      <ul>
+        <li>
+          <a class="secondary" id="open-sidebar" href="#">
+            <svg width="50" height="50" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path d="M4 18L20 18" stroke-width="2" stroke-linecap="round" />
+              <path d="M4 12L20 12" stroke-width="2" stroke-linecap="round" />
+              <path d="M4 6L20 6" stroke-width="2" stroke-linecap="round" />
+            </svg>
+          </a>
+        </li>
+      </ul>
+    </nav>
+  </header>
+  <main class="container grid main-screen">
+    <section>
+      <aside id="sidebar">
+        <header class="grid" id="sidebar-header-small-screen">
+          <h2>Menu</h2>
+          <a id="close-sidebar" href="#">
+            <svg width="24px" height="24px" fill="#FFFFFF" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg">
+              <path
+                d="M697.4 759.2l61.8-61.8L573.8 512l185.4-185.4-61.8-61.8L512 450.2 326.6 264.8l-61.8 61.8L450.2 512 264.8 697.4l61.8 61.8L512 573.8z" />
+            </svg>
+          </a>
+        </header>
+        <header id="sidebar-header-main">
+          <div class="logo-wrapper">
+            <svg class="logo" id="eFG6uYEB0Sx1" width="400" height="200" preserveAspectRatio="xMidYMid meet"
+              viewBox="0 40 100 100" shape-rendering="geometricPrecision" text-rendering="geometricPrecision">
+              <g>
+                <!--Icon shape-->
+                <rect width="77" height="77" x="-40" y="50.5" rx="13" ry="13" fill="none" stroke-width="6" />
+                <!--Tick-->
+                <path
+                  d="M34.264179,87.977264c5.923501,2.240505,14.069886,12.381528,17.2989,19.275918C58.060229,96.515478,73.388151,78.067343,82.7011,70.678364"
+                  transform="translate(-59.5, 3)" fill="none" stroke-width="8" stroke-linecap="round"
+                  stroke-linejoin="round" />
+              </g>
+              <g>
+                <!--"Taskr" text-->
+                <text dx="-18" dy="1" font-family="Prompt" font-size="12" font-weight="400"
+                  transform="matrix(3.379208 0 0 3.832362 107.691444 91.051542)" stroke-width="0">
+                  <tspan y="0" font-family="Prompt" font-weight="600" stroke-width="0">Taskr</tspan>
+                  <tspan x="0" y="10" font-family="Roboto" font-weight="400" stroke-width="0" />
+                </text>
+                <!--"Get shit done" text-->
+                <text dx="-59.5" dy="0" font-family="Prompt" font-size="11" text-decoration="overline" font-weight="700"
+                  transform="translate(113.355163 110.983429)" stroke-width="0">
+                  <tspan y="4" font-weight="700" stroke-width="0">GET SHIT DONE</tspan>
+                </text>
+              </g>
+            </svg>
+          </div>
+        </header>
+        <nav class="overflow-auto" id="sidebar-nav">
+          <details>
+            <summary><b>Tasks</b></summary>
+            <ul class="nav-ul">
+              <li><a class="primary" href="#">View Tasks</a></li>
+              <li><a class="secondary add-task" href="#">Add Task</a></li>
+            </ul>
+          </details>
+          <hr />
+          <details>
+            <summary><b>Data</b></summary>
+            <ul class="nav-ul">
+              <li><a class="secondary" href="/data">View Data</a></li>
+            </ul>
+          </details>
+          <hr />
+          <details>
+            <summary><b>My account</b></summary>
+            <ul class="nav-ul">
+              <li><a class="secondary" href="/settings">Edit Profile</a></li>
+            </ul>
+          </details>
+          <hr />
+          <li><a id="logout" href="#" class="secondary">Logout</a></li>
+          <li>
+            <div>
+              <form>
+                <input type="checkbox" role="switch" id="theme-switcher" />
+                <label for="theme-switcher"></label>
+              </form>
+            </div>
+          </li>
+          <li>
+            <p>&copy; 2025 Taskr</p>
+          </li>
+        </nav>
+      </aside>
+      <dialog class="delete-task-dialog">
+        <article>
+          <header>
+            <h1>Delete</h1>
+          </header>
+          <p>Are you sure you want to delete this task?</p>
+          <p style="color: var(--pico-del-color)">
+            <strong><i>Warning: This action cannot be undone.</i></strong>
+          </p>
+          <footer>
+            <button class="secondary" id="cancel-delete">Cancel</button>
+            <button class="primary" id="confirm-delete">Delete</button>
+          </footer>
+        </article>
+      </dialog>
+      <dialog class="add-task-dialog">
+        <article class="modal">
+          <header class="modal-header grid">
+            <h1>New task</h1>
+            <p class="error" id="add-task-error-message"></p>
+          </header>
+          <div class="modal-body">
+            <form id="add-task-form" method="post" action="/add-task">
+              <label for="task-type">Type</label>
+              <select id="task-type" required>
+                <option value="" disabled selected>Select a type</option>
+                <option value="1">To-do</option>
+                <option value="2">Shopping list</option>
+                <option value="3">Note</option>
+              </select>
+              <label for="task-title">Title</label>
+              <input type="text" id="task-title" required />
+              <div class="show-hide modal-sub-section" id="shopping-list-container-modal">
+                <p>
+                  Add items <small>(optional) <span class="error" id="shopping-list-item-error"></span></small>
+                </p>
+                <fieldset id="add-shopping-list-items" role="group">
+                  <input id="add-shopping-list-item" type="text" placeholder="Item" />
+                  <input type="text" id="add-shopping-list-store" placeholder="Store" />
+                  <input type="text" id="add-shopping-list-quantity" placeholder="Quantity" />
+                  <button class="outline contrast" id="add-shopping-list-item-button">Add</button>
+                </fieldset>
+                <div class="shopping-list-items"></div>
+              </div>
+              <fieldset class="show-hide" id="description-due-date-priority">
+                <label for="task-description">Description</label>
+                <textarea id="task-description" required></textarea>
+                <fieldset class="show-hide" id="has-subtasks-fieldset">
+                  <div class="show-subtasks-switch">
+                    <input type="checkbox" role="switch" id="has-subtasks" />
+                    <label for="has-subtasks"><small>Has Subtasks</small></label>
+                  </div>
+                  <div class="show-hide" id="subtask-container-modal">
+                    <fieldset id="add-subtask-fieldset" style="padding-bottom: 0">
+                      <p>Add subtasks <small>(you can add/amend these later)</small></p>
+                      <div class="grid">
+                        <fieldset role="group">
+                          <input id="add-subtask-field" type="text" placeholder="Subtask" />
+                          <select id="add-subtask-priority">
+                            <option value="0" disabled selected>Priority (optional)</option>
+                            <option value="1">Low</option>
+                            <option value="2">Medium</option>
+                            <option value="3">High</option>
+                          </select>
+                        </fieldset>
+                      </div>
+                      <fieldset role="group">
+                        <label for="add-subtask-due-date">Due Date (optional)</label>
+                        <input type="date" id="add-subtask-due-date" placeholder="Due by..." />
+                        <button id="add-subtask-button-modal">Add</button>
+                      </fieldset>
+                      <p class="error" id="add-subtask-error-message"></p>
+                    </fieldset>
+                    <table class="table sub-sub">
+                      <tbody id="subtask-items"></tbody>
+                    </table>
+                  </div>
+                </fieldset>
+                <label for="task-due-date">Due Date <small>(optional)</small></label>
+                <input type="date" id="task-due-date" />
+                <label for="task-priority">Priority <small>(optional)</small></label>
+                <select id="task-priority">
+                  <option value="0" disabled selected>Select a priority</option>
+                  <option value="1">Low</option>
+                  <option value="2">Medium</option>
+                  <option value="3">High</option>
+                </select>
+              </fieldset>
+            </form>
+          </div>
+          <footer class="modal-footer">
+            <button class="secondary" id="cancel-add-task-button">Cancel</button>
+            <button class="primary" id="confirm-add-task-button" disabled>Add Task</button>
+          </footer>
+        </article>
+      </dialog>
+    </section>
+    <section class="content">
+      <div class="grid" id="task-controls">
+        <div>
+          <details class="dropdown" id="filter-tasks">
+            <summary>Filter</summary>
+            <ul>
+              <li>
+                <label><input type="checkbox" /> Urgent</label>
+              </li>
+              <li>
+                <label><input type="checkbox" /> Today</label>
+              </li>
+              <li>
+                <label><input type="checkbox" /> This Week</label>
+              </li>
+              <li>
+                <label><input type="checkbox" /> This Month</label>
+              </li>
+              <li>
+                <label><input type="checkbox" /> This Year</label>
+              </li>
+            </ul>
+          </details>
+        </div>
+        <div>
+          <details class="dropdown" id="sort-tasks">
+            <summary>Sort</summary>
+            <ul>
+              <li>
+                <label><input type="radio" name="sort" /> Urgent</label>
+              </li>
+              <li>
+                <label><input type="radio" name="sort" /> Due Date</label>
+              </li>
+              <li>
+                <label><input type="radio" name="sort" /> Alphabetical</label>
+              </li>
+            </ul>
+          </details>
+        </div>
+      </div>
+      <div class="primary-content overflow-auto" id="task-list">
+        {{!-- If there are tasks, display them --}}
+        {{#if tasks.length}}
+          {{#each tasks}}
+            {{> taskItem}} {{!-- for each Task, render the taskItem partial --}}
+          {{/each}}
+        {{else}}
+        {{!-- If there are no tasks, display a welcome message --}}
+        <div class="no-tasks">
+          <hgroup>
+            <h1>Welcome to Taskr!</h1>
+            <h3>Uh-oh! Looks like you don't have any tasks.</h3>
+            <p>Let's get you started.</p>
+          </hgroup>
+          <button class="add-task">Add Task</button>
+        </div>
+        {{/if}}
+      </div>
+    </section>
+  </main>
+  <!-- Include the Handlebars library -->
+  <script src="https://cdn.jsdelivr.net/npm/handlebars@latest/dist/handlebars.min.js"></script>
+
+  <!-- Scripts for functionality and dynamic content -->
+  <script src="/javascript/handlebars-setup.js"></script>
+  <script src="/javascript/theme-switcher.js"></script>
+  <script src="/javascript/sidebar.js"></script>
+  <script src="/javascript/main.js" type="module"></script>
+
+  <!-- Handlebars template for the "task" partial -->
+  <script id="task-template" type="text/x-handlebars-template">
+    \{{> taskItem}}
+  </script>
+</body>
+
+</html>

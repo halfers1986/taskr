@@ -1,0 +1,10 @@
+<svg class="logo" id="eFG6uYEB0Sx1" width="200" height="200" preserveAspectRatio="xMidYMid meet" viewBox="0 40 100 100" shape-rendering="geometricPrecision" text-rendering="geometricPrecision">
+  <g>
+<!--Background shape-->
+    <rect width="98" height="98" x="1" y="41" rx="13" ry="13" fill="white"/>
+<!--Icon shape-->
+    <rect width="77" height="77" x="11.5" y="50.5" rx="13" ry="13" fill="none" stroke="#9236a4" stroke-width="6"/>
+<!--Tick-->
+    <path d="M34.264179,87.977264c5.923501,2.240505,14.069886,12.381528,17.2989,19.275918C58.060229,96.515478,73.388151,78.067343,82.7011,70.678364" transform="translate(-8, 3)" fill="none" stroke="#9236a4" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+</svg>
