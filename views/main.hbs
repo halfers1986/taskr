@@ -102,13 +102,13 @@
                     <summary>By Type</summary>
                     <ul>
                       <li>
-                        <label><input type="checkbox" />To-do</label>
+                        <label><input type="checkbox" value="1"/>To-do</label>
                       </li>
                       <li>
-                        <label><input type="checkbox" />Shopping List</label>
+                        <label value=""><input type="checkbox" value="2"/>Shopping List</label>
                       </li>
                       <li>
-                        <label><input type="checkbox" />Note</label>
+                        <label><input type="checkbox" value="3"/>Note</label>
                       </li>
                     </ul>
                   </details>
@@ -118,13 +118,13 @@
                     <summary>By Priority</summary>
                     <ul>
                       <li>
-                        <label><input type="checkbox" />Low</label>
+                        <label><input type="checkbox" value="1"/>Low</label>
                       </li>
                       <li>
-                        <label><input type="checkbox" />Medium</label>
+                        <label><input type="checkbox" value="2"/>Medium</label>
                       </li>
                       <li>
-                        <label><input type="checkbox" />High</label>
+                        <label><input type="checkbox" value="3"/>High</label>
                       </li>
                     </ul>
                   </details>
@@ -134,16 +134,28 @@
                     <summary>By Due Date</summary>
                     <ul>
                       <li>
-                        <label><input type="checkbox" /> Today</label>
+                        <label><input type="checkbox" value="Overdue"/> Overdue</label>
                       </li>
                       <li>
-                        <label><input type="checkbox" /> This Week</label>
+                        <label><input type="checkbox" value="Today"/> Today</label>
                       </li>
                       <li>
-                        <label><input type="checkbox" /> This Month</label>
+                        <label><input type="checkbox" value="Tomorrow"/> Tomorrow</label>
                       </li>
                       <li>
-                        <label><input type="checkbox" /> This Year</label>
+                        <label><input type="checkbox" value="This Week"/> This Week</label>
+                      </li>
+                      <li>
+                        <label><input type="checkbox" value="Next Week"/> Next Week</label>
+                      </li>
+                      <li>
+                        <label><input type="checkbox" value="This Month"/> This Month</label>
+                      </li>
+                      <li>
+                        <label><input type="checkbox" value="Next Month"/> Next Month</label>
+                      </li>
+                      <li>
+                        <label><input type="checkbox" value="This Year"/> This Year</label>
                       </li>
                     </ul>
                   </details>
@@ -153,13 +165,13 @@
                     <summary>By Status</summary>
                     <ul>
                       <li>
-                        <label><input type="checkbox" /> Completed</label>
+                        <label><input type="checkbox" value="Completed"/> Completed</label>
                       </li>
                       <li>
-                        <label><input type="checkbox" /> In Progress</label>
+                        <label><input type="checkbox" value="In Progress"/> In Progress</label>
                       </li>
                       <li>
-                        <label><input type="checkbox" /> Not Started</label>
+                        <label><input type="checkbox" value="Not Started"/> Not Started</label>
                       </li>
                     </ul>
                   </details>
@@ -169,33 +181,33 @@
                     <summary>By Category</summary>
                     <ul>
                       <li>
-                        <label><input type="checkbox" /> Work</label>
+                        <label><input type="checkbox" value="1"/> Work</label>
                       </li>
                       <li>
-                        <label><input type="checkbox" /> Personal</label>
+                        <label><input type="checkbox" value="2"/> Personal</label>
                       </li>
                       <li>
-                        <label><input type="checkbox" /> Urgent</label>
+                        <label><input type="checkbox" value="3"/> Urgent</label>
                       </li>
                       <li>
-                        <label><input type="checkbox" /> Home</label>
+                        <label><input type="checkbox" value="4"/> Home</label>
                       </li>
                       <li>
-                        <label><input type="checkbox" /> Health</label>
+                        <label><input type="checkbox" value="5"/> Health</label>
                       </li>
                       <li>
-                        <label><input type="checkbox" /> Shopping</label>
+                        <label><input type="checkbox" value="6"/> Shopping</label>
                       </li>
                       <li>
-                        <label><input type="checkbox" /> Study</label>
+                        <label><input type="checkbox" value="7"/> Study</label>
                       </li>
                       <li>
-                        <label><input type="checkbox" /> Hobby</label>
+                        <label><input type="checkbox" value="8"/> Hobby</label>
                       </li>
-                      <!-- User-defined categories -->
                       {{#each categories as |category|}}
+                      <!-- User-defined categories -->
                       <li>
-                        <input type="checkbox" id="userCategoryFilter" name="userCategoryFilter" value="{{category}}">
+                        <label><input type="checkbox" name="userCategoryFilter" value="{{category_id}}">{{category_name}}</label>
                       </li>
                       {{/each}}
                     </ul>
@@ -210,13 +222,40 @@
               <summary>Sort</summary>
               <ul>
                 <li>
-                  <label><input type="radio" name="sort" /> Urgent</label>
+                  <label><input type="radio" name="sort" value="dueDateSoonest"/> Due Date (asc)</label>
                 </li>
                 <li>
-                  <label><input type="radio" name="sort" /> Due Date</label>
+                  <label><input type="radio" name="sort" value="dueDateLatest"/> Due Date (desc)</label>
                 </li>
                 <li>
-                  <label><input type="radio" name="sort" /> Alphabetical</label>
+                  <label><input type="radio" name="sort" value="priorityHighest"/> Priority (asc)</label>
+                </li>
+                <li>
+                  <label><input type="radio" name="sort" value="priorityLowest"/> Priority (desc)</label>
+                </li>
+                <li>
+                  <label><input type="radio" name="sort" value="createdFirst"/> Created Date (asc)</label>
+                </li>
+                <li>
+                  <label><input type="radio" name="sort" value="createdLast"/> Created Date (desc)</label>
+                </li>
+                <li>
+                  <label><input type="radio" name="sort" value="updatedRecent"/> Updated Date (desc)</label>
+                </li>
+                <li>
+                  <label><input type="radio" name="sort" value="updatedOldest"/> Updated Date (asc)</label>
+                </li>
+                <li>
+                  <label><input type="radio" name="sort" value="category"/> Category</label>
+                </li>
+                <li>
+                  <label><input type="radio" name="sort" value="status"/> Status</label>
+                </li>
+                <li>
+                  <label><input type="radio" name="sort" value="type"/> Type</label>
+                </li>
+                <li>
+                  <label><input type="radio" name="sort" value="alphabetical"/> Alphabetical</label>
                 </li>
               </ul>
             </details>
@@ -362,6 +401,7 @@
   <script src="/javascript/handlebars-setup.js"></script>
   <script src="/javascript/theme-switcher.js"></script>
   <script src="/javascript/slide-in-nav--mobile.js"></script>
+  <script src="/javascript/filterAndSort.js"></script>
   <script src="/javascript/main.js" type="module"></script>
 
   <!-- Handlebars template for the "task" partial -->

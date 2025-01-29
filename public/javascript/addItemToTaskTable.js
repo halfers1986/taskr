@@ -74,7 +74,7 @@ export default async function addItemToTaskTable(event) {
           tableBody.className = "shopping-list-table-body";
         }
         newTable.appendChild(tableBody);
-        container.prependChild(newTable);
+        container.prepend(newTable);
       }
 
       // Create a new row in the subtask table
@@ -152,6 +152,7 @@ export default async function addItemToTaskTable(event) {
 
       const table = task.querySelector("table");
       const tbody = table.querySelector("tbody");
+      console.log("Appending new row to table body:", tbody); // Debugging log
       tbody.appendChild(newRow);
 
       // Clear the value of the new subtask input element

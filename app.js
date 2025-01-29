@@ -57,7 +57,7 @@ app.use(cookieParser());
 // Middleware to manage sessions
 app.use(
   session({
-    secret: "", // Secret password here
+    secret: "supersecretpassword", // Secret password here
     resave: false, // Prevents session from being saved every time a request is made
     saveUninitialized: false, // GDPR compliance (only save cookies when user logs in)
     cookie: {
@@ -69,18 +69,16 @@ app.use(
 
 app.use("/", router);
 
-// Middleware to log session data
-app.use((req, res, next) => {
-  console.log("Session data:", req.session);
-  next();
-});
+// Middleware to log session data -- used for debugging
+// app.use((req, res, next) => {
+//   console.log("Session data:", req.session);
+//   next();
+// });
 
-// Middleware to log incoming requests
+// Middleware to log incoming requests -- used for debugging
 // app.use((req, res, next) => {
 //   console.log("Incoming request:", req.method, req.url);
 //   next();
 // });
-
-// app.set("view engine", "ejs");
 
 module.exports = app;

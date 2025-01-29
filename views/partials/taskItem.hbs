@@ -30,13 +30,17 @@
       <h2 class="task-title">{{task_title}}</h2>
     </div>
     <div style="display: flex; flex-direction: row; align-items: center; justify-content: space-between">
+      <h4 class="task-category" data-task-category="{{task_category_id}}" style="margin-right: 1rem;">
+        {{#if task_category_id}}
+        <u>Category:</u> {{category_name}}
+        {{/if}}
       <h4 class="task-priority" data-task-priority="{{task_priority_id}}" style="margin-right: 1rem;">
         {{#if task_priority_id}}
         <u>Priority:</u> {{#if (eq task_priority_id 1)}}Low{{else if (eq task_priority_id 2)}}Medium{{else if (eq
         task_priority_id 3)}}High{{/if}}
         {{/if}}
       </h4>
-      <h4 class="task-due-date" data-date="{{task_due_date}}">
+      <h4 class="task-due-date" data-task-due-date="{{task_due_date}}">
         {{#if (or (eq task_type_id 1) (eq task_type_id 3))}}
         {{#if task_due_date_formatted}}
         <u>Due:</u> {{task_due_date_formatted}}

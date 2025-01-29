@@ -387,8 +387,8 @@ td.checked-item {
 
 /* Column 1: Fixed width */
 .column-checkbox {
-    width: 0.75rem;
-    padding-left: 0.25em;
+    width: 2rem;
+    padding-left: 0.9em;
 }
 
 .column-checkbox [type="checkbox"] {

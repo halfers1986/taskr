@@ -43,6 +43,7 @@ exports.getDashboard = async (req, res) => {
     // Not all users will have categories set up so don't throw an error if none are found
     // Instead, just send an empty array to the client
     const categories = settings.length > 0 ? settings : [];
+    // console.log(categories);
 
     // Format due dates on the tasks
     results.forEach((task) => {
@@ -52,7 +53,7 @@ exports.getDashboard = async (req, res) => {
       } else {
         task.task_due_date_formatted = null;
       }
-      console.log(task);
+      // console.log(task);
     });
     // Render the template with the combined data
     res.render("main", { tasks: results, categories, layout: false });
