@@ -1,4 +1,3 @@
-
 // Switch theme based on user's preference or saved theme
 
 // Function to get the user's default theme
@@ -13,6 +12,8 @@ function applyTheme(theme) {
     if (themeLabel) {
         themeLabel.innerHTML = theme === 'dark' ? '<small>Switch to Light Mode</small>' : '<small>Switch to Dark Mode</small>';
     }
+    // Custom event to notify other components of theme change (needed to re-render Chart.js charts)
+    document.dispatchEvent(new Event('themeChange'));
 }
 
 // Function to toggle the theme

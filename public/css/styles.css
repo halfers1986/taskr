@@ -83,7 +83,7 @@ header {
     }
 
     backdrop-filter: blur(80px);
-    z-index: 2;
+    z-index: 10;
 }
 
 .app-header {
@@ -196,6 +196,8 @@ svg.tile-icon {
 .task {
     position: relative;
     transition: opacity 0.3s ease, filter 0.3s ease;
+    margin: 1rem;
+    box-shadow: 0 0 5px 2px rgba(0, 0, 0, 0.2);
 }
 
 .task:hover {
@@ -498,4 +500,21 @@ td.checked-item {
     align-items: center;
     padding-left: 10rem;
     padding-right: 10rem;
+}
+
+
+/* -- CHARTS -- */
+.chart {
+    margin: 1rem;
+    padding: 1rem;
+    box-shadow: 0 0 5px 2px var(--pico-muted-color);
+}
+
+.chart-container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
 }

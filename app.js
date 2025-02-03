@@ -45,6 +45,12 @@ app.get('/views/partials/:partial', (req, res) => {
 // Middleware to log requests
 app.use(morgan("tiny"));
 
+// Middleware to block caching, so that protected pages are inaccessible after logout
+app.use((req, res, next) => {
+  res.setHeader('Cache-Control', 'no-store');
+  next();
+});
+
 // Serve static files from the public directory
 app.use(express.static(rootPath + "/public"));
 

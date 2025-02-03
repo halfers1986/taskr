@@ -63,7 +63,7 @@ function filterTasks() {
     tasks.forEach((task) => {
         const taskType = task.getAttribute("data-task-type");
         const taskPriority = task.querySelector(".task-priority").getAttribute("data-task-priority");
-        const taskCategory = task.getAttribute("data-task-category");
+        const taskCategory = task.querySelector(".task-category").getAttribute("data-task-category");
         const taskDueDate = task.querySelector(".task-due-date").getAttribute("data-task-due-date");
         var taskStatus = getStatusValue(task);
 

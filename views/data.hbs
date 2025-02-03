@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Taskr</title>
+
+  <!-- Favicons -->
+  <link rel="icon" type="image/png" href="/imgs/favicon-32x32.png" sizes="32x32" />
+  <link rel="icon" type="image/png" href="/imgs/favicon-16x16.png" sizes="16x16" />
+
+  <!-- Pico.css -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2.0.6/css/pico.blue.min.css" />
+  <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.colors.min.css" /> -->
+
+  <!-- Personal css -->
+  {{!--
+  <link rel="stylesheet" href="/css/mystyles.css" /> --}}
+  <link rel="stylesheet" href="/css/styles.css" />
+
+  <!-- Logo font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Prompt:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+    rel="stylesheet" />
+</head>
+
+<body>
+  <header style="margin: 0; padding: 0;">
+    <div class="container app-header">
+      <div class="logo-wrapper">
+        <svg class="logo" id="eFG6uYEB0Sx1" width="400" height="200" preserveAspectRatio="xMidYMid meet"
+          viewBox="0 40 100 100" shape-rendering="geometricPrecision" text-rendering="geometricPrecision">
+          <g>
+            <!--Icon shape-->
+            <rect width="77" height="77" x="-40" y="50.5" rx="13" ry="13" fill="none" stroke-width="6" />
+            <!--Tick-->
+            <path
+              d="M34.264179,87.977264c5.923501,2.240505,14.069886,12.381528,17.2989,19.275918C58.060229,96.515478,73.388151,78.067343,82.7011,70.678364"
+              transform="translate(-59.5, 3)" fill="none" stroke-width="8" stroke-linecap="round"
+              stroke-linejoin="round" />
+          </g>
+          <g>
+            <!--"Taskr" text-->
+            <text dx="-18" dy="1" font-family="Prompt" font-size="12" font-weight="400"
+              transform="matrix(3.379208 0 0 3.832362 107.691444 91.051542)" stroke-width="0">
+              <tspan y="0" font-family="Prompt" font-weight="600" stroke-width="0">Taskr</tspan>
+              <tspan x="0" y="10" font-family="Roboto" font-weight="400" stroke-width="0" />
+            </text>
+            <!--"Get shit done" text-->
+            <text dx="-59.5" dy="0" font-family="Prompt" font-size="11" text-decoration="overline" font-weight="700"
+              transform="translate(113.355163 110.983429)" stroke-width="0">
+              <tspan y="4" font-weight="700" stroke-width="0">GET SHIT DONE</tspan>
+            </text>
+          </g>
+        </svg>
+      </div>
+      <nav id="nav-small-screen">
+        <ul>
+          <li>
+            <a class="secondary" id="open-sidebar" href="#">
+              <svg width="50" height="50" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path d="M4 18L20 18" stroke-width="2" stroke-linecap="round" />
+                <path d="M4 12L20 12" stroke-width="2" stroke-linecap="round" />
+                <path d="M4 6L20 6" stroke-width="2" stroke-linecap="round" />
+              </svg>
+            </a>
+          </li>
+        </ul>
+      </nav>
+      <nav id="main-nav">
+        <header class="flex" id="sidebar-header-small-screen">
+          <h2>Menu</h2>
+          <a id="close-sidebar" href="#">
+            <svg width="24px" height="24px" fill="#FFFFFF" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg">
+              <path
+                d="M697.4 759.2l61.8-61.8L573.8 512l185.4-185.4-61.8-61.8L512 450.2 326.6 264.8l-61.8 61.8L450.2 512 264.8 697.4l61.8 61.8L512 573.8z" />
+            </svg>
+          </a>
+        </header>
+        <ul>
+          <li><a class="primary" href="/">Tasks</a></li>
+          <li><a class="secondary" href="#">Data</a></li>
+          <li><a class="primary" href="#">Settings</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+  <main class="container grid main-screen">
+    <section>
+      <aside id="sidebar">
+        <div id="data-controls">
+          <h1 style="padding-top: 2rem; padding-left: 1rem;">Data</h1>
+          <div style="padding: 0.5rem;">
+            <fieldset id="sort-tasks">
+              <legend>View data for period...</legend>
+              <label><input type="radio" name="sort" value="allTime" checked/> All time</label>
+              <label><input type="radio" name="sort" value="week" /> Last week</label>
+              <label><input type="radio" name="sort" value="month" /> Last month</label>
+              <label><input type="radio" name="sort" value="sixMonth" /> Last 6 months</label>
+              <label><input type="radio" name="sort" value="year" /> Last year</label>
+            </fieldset>
+          </div>
+        </div>
+        <nav class="overflow-auto" id="sidebar-nav">
+          <li><a id="logout" href="#" class="secondary">Logout</a></li>
+          <li>
+            <div>
+              <form>
+                <input type="checkbox" role="switch" id="theme-switcher" />
+                <label for="theme-switcher"></label>
+              </form>
+            </div>
+          </li>
+          <li>
+            <p>&copy; 2025 Taskr</p>
+          </li>
+        </nav>
+      </aside>
+    </section>
+    <section class="chart-container">
+      <div>
+        <canvas class="chart" id="type-chart"></canvas>
+      </div>
+      <div>
+        <canvas class="chart" id="category-chart"></canvas>
+      </div>
+      <div>
+        <canvas class="chart" id="priority-chart"></canvas>
+      </div>
+    </section>
+  </main>
+  <!-- Include the Handlebars library -->
+  <script src="https://cdn.jsdelivr.net/npm/handlebars@latest/dist/handlebars.min.js"></script>
+
+  <!-- Include the Chart.js library -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+  <!-- Scripts for functionality and dynamic content -->
+  <script src="/javascript/handlebars-setup.js"></script>
+  <script src="/javascript/theme-switcher.js"></script>
+  <script src="/javascript/slide-in-nav--mobile.js"></script>
+  <script src="/javascript/data.js" type="module"></script>
+</body>
+
+</html>
