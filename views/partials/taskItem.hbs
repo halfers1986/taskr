@@ -34,19 +34,19 @@
         {{#if task_category_id}}
         <u>Category:</u> {{category_name}}
         {{/if}}
-      <h4 class="task-priority" data-task-priority="{{task_priority_id}}" style="margin-right: 1rem;">
-        {{#if task_priority_id}}
-        <u>Priority:</u> {{#if (eq task_priority_id 1)}}Low{{else if (eq task_priority_id 2)}}Medium{{else if (eq
-        task_priority_id 3)}}High{{/if}}
-        {{/if}}
-      </h4>
-      <h4 class="task-due-date" data-task-due-date="{{task_due_date}}">
-        {{#if (or (eq task_type_id 1) (eq task_type_id 3))}}
-        {{#if task_due_date_formatted}}
-        <u>Due:</u> {{task_due_date_formatted}}
-        {{/if}}
-        {{/if}}
-      </h4>
+        <h4 class="task-priority" data-task-priority="{{task_priority_id}}" style="margin-right: 1rem;">
+          {{#if task_priority_id}}
+          <u>Priority:</u> {{#if (eq task_priority_id 1)}}Low{{else if (eq task_priority_id 2)}}Medium{{else if (eq
+          task_priority_id 3)}}High{{/if}}
+          {{/if}}
+        </h4>
+        <h4 class="task-due-date" data-task-due-date="{{task_due_date}}">
+          {{#if (or (eq task_type_id 1) (eq task_type_id 3))}}
+          {{#if task_due_date_formatted}}
+          <u>Due:</u> {{task_due_date_formatted}}
+          {{/if}}
+          {{/if}}
+        </h4>
     </div>
   </div>
   {{#if (or (eq task_type_id 1) (eq task_type_id 3))}}
@@ -56,8 +56,8 @@
   <div class="subtasks">
     <details>
       <summary role="button" class="secondary outline sub-item-dropdown">Subtasks</summary>
+      {{#if (gt (length subtasks) 0)}}
       <table class="table">
-        {{#if (gt (length subtasks) 0)}}
         <thead>
           <tr class="tile-row">
             <th></th>
@@ -96,8 +96,8 @@
           </tr>
           {{/each}}
         </tbody>
-        {{/if}}
       </table>
+      {{/if}}
       <form class="add-subtask-to-existing-task" method="post" action="/new-subtask">
         <fieldset class="add-subtask-fieldset" role="group">
           <input class="add-subtask-field" type="text" placeholder="Add new subtask..." />
@@ -115,8 +115,8 @@
   </div>
   {{else if (eq task_type_id 2)}}
   <div class="shopping-list">
+    {{#if (gt (length listItems) 0)}}
     <table class="table">
-      {{#if (gt (length listItems) 0)}}
       <thead>
         <tr class="tile-row">
           <th></th>
@@ -151,8 +151,8 @@
         </tr>
         {{/each}}
       </tbody>
-      {{/if}}
     </table>
+    {{/if}}
     <form class="add-list-item-to-existing-task" method="post" action="/new-list-item">
       <fieldset class="add-subtask-fieldset" role="group">
         <input class="add-item-field" type="text" placeholder="Add new item to list..." />

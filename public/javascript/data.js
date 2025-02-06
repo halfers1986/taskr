@@ -3,6 +3,7 @@ document.addEventListener('DOMContentLoaded', async function () {
     const categoryChartElement = document.getElementById('category-chart');
     const priorityChartElement = document.getElementById('priority-chart');
     var charts = [];
+
     const results = await fetch('/basic-dashboard', {
         method: 'GET',
         headers: {
@@ -10,7 +11,21 @@ document.addEventListener('DOMContentLoaded', async function () {
         }
     });
     const basicData = await results.json();
-    console.log(basicData);
+
+    // If the request failed, log the error and return
+    if (!results.ok) {
+        console.error("Failed to get basic dashboard data:", basicData.message);
+        typeChartElement.innerHTML = `<p>Error fetching data</p>`;
+        categoryChartElement.innerHTML = `<p>Error fetching data</p>`;
+        priorityChartElement.innerHTML = `<p>Error fetching data</p>`;
+        return;
+    }
+
+    // If there are no tasks, display a message and return
+    if (basicData.results.length === 0) {
+        // TODO: Add a message to the page
+    }
+
     const taskTypes = [];
     const taskCategories = [];
     const taskPriorities = [];

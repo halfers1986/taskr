@@ -14,7 +14,7 @@ export async function setTaskComplete(event) {
 
   const data = await response.json();
   if (!response.ok) {
-    throw new Error(data.message || "Failed to update task as complete.");
+    return console.error(data.message || "Failed to update task as complete.");
   }
 
   // Update the task element in the DOM
@@ -55,7 +55,7 @@ export async function reopenTask(event) {
 
   const data = await response.json();
   if (!response.ok) {
-    throw new Error(data.message || "Failed to update task as incomplete.");
+    return console.error(data.message || "Failed to update task as incomplete.");
   }
   console.log("Task reopened");
   console.log(data);
@@ -66,4 +66,4 @@ export async function reopenTask(event) {
   task.querySelector(".completed-task-label").remove();
   task.dataset.taskComplete = false;
   task.dataset.taskCompletedTimestamp = null;
-}
+};

@@ -1,0 +1,109 @@
+/* General styles */
+body, html {
+    display: inline;
+    margin: 0;
+    padding: 0;
+}
+
+/* Main container */
+main {
+    display: flex;
+    flex-direction: column;
+    min-height: 95vh;
+    padding: 1rem;
+    box-sizing: border-box;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Article styling */
+article {
+    padding: 1rem;
+    box-sizing: border-box;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+@media (min-width: 1024px) {
+    article {
+        max-width: 50%;
+        margin: 0 auto;
+    }
+}
+
+/* Footer styling */
+footer {
+    background-color: var(--pico-background-color);
+    padding: 1rem;
+    text-align: center;
+    width: 100%;
+    box-sizing: border-box;
+    position: sticky;
+    bottom: 0;
+    flex-shrink: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+footer .container {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+    max-width: 40%;
+    margin: 0 auto;
+}
+
+footer p {
+    margin: 0;
+}
+
+footer form {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+}
+
+footer form label,
+footer form input {
+    margin: 0;
+    padding: 0;
+    align-self: center;
+    justify-self: flex-start;
+}
+
+@media (max-width: 768px) {
+    footer .container {
+        max-width: 100%;
+        font-size: x-small;
+    }
+}
+
+/* logo styling */
+.logo {
+    width: 40%;
+    left: 0;
+    height: auto;
+    max-width: 20rem;
+    display: inline-block;
+    stroke: var(--pico-primary-background)
+}
+
+.logo-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+}
+
+.logo-wrapper {
+    position: relative;
+    align-items: center;
+    justify-content: center;
+    max-width: 50%;
+    max-width: 15rem;
+}

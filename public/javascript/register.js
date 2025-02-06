@@ -151,20 +151,22 @@ async function register() {
         dob: dobElement.value
       }),
     });
-    if (!response.ok) {
-      errorElement.textContent = "Failed to login. (Error: " + results.status + ")";
-      return;
-    }
 
     // Parse the JSON response
     const data = await response.json();
 
-    // Redirect the user to the dashboard
+    // If the registration failed, show an error message and return
+    if (!response.ok) {
+      errorElement.textContent = data.message || "An unexpected error occurred. Please try again.";
+      return;
+    }
+
+    // Else redirect the user to the dashboard
     window.location.href = data.url;
+
   } catch (error) {
     console.error("Failed to register user:", error.message);
-    console.log("Error" + error.message);
-    errorElement.textContent = error.message;
+    errorElement.textContent = "An unexpected error occurred. Please try again.";
   }
 }
 

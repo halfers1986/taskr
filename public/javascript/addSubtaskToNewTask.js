@@ -2,7 +2,7 @@ const subtaskDescriptionField = document.getElementById("add-subtask-field");
 const addSubtaskDueDateField = document.getElementById("add-subtask-due-date");
 const addSubtaskPriorityField = document.getElementById("add-subtask-priority");
 const errorElement = document.getElementById("add-subtask-error-message");
-const subtaskContainer = document.getElementById("subtask-items");
+const subtaskContainer = document.getElementById("subtask-container-modal");
 
 export function resetSubtaskForm() {
   subtaskDescriptionField.value = "";
@@ -76,8 +76,29 @@ export function addSubtaskToNewTask(event) {
   row.appendChild(newPriority);
   row.appendChild(deleteColumn);
 
-  // Append the new row to the subtask container
-  subtaskContainer.appendChild(row);
+  // Check if the table exists, if not, create it
+  let table= subtaskContainer.querySelector(".subtask-table");
+  if (!table) {
+    table = document.createElement("table");
+    table.classList.add("table");
+    table.classList.add("subtask-table");
+    const tableHeader = document.createElement("thead");
+    const headerRow = document.createElement("tr");
+    const headers = ["Description", "Date", "Priority", ""];
+    headers.forEach(headerText => {
+      const header = document.createElement("th");
+      header.innerText = headerText;
+      headerRow.appendChild(header);
+    });
+    tableHeader.appendChild(headerRow);
+    table.appendChild(tableHeader);
+    const tableBody = document.createElement("tbody");
+    table.appendChild(tableBody);
+    subtaskContainer.appendChild(table);
+  }
+
+  const tableBody = table.querySelector("tbody");
+  tableBody.appendChild(row);
 
   // Clear the input fields and focus on the subtask name field
   subtaskDescriptionField.value = "";

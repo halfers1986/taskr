@@ -68,6 +68,7 @@ function addShoppingListItemToTable(itemValue, countValue, storeValue) {
   if (!table) {
     table = document.createElement("table");
     table.classList.add("table");
+    table.classList.add("shopping-list-table");
     const tableHeader = document.createElement("thead");
     const headerRow = document.createElement("tr");
     const headers = ["Item", "Store", "Count", ""];

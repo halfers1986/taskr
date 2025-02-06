@@ -8,6 +8,8 @@ const taskController = require("../controllers/taskController");
 const subItemController = require("../controllers/subItemController");
 
 // Authentication middleware
+// (declared here so it can be used in multiple routes, but not all routes need it,
+// so not declared in the main app.js file)
 function ensureAuthenticated(req, res, next) {
   if (req.session.loggedIn) {
     return next();
@@ -37,9 +39,9 @@ router.delete("/delete-task", ensureAuthenticated, taskController.deleteTask);
 
 // -- Sub-Item Routes --
 // Patch route to update the status of a subtask or shopping list item
-router.post("/update-subtask", ensureAuthenticated, subItemController.updateSubItem);
-router.post("/new-table-item", ensureAuthenticated, subItemController.addSubItem);
 router.patch("/:type/:id", ensureAuthenticated, subItemController.updateSubItemStatus);
+router.post("/update-subitem", ensureAuthenticated, subItemController.updateSubItem);
+router.post("/new-table-item", ensureAuthenticated, subItemController.addSubItem);
 router.delete("/delete-table-item", ensureAuthenticated, subItemController.deleteSubItem);
 
 

@@ -1,30 +1,29 @@
 const express = require("express");
 const { engine } = require("express-handlebars");
-const morgan = require("morgan");
 const cookieParser = require("cookie-parser");
 const session = require("express-session");
-const PORT = 3000;
 const app = express();
 const path = require("path");
 const router = require("./routes/routes");
 const rootPath = path.join(__dirname);
 
+
+// -- HANDLEBARS CONFIGURATION -- //
 // Register Handlebars as the view engine
 // Declare helpers for Handlebars
 app.engine('hbs', engine({
   extname: 'hbs',
-  // defaultLayout: 'main',
-  layoutsDir: path.join(__dirname, 'views/layouts'),
+  // layoutsDir: path.join(__dirname, 'views/layouts'),
   partialsDir: path.join(__dirname, 'views/partials'), // Register partials directory
   helpers: {
-    eq: (a, b) => a === b,
-    or: (a, b) => a || b,
-    length: (arr) => arr.length,
-    gt: (a, b) => a > b,
-    var: (name, value, options) => {
+    eq: (a, b) => a === b, // Helper to compare two values (EQUAL)
+    or: (a, b) => a || b, // Helper to compare two values (OR)
+    length: (arr) => arr.length, // Helper to get the length of an array
+    gt: (a, b) => a > b, // Helper to compare two values (GREATER THAN)
+    var: (name, value, options) => { // Helper to set a variable in Handlebars
       options.data.root[name] = value;
     },
-    formatDate: (date) => {
+    formatDate: (date) => { // Helper to format a date as YYYY-MM-DD (for input[type="date"])
       if (!date) return '';
       const d = new Date(date);
       return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
@@ -34,17 +33,8 @@ app.engine('hbs', engine({
 app.set('view engine', 'hbs');
 app.set('views', path.join(__dirname, 'views'));
 
-// Serve partials from the 'views/partials' directory
-app.get('/views/partials/:partial', (req, res) => {
-  const partialName = req.params.partial;
-  const partialPath = path.join(__dirname, 'views', 'partials', `${partialName}`);
-  
-  res.sendFile(partialPath);
-});
 
-// Middleware to log requests
-app.use(morgan("tiny"));
-
+// -- OTHER MIDDLEWARE -- //
 // Middleware to block caching, so that protected pages are inaccessible after logout
 app.use((req, res, next) => {
   res.setHeader('Cache-Control', 'no-store');
@@ -54,8 +44,8 @@ app.use((req, res, next) => {
 // Serve static files from the public directory
 app.use(express.static(rootPath + "/public"));
 
-// Middleware to parse incoming JSON data
-app.use(express.json());
+// Serve partials as static files
+app.use('/partials', express.static(path.join(__dirname, 'views/partials')));
 
 // Middleware to parse cookies
 app.use(cookieParser());
@@ -73,6 +63,15 @@ app.use(
   })
 );
 
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
+
+// Middleware to log incoming requests -- used for debugging
+app.use((req, res, next) => {
+  console.log(`Incoming request: ${req.method} ${req.url}`);
+  next();
+});
+
 app.use("/", router);
 
 // Middleware to log session data -- used for debugging
@@ -86,5 +85,9 @@ app.use("/", router);
 //   console.log("Incoming request:", req.method, req.url);
 //   next();
 // });
+
+app.listen(3000, () => {
+  console.log("Server is running on port 3000");
+});
 
 module.exports = app;

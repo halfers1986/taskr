@@ -29,7 +29,7 @@
 
 <body>
   <header style="margin: 0; padding: 0;">
-    <div class="container app-header"> 
+    <div class="container app-header">
       <div class="logo-wrapper">
         <svg class="logo" id="eFG6uYEB0Sx1" width="400" height="200" preserveAspectRatio="xMidYMid meet"
           viewBox="0 40 100 100" shape-rendering="geometricPrecision" text-rendering="geometricPrecision">
@@ -57,6 +57,13 @@
           </g>
         </svg>
       </div>
+      <nav id="main-nav">
+        <ul>
+          <li><a class="secondary" href="#">Tasks</a></li>
+          <li><a class="primary" href="/data">Data</a></li>
+          <li><a class="primary" href="#">Settings</a></li>
+        </ul>
+      </nav>
       <nav id="nav-small-screen">
         <ul>
           <li>
@@ -70,7 +77,11 @@
           </li>
         </ul>
       </nav>
-      <nav id="main-nav">
+    </div>
+  </header>
+  <main class="container grid main-screen">
+    <section class="sidebar-container">
+      <aside id="sidebar">
         <header class="flex" id="sidebar-header-small-screen">
           <h2>Menu</h2>
           <a id="close-sidebar" href="#">
@@ -80,17 +91,6 @@
             </svg>
           </a>
         </header>
-        <ul>
-          <li><a class="secondary" href="#">Tasks</a></li>
-          <li><a class="primary" href="/data">Data</a></li>
-          <li><a class="primary" href="#">Settings</a></li>
-        </ul>
-      </nav>
-    </div>
-  </header>
-  <main class="container grid main-screen">
-    <section>
-      <aside id="sidebar">
         <h1 style="padding-top: 2rem; padding-left: 1rem;">Tasks</h1>
         <div id="task-controls">
           <button class="add-task" style="width: 90%; margin: 0.5rem;">Add Task</button>
@@ -103,13 +103,13 @@
                     <summary>By Type</summary>
                     <ul>
                       <li>
-                        <label><input type="checkbox" value="1"/>To-do</label>
+                        <label><input type="checkbox" value="1" />To-do</label>
                       </li>
                       <li>
-                        <label value=""><input type="checkbox" value="2"/>Shopping List</label>
+                        <label value=""><input type="checkbox" value="2" />Shopping List</label>
                       </li>
                       <li>
-                        <label><input type="checkbox" value="3"/>Note</label>
+                        <label><input type="checkbox" value="3" />Note</label>
                       </li>
                     </ul>
                   </details>
@@ -119,13 +119,13 @@
                     <summary>By Priority</summary>
                     <ul>
                       <li>
-                        <label><input type="checkbox" value="1"/>Low</label>
+                        <label><input type="checkbox" value="1" />Low</label>
                       </li>
                       <li>
-                        <label><input type="checkbox" value="2"/>Medium</label>
+                        <label><input type="checkbox" value="2" />Medium</label>
                       </li>
                       <li>
-                        <label><input type="checkbox" value="3"/>High</label>
+                        <label><input type="checkbox" value="3" />High</label>
                       </li>
                     </ul>
                   </details>
@@ -135,28 +135,28 @@
                     <summary>By Due Date</summary>
                     <ul>
                       <li>
-                        <label><input type="checkbox" value="Overdue"/> Overdue</label>
+                        <label><input type="checkbox" value="Overdue" /> Overdue</label>
                       </li>
                       <li>
-                        <label><input type="checkbox" value="Today"/> Today</label>
+                        <label><input type="checkbox" value="Today" /> Today</label>
                       </li>
                       <li>
-                        <label><input type="checkbox" value="Tomorrow"/> Tomorrow</label>
+                        <label><input type="checkbox" value="Tomorrow" /> Tomorrow</label>
                       </li>
                       <li>
-                        <label><input type="checkbox" value="This Week"/> This Week</label>
+                        <label><input type="checkbox" value="This Week" /> This Week</label>
                       </li>
                       <li>
-                        <label><input type="checkbox" value="Next Week"/> Next Week</label>
+                        <label><input type="checkbox" value="Next Week" /> Next Week</label>
                       </li>
                       <li>
-                        <label><input type="checkbox" value="This Month"/> This Month</label>
+                        <label><input type="checkbox" value="This Month" /> This Month</label>
                       </li>
                       <li>
-                        <label><input type="checkbox" value="Next Month"/> Next Month</label>
+                        <label><input type="checkbox" value="Next Month" /> Next Month</label>
                       </li>
                       <li>
-                        <label><input type="checkbox" value="This Year"/> This Year</label>
+                        <label><input type="checkbox" value="This Year" /> This Year</label>
                       </li>
                     </ul>
                   </details>
@@ -166,13 +166,13 @@
                     <summary>By Status</summary>
                     <ul>
                       <li>
-                        <label><input type="checkbox" value="Completed"/> Completed</label>
+                        <label><input type="checkbox" value="Completed" /> Completed</label>
                       </li>
                       <li>
-                        <label><input type="checkbox" value="In Progress"/> In Progress</label>
+                        <label><input type="checkbox" value="In Progress" /> In Progress</label>
                       </li>
                       <li>
-                        <label><input type="checkbox" value="Not Started"/> Not Started</label>
+                        <label><input type="checkbox" value="Not Started" /> Not Started</label>
                       </li>
                     </ul>
                   </details>
@@ -182,33 +182,34 @@
                     <summary>By Category</summary>
                     <ul>
                       <li>
-                        <label><input type="checkbox" value="1"/> Work</label>
+                        <label><input type="checkbox" value="1" /> Work</label>
                       </li>
                       <li>
-                        <label><input type="checkbox" value="2"/> Personal</label>
+                        <label><input type="checkbox" value="2" /> Personal</label>
                       </li>
                       <li>
-                        <label><input type="checkbox" value="3"/> Urgent</label>
+                        <label><input type="checkbox" value="3" /> Urgent</label>
                       </li>
                       <li>
-                        <label><input type="checkbox" value="4"/> Home</label>
+                        <label><input type="checkbox" value="4" /> Home</label>
                       </li>
                       <li>
-                        <label><input type="checkbox" value="5"/> Health</label>
+                        <label><input type="checkbox" value="5" /> Health</label>
                       </li>
                       <li>
-                        <label><input type="checkbox" value="6"/> Shopping</label>
+                        <label><input type="checkbox" value="6" /> Shopping</label>
                       </li>
                       <li>
-                        <label><input type="checkbox" value="7"/> Study</label>
+                        <label><input type="checkbox" value="7" /> Study</label>
                       </li>
                       <li>
-                        <label><input type="checkbox" value="8"/> Hobby</label>
+                        <label><input type="checkbox" value="8" /> Hobby</label>
                       </li>
                       {{#each categories as |category|}}
                       <!-- User-defined categories -->
                       <li>
-                        <label><input type="checkbox" name="userCategoryFilter" value="{{category_id}}">{{category_name}}</label>
+                        <label><input type="checkbox" name="userCategoryFilter"
+                            value="{{category_id}}">{{category_name}}</label>
                       </li>
                       {{/each}}
                     </ul>
@@ -223,40 +224,40 @@
               <summary>Sort</summary>
               <ul>
                 <li>
-                  <label><input type="radio" name="sort" value="dueDateSoonest"/> Due Date (asc)</label>
+                  <label><input type="radio" name="sort" value="dueDateSoonest" /> Due Date (asc)</label>
                 </li>
                 <li>
-                  <label><input type="radio" name="sort" value="dueDateLatest"/> Due Date (desc)</label>
+                  <label><input type="radio" name="sort" value="dueDateLatest" /> Due Date (desc)</label>
                 </li>
                 <li>
-                  <label><input type="radio" name="sort" value="priorityHighest"/> Priority (asc)</label>
+                  <label><input type="radio" name="sort" value="priorityHighest" /> Priority (asc)</label>
                 </li>
                 <li>
-                  <label><input type="radio" name="sort" value="priorityLowest"/> Priority (desc)</label>
+                  <label><input type="radio" name="sort" value="priorityLowest" /> Priority (desc)</label>
                 </li>
                 <li>
-                  <label><input type="radio" name="sort" value="createdFirst"/> Created Date (asc)</label>
+                  <label><input type="radio" name="sort" value="createdFirst" /> Created Date (asc)</label>
                 </li>
                 <li>
-                  <label><input type="radio" name="sort" value="createdLast"/> Created Date (desc)</label>
+                  <label><input type="radio" name="sort" value="createdLast" /> Created Date (desc)</label>
                 </li>
                 <li>
-                  <label><input type="radio" name="sort" value="updatedRecent"/> Updated Date (desc)</label>
+                  <label><input type="radio" name="sort" value="updatedRecent" /> Updated Date (desc)</label>
                 </li>
                 <li>
-                  <label><input type="radio" name="sort" value="updatedOldest"/> Updated Date (asc)</label>
+                  <label><input type="radio" name="sort" value="updatedOldest" /> Updated Date (asc)</label>
                 </li>
                 <li>
-                  <label><input type="radio" name="sort" value="category"/> Category</label>
+                  <label><input type="radio" name="sort" value="category" /> Category</label>
                 </li>
                 <li>
-                  <label><input type="radio" name="sort" value="status"/> Status</label>
+                  <label><input type="radio" name="sort" value="status" /> Status</label>
                 </li>
                 <li>
-                  <label><input type="radio" name="sort" value="type"/> Type</label>
+                  <label><input type="radio" name="sort" value="type" /> Type</label>
                 </li>
                 <li>
-                  <label><input type="radio" name="sort" value="alphabetical"/> Alphabetical</label>
+                  <label><input type="radio" name="sort" value="alphabetical" /> Alphabetical</label>
                 </li>
               </ul>
             </details>
@@ -325,12 +326,12 @@
                 <label for="task-description">Description</label>
                 <textarea id="task-description" required></textarea>
                 <fieldset class="show-hide" id="has-subtasks-fieldset">
-                  <div class="show-subtasks-switch">
+                  <div class="show-subtasks-switch" style="margin-left: 0.5rem; margin-bottom: 0.1rem;">
                     <input type="checkbox" role="switch" id="has-subtasks" />
                     <label for="has-subtasks"><small>Has Subtasks</small></label>
                   </div>
                   <div class="show-hide" id="subtask-container-modal">
-                    <fieldset id="add-subtask-fieldset" style="padding-bottom: 0">
+                    <fieldset id="add-subtask-fieldset" style="padding-bottom: 0; margin-bottom: 0;">
                       <p>Add subtasks <small>(you can add/amend these later)</small></p>
                       <div class="grid">
                         <fieldset role="group">
@@ -350,9 +351,6 @@
                       </fieldset>
                       <p class="error" id="add-subtask-error-message"></p>
                     </fieldset>
-                    <table class="table sub-sub">
-                      <tbody id="subtask-items"></tbody>
-                    </table>
                   </div>
                 </fieldset>
                 <label for="task-due-date">Due Date <small>(optional)</small></label>
@@ -399,9 +397,9 @@
   <script src="https://cdn.jsdelivr.net/npm/handlebars@latest/dist/handlebars.min.js"></script>
 
   <!-- Scripts for functionality and dynamic content -->
-  <script src="/javascript/handlebars-setup.js"></script>
-  <script src="/javascript/theme-switcher.js"></script>
-  <script src="/javascript/slide-in-nav--mobile.js"></script>
+  <script src="/javascript/handlebarsSetup.js"></script>
+  <script src="/javascript/themeSwitcher.js"></script>
+  <script src="/javascript/slideInNavMobile.js"></script>
   <script src="/javascript/filterAndSort.js"></script>
   <script src="/javascript/main.js" type="module"></script>
 

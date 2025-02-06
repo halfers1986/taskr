@@ -49,30 +49,28 @@ async function tryLogin(event) {
   } else {
     // Send the login request to the server
     try {
-      const results = await fetch("/login", {
+      const response = await fetch("/login", {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ username: username, password }),
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ username, password }),
+        credentials: "include" // Send session cookies
       });
 
-      // Check if the login was successful
-      if (results.status === 401) {
-        showError("invalid");
-        return;
-      } else if (!results.ok) {
-        errorElement.textContent = "Failed to login. (Error: " + results.status + ")";
+      // Parse the JSON response
+      const data = await response.json();
+
+      // If the login failed, show an error message and return
+      if (!response.ok) {
+        showError(data.message || "An unexpected error occurred. Please try again.");
         return;
       }
-      
-      // Parse the JSON response
-      const data = await results.json();
 
-      // Redirect the user to the dashboard
+      // Else redirect the user to the dashboard
       window.location.href = data.url;
+
     } catch (error) {
       console.error("Failed to login user:", error.message);
+      showError("An unexpected error occurred. Please try again.");
     }
   }
 }
