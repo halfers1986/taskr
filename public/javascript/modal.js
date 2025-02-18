@@ -7,13 +7,13 @@ let visibleModal = null;
 
 // Handle close action
 export const closeModal = (modal) => {
-    visibleModal = null;
-    document.documentElement.classList.add(closingClass);
-    setTimeout(() => {
-      document.documentElement.classList.remove(closingClass, isOpenClass);
-      modal.removeAttribute("open");
-    }, animationDuration);
-  };
+  visibleModal = null;
+  document.documentElement.classList.add(closingClass);
+  setTimeout(() => {
+    document.documentElement.classList.remove(closingClass, isOpenClass);
+    modal.removeAttribute("open");
+  }, animationDuration);
+};
 
 // Handle open action
 export function openModal(modal) {
@@ -27,7 +27,7 @@ export function openModal(modal) {
 
 // Close with Esc key
 document.addEventListener("keydown", (event) => {
-    if (event.key === "Escape" && visibleModal != null) {
-      closeModal(visibleModal);
-    }
-  });
+  if (event.key === "Escape" && visibleModal != null) {
+    closeModal(visibleModal);
+  }
+});

@@ -59,9 +59,9 @@
       </div>
       <nav id="main-nav">
         <ul>
-          <li><a class="secondary" href="#">Tasks</a></li>
+          <li><a class="primary" href="/">Tasks</a></li>
           <li><a class="primary" href="/data">Data</a></li>
-          <li><a class="primary" href="/settings">Settings</a></li>
+          <li><a class="secondary" href="#">Settings</a></li>
         </ul>
       </nav>
       <nav id="nav-small-screen">
@@ -90,19 +90,7 @@
             </svg>
           </a>
         </header>
-        <h1 style="padding-top: 2rem; padding-left: 1rem;">Data</h1>
-        <div id="data-controls">
-          <div style="padding: 0.5rem;">
-            <fieldset id="sort-tasks">
-              <legend>View data for period...</legend>
-              <label><input type="radio" name="time-period" value="allTime" checked /> All time</label>
-              <label><input type="radio" name="time-period" value="week" /> Last week</label>
-              <label><input type="radio" name="time-period" value="month" /> Last month</label>
-              <label><input type="radio" name="time-period" value="sixMonth" /> Last 6 months</label>
-              <label><input type="radio" name="time-period" value="year" /> Last year</label>
-            </fieldset>
-          </div>
-        </div>
+        <h1 style="padding-top: 2rem; padding-left: 1rem;">Settings</h1>
         <nav class="overflow-auto" id="sidebar-nav">
           <li><a id="logout" href="#" class="secondary">Logout</a></li>
           <li>
@@ -118,74 +106,95 @@
           </li>
         </nav>
       </aside>
+      <dialog class="delete-account-dialog">
+        <article>
+          <header>
+            <hgroup>
+              <h1 style="color: var(--pico-del-color)">WARNING</h1>
+              <h2 style="color: var(--pico-del-color)">You are about to delete your account</h2>
+              <p style="color: var(--pico-del-color)">This action cannot be undone. Are you sure you want to proceed?
+              </p>
+            </hgroup>
+          </header>
+          <label for="confirm-password-delete-account">Enter your password to confirm</label>
+          <input type="password" id="confirm-password-delete-account" name="confirm-password-delete-account" required>
+          <label for="delete-account-input">Type 'DELETE' to confirm</label>
+          <input type="text" id="delete-account-input" name="delete-account-input" required>
+          <p id="delete-account-error" style="display: none; color: var(--pico-del-color)">Incorrect password or
+            confirmation</p>
+          <p style="color: var(--pico-del-color)">
+            <strong><i>This action cannot be undone.</i></strong>
+          </p>
+          <footer>
+            <button class="secondary" id="cancel-delete-account">Cancel</button>
+            <button class="primary" id="confirm-delete-account">Delete</button>
+          </footer>
+          <h1 id="confirmation-of-deletion" style="color: var(--pico-del-color); display: none;">Account Deleted</h1>
+        </article>
+      </dialog>
     </section>
-    <section class="data-container">
-      <div>
-        <div class="stat-container">
-          <h2>Statistics</h2>
-          <div class="stats"
-            style="display: flex; justify-content: space-around; flex-wrap: wrap; align-items: center;">
-            <div style="text-align: center; flex-basis: 33%;">
-              <h4>Total tasks</h4>
-              <h2 id="total-tasks">0</h2>
-            </div>
-            <div style="text-align: center; flex-basis: 33%;">
-              <h4>Completed tasks</h4>
-              <h2 id="completed-tasks">0</h2>
-            </div>
-            <div style="text-align: center; flex-basis: 33%;">
-              <h4>Open tasks</h4>
-              <h2 id="open-tasks">0</h2>
-            </div>
-            <div style="text-align: center; flex-basis: 33%;">
-              <h4>Total subtasks</h4>
-              <h2 id="total-subtasks">0</h2>
-            </div>
-            <div style="text-align: center; flex-basis: 33%;">
-              <h4>Completed subtasks</h4>
-              <h2 id="completed-subtasks">0</h2>
-            </div>
-            <div style="text-align: center; flex-basis: 33%;">
-              <h4>Open subtasks</h4>
-              <h2 id="open-subtasks">0</h2>
-            </div>
-            <div style="text-align: center; flex-basis: 33%;">
-              <h4>Total list items</h4>
-              <h2 id="total-list-items">0</h2>
-            </div>
-            <div style="text-align: center; flex-basis: 33%;">
-              <h4>Completed list items</h4>
-              <h2 id="completed-list-items">0</h2>
-            </div>
-            <div style="text-align: center; flex-basis: 33%;">
-              <h4>Open list items</h4>
-              <h2 id="open-list-items">0</h2>
-            </div>
-          </div>
+    <section>
+      <div class="user-details">
+        <h2 style="margin-top: 2rem">Your Details</h2>
+        <div class="user-detail-pair">
+          <p>Username:</p>
+          <p id="username">{{settings.user_username}}</p>
         </div>
-        <div>
-          <h2 style="margin-top: 1rem">Visualisation</h2>
-          <div class="charts">
-            <div class="chart-container">
-              <canvas class="chart" id="type-chart"></canvas>
-            </div>
-            <div class="chart-container">
-              <canvas class="chart" id="category-chart"></canvas>
-            </div>
-            <div class="chart-container">
-              <canvas class="chart" id="priority-chart"></canvas>
-            </div>
-            <div class="chart-container">
-              <canvas class="chart" id="completion-%-type-chart"></canvas>
-            </div>
-            <div class="chart-container">
-              <canvas class="chart" id="average-completion-time"></canvas>
-            </div>
-            <div class="chart-container">
-              <canvas class="chart" id="categories-by-type"></canvas>
-            </div>
-          </div>
+        <div class="user-detail-pair">
+          <p>Full Name:</p>
+          <p id="name">{{settings.user_first_name}} {{settings.user_last_name}}</p>
         </div>
+        <div class="user-detail-pair">
+          <p>Email:</p>
+          <p id="email">{{settings.user_email}}</p>
+        </div>
+        <button id="edit-details">Edit Details</button>
+      </div>
+      <div class="change-password">
+        <h2 style="margin-top: 2rem">Change Password</h2>
+        <p id="update-password-success" style="display: none;">Password changed successfully</p>
+        <button id="change-password-button">Change Password</button>
+        <p id="password-change-success" style="display: none;">Password changed successfully</p>
+        <form id="change-password-form" style="display: none;">
+          <label for="current-password">Current Password</label>
+          <input type="password" id="current-password" name="current-password" required>
+          <label for="new-password">New Password</label>
+          <input type="password" id="new-password" name="new-password" required>
+          <label for="confirm-password">Confirm New Password</label>
+          <input type="password" id="confirm-password" name="confirm-password" required>
+          <p id="password-match-error" style="display: none;">Passwords do not match</p>
+          <p id="password-change-error-failure" style="display: none;">Password change failed</p>
+          <p id="current-password-error" style="display: none;">Current password is incorrect</p>
+          <p id="password-length-error" style="display: none;">Password must be at least 8 characters long</p>
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+            <button type="submit" id="confirm-password-change">Save</button>
+            <button class="secondary" type="button" id="cancel-password-change">Cancel</button>
+          </div>
+        </form>
+      </div>
+      <div class="custom-categories">
+        <h2 style="margin-top: 2rem">My Custom Categories</h2>
+        <ul id="custom-categories-list">
+          {{#if categories.length}}
+          {{#each categories}}
+          <li class="category-list-item" data-category-id="{{category_id}}">{{category_name}} <button
+              class="custom-categories-delete">X</button></li>
+          {{/each}}
+        </ul>
+        {{else}}
+        <p>No categories found</p>
+        {{/if}}
+        <form id="add-category-form">
+          <fieldset role="group">
+            <input type="text" id="new-category" name="new-category" placeholder="Add custom category" required>
+            <button id="add-category" type="submit">Add</button>
+          </fieldset>
+        </form>
+      </div>
+      <div class="delete-account">
+        <h2 style="margin-top: 2rem">Account</h2>
+        <button id="delete-account-button">Delete Account</button>
+      </div>
     </section>
   </main>
   <!-- Include the Handlebars library -->
@@ -198,7 +207,7 @@
   <script src="/javascript/handlebarsSetup.js"></script>
   <script src="/javascript/themeSwitcher.js"></script>
   <script src="/javascript/slideInNavMobile.js"></script>
-  <script src="/javascript/data.js" type="module"></script>
+  <script src="/javascript/settings.js" type="module"></script>
 </body>
 
 </html>

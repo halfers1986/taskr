@@ -3,7 +3,7 @@
   data-task-updated="{{task_updated_timestamp}}" data-task-completed-timestamp="{{task_completed_timestamp}}"
   data-task-complete="{{task_complete}}">
   <div class="tile-header">
-    <div style="display: flex; align-items: center; max-width: 50%;">
+    <div class="icon-header-container">
       <div style="padding-bottom: 1rem; margin-left: 0; margin-right: 0.5rem">
         {{#if (eq task_type_id 1)}}
         <svg class="tile-icon" style="margin-left: -0.25rem" viewBox="0 0 32 32" id="icon"
@@ -30,23 +30,24 @@
       <h2 class="task-title">{{task_title}}</h2>
     </div>
     <div style="display: flex; flex-direction: row; align-items: center; justify-content: space-between">
-      <h4 class="task-category" data-task-category="{{task_category_id}}" style="margin-right: 1rem;">
+      <h4 class="task-category" data-task-category="{{task_category_id}}" data-task-category-name="{{category_name}}" style="margin-right: 1rem;">
         {{#if task_category_id}}
         <u>Category:</u> {{category_name}}
         {{/if}}
-        <h4 class="task-priority" data-task-priority="{{task_priority_id}}" style="margin-right: 1rem;">
-          {{#if task_priority_id}}
-          <u>Priority:</u> {{#if (eq task_priority_id 1)}}Low{{else if (eq task_priority_id 2)}}Medium{{else if (eq
-          task_priority_id 3)}}High{{/if}}
-          {{/if}}
-        </h4>
-        <h4 class="task-due-date" data-task-due-date="{{task_due_date}}">
-          {{#if (or (eq task_type_id 1) (eq task_type_id 3))}}
-          {{#if task_due_date_formatted}}
-          <u>Due:</u> {{task_due_date_formatted}}
-          {{/if}}
-          {{/if}}
-        </h4>
+      </h4>
+      <h4 class="task-priority" data-task-priority="{{task_priority_id}}" style="margin-right: 1rem;">
+        {{#if task_priority_id}}
+        <u>Priority:</u> {{#if (eq task_priority_id 1)}}Low{{else if (eq task_priority_id 2)}}Medium{{else if (eq
+        task_priority_id 3)}}High{{/if}}
+        {{/if}}
+      </h4>
+      <h4 class="task-due-date" data-task-due-date="{{task_due_date}}">
+        {{#if (or (eq task_type_id 1) (eq task_type_id 3))}}
+        {{#if task_due_date_formatted}}
+        <u>Due:</u> {{task_due_date_formatted}}
+        {{/if}}
+        {{/if}}
+      </h4>
     </div>
   </div>
   {{#if (or (eq task_type_id 1) (eq task_type_id 3))}}

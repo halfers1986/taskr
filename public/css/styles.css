@@ -23,6 +23,10 @@
 
 /* GLOBAL SETTINGS */
 
+.secondary {
+    text-decoration: underline;
+}
+
 /* Header */
 header {
     position: sticky;
@@ -112,7 +116,7 @@ svg.tile-icon {
 /* -- TILES -- */
 .tile-header {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     max-height: 10rem;
     justify-content: space-between;
     margin-bottom: 0.5rem;
@@ -121,6 +125,12 @@ svg.tile-icon {
 .tile-header h2 h4 {
     margin: 0;
     padding-bottom: 0.5rem;
+}
+
+.icon-header-container {
+    display: flex;
+    align-items: center;
+    max-width: 50%;
 }
 
 .tile-footer {
@@ -329,18 +339,10 @@ article.modal {
 
 
 /* -- TABLES -- */
-.table td,
-.table th {
-    min-height: 100%;
-    /* Ensure the cell has a minimum height */
-    white-space: nowrap;
-    /* Prevent text wrapping */
-    overflow: hidden;
-    /* Hide overflowing content */
-    text-overflow: ellipsis;
-    /* Show ellipsis for overflow */
-    padding: 0.25rem;
-    margin: 0;
+
+td, th {
+    background-color: transparent;
+    border: 0px;
 }
 
 td.checked-item {
@@ -349,26 +351,37 @@ td.checked-item {
     opacity: 0.8;
 }
 
+.column {
+    text-align: left;
+}
+
 /* Column 1: Fixed width */
 .column-checkbox {
     width: 2rem;
     padding-left: 0.9em;
+    justify-content: center;
+    text-align: center;
 }
 
 .column-checkbox [type="checkbox"] {
     margin-inline-end: 0;
 }
 
-/* Column 5: Slight growth/shrinkage, based on content */
 .column-buttons {
-    display: flex;
-    flex-direction: row;
-    width: auto;
-    /* max-width: 130px; */
-    justify-content: space-around;
-    padding-left: 0.25rem;
-    padding-right: 0.25rem;
+    justify-content: center;
+    text-align: right !important;
+}
+
+tr {
+    display: grid;
     box-sizing: border-box;
+    grid-template-columns: 2.3rem 1fr 1fr 1fr 1fr;
+    align-items: center;
+}
+
+.shopping-list-table tr,
+.subtask-table tr {
+    grid-template-columns: 1fr 1fr 1fr 1fr;
 }
 
 /* Table button style */
@@ -412,57 +425,72 @@ td.checked-item {
     margin: 0;
 }
 
-
-/* -- LOGIN PAGE -- */
-
-.login {
-    width: auto;
-    max-width: 85%;
-}
-
-.front-page {
-    display: flex;
-    align-items: center;
-    vertical-align: middle;
-    justify-content: center;
-    min-height: 100%;
-    overflow-y: auto;
-    top: 0;
-}
-
-
-/* -- REGISTER PAGE -- */
-
-.register {
-    max-width: 70%;
-    max-height: 150%;
-}
-
-.register-page {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    max-height: 120vh;
-    top: 0;
-    padding-top: 1rem;
-    padding-bottom: 3rem;
-}
-
 /* -- CHARTS -- */
 .chart {
     margin: 1rem;
     padding: 1rem;
     box-shadow: 0 0 5px 2px var(--pico-muted-color);
+    border-radius: 0.25rem;
+    height: 100%;
+    width: 100%;
+}
+
+.data-container {
+    width: 100%;
+    padding-top: 2rem;
+}
+
+.charts {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: stretch;
+}
+
+.stat-container > div > div > h2 {
+    color: var(--pico-primary-background);
+    text-shadow: 1px 1px 1px var(--pico-muted-color);
 }
 
 .chart-container {
+    flex: 1 1 45%; /* Allow the container to grow and shrink */
     display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
     align-items: center;
     justify-content: center;
-    padding: 1rem;
+    margin: 1rem;
+    max-height: 400px;
+}
+
+
+/* -- USER SETTINGS -- */
+.user-details,
+.custom-categories,
+#change-password-form {
+    max-width: 600px;
+}
+.user-detail-pair {
+    display: grid;
+    grid-template-columns: 1fr 3fr;
+    gap: 1rem;
+}
+
+#delete-account-button {
+    color: var(--pico-color);
+    background-color: var(--pico-form-element-invalid-focus-color);
+    border: 1px solid var(--pico-form-element-invalid-border-color);
+    font-weight: bold;
+    /* text-decoration: underline; */
+}
+
+.custom-categories-delete {
+    color: var(--pico-color);
+    background-color: var(--pico-form-element-invalid-focus-color);
+    border: 1px solid var(--pico-form-element-invalid-border-color);
+    font-weight: bold;
+    font-size: small;
+    padding: 0.05rem 0.25rem;
+    margin-left: 0.3rem;
+    /* text-decoration: underline; */
 }
 
 /* SETTINGS FOR LARGE SCREENS */
@@ -510,6 +538,9 @@ td.checked-item {
     .main-screen {
         overflow: visible;
         grid-template-columns: 1fr;
+        grid-column-gap: 0;
+        grid-row-gap: 0;
+        padding-top: 0;
     }
 
     #open-sidebar>svg {
@@ -522,5 +553,66 @@ td.checked-item {
         justify-content: space-between;
         padding: 0 1rem;
         padding-top: 0.3rem;
+    }
+
+    .tile-header {
+        flex-direction: column;
+    }
+
+    .icon-header-container {
+        max-width: 100%;
+    }
+
+    h4 {
+        font-size: medium;
+    }
+
+    .tile-footer button {
+        font-size: small;
+        padding: 0.25rem 0.5rem;
+        height: 2.5rem;
+        #bin-icon svg {
+            height: 1.3rem;
+        }
+    }
+
+    table {
+        font-size: x-small;
+        max-width: 100%;
+        td, th {
+           padding: 0.2rem;
+        }
+    }
+
+    .button-table {
+        font-size: x-small;
+        padding: 0.15rem 0.25rem;
+    }
+
+    .add-list-item-to-existing-task input,
+    .add-subtask-to-existing-task input,
+    .add-subtask-to-existing-task select {
+        font-size: small;
+        height: 2.5rem !important;
+        padding: 0.5rem 0.25rem !important;
+    }
+
+    button.add-list-item-button,
+    button.add-subtask-button {
+        font-size: small;
+        height: 2.5rem !important;
+        padding: 0.5rem 0.25rem !important;
+    }
+
+    .chart-container {
+        flex: 1 1 100%; /* Stack charts vertically on small screens */
+        max-height: 300px; /* Adjust the maximum height for small screens */
+        min-height: 200px; /* Adjust the minimum height for small screens */
+        aspect-ratio: 1 / 1; /* Maintain a square aspect ratio */
+    }
+
+    chart {
+        width: 100%;
+        height: 100%;
     }
 }

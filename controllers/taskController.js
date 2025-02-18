@@ -4,7 +4,7 @@ const endpointPartial = "http://localhost:3001";
 // Consumes the GET /tasks/:userid endpoint from the API
 exports.getTasks = async (req, res) => {
   const userID = req.session.userID;
-  console.log("UserID: ",userID);
+  // console.log("UserID: ",userID);
   try {
 
     const response = await fetch(`${endpointPartial}/tasks/${userID}`, {
@@ -14,7 +14,7 @@ exports.getTasks = async (req, res) => {
 
     const data = await response.json();
 
-    console.log(data);
+    // console.log(data);
 
     // Render the template with the returned data
     // layout: false prevents the default layout from being used (Handlebars) as we don't have one
@@ -144,70 +144,3 @@ exports.deleteTask = async (req, res) => {
     return res.status(500).json({ message: "Failed to delete task" });
   }
 };
-
-// Decided to handle filtering and sorting on the front-end instead
-// exports.filterTasks = async (req, res) => {
-// const userID = req.session.userID;
-// const { filterType, filterValue, orderBy } = req.body;
-
-// let orderBySQL = "";
-// switch (orderBy) {
-//   case "dueDateSoonest": orderBySQL = "task_due_date "; break;
-//   case "dueDateLatest": orderBySQL = "task_due_date DESC"; break;
-//   case "priorityHighest": orderBySQL = "task_priority_id"; break;
-//   case "priorityLowest": orderBySQL = "task_priority_id DESC"; break;
-//   case "createdFirst": orderBySQL = "task_created_timestamp"; break;
-//   case "createdLast": orderBySQL = "task_created_timestamp DESC"; break;
-//   default: orderBySQL = "task_created_timestamp"; break;
-// }
-
-// try {
-//   const sql = `SELECT * FROM task WHERE task_user_id = ? AND ?? = ? ORDER BY ?`;
-//   const [results] = await conn.query(sql, [userID, filterType, filterValue, orderBySQL]);
-
-//   // Fetch subtasks for each task in parallel
-//   await Promise.all(
-//     results.map(async (task) => {
-//       const taskID = task.task_id;
-//       const taskType = task.task_type_id;
-//       if (taskType === 1) {
-//         const subtaskSQL = `SELECT * FROM subtask WHERE subtask_task_id = ${taskID}`;
-//         const [subtasks] = await conn.query(subtaskSQL); // Fetch subtasks
-//         // Format due dates for the subtasks
-//         subtasks.forEach((subtask) => {
-//           if (subtask.subtask_due_date !== null) {
-//             const date = new Date(subtask.subtask_due_date);
-//             subtask.subtask_due_date_formatted = date.toLocaleDateString("en-GB"); // Format to DD/MM/YYYY
-//           } else {
-//             subtask.subtask_due_date_formatted = null;
-//           }
-//           // Convert priority ID to text
-//           const priorityText = ["None", "Low", "Medium", "High"];
-//           subtask.subtask_priority_text = priorityText[subtask.subtask_priority_id];
-//         });
-//         task.subtasks = subtasks; // Attach subtasks to task
-//       } else if (taskType === 2) {
-//         const listSQL = `SELECT * FROM list_item WHERE list_item_task_id = ${taskID}`;
-//         const [listItems] = await conn.query(listSQL); // Fetch list items
-//         task.listItems = listItems; // Attach list items to task
-//       }
-//     })
-//   );
-
-//   // Format due dates on the tasks
-//   results.forEach((task) => {
-//     if (task.task_due_date !== null) {
-//       const date = new Date(task.task_due_date);
-//       task.task_due_date_formatted = date.toLocaleDateString("en-GB"); // Format to DD/MM/YYYY
-//     } else {
-//       task.task_due_date_formatted = null;
-//     }
-//   });
-
-//   // Send the filtered tasks to the client
-//   res.json({ tasks: results });
-// } catch (err) {
-//   console.error("Error fetching tasks or subtasks:", err);
-//   res.status(500).send("An error occurred");
-// }
-// }

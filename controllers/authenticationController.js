@@ -36,8 +36,6 @@ exports.logInUser = async (req, res) => {
       return res.status(response.status).json({ message: data.message });
     }
 
-    console.log("Data on Login:", data);
-
     // Else on successful login, set the session data
     req.session.username = username;
     req.session.loggedIn = true;
@@ -66,6 +64,8 @@ exports.logOutUser = (req, res) => {
 // Handler for POST /register
 // Consumes POST /register endpoint from the API
 exports.registerUser = async (req, res) => {
+  const { username } = req.body;
+
   try {
     const response = await fetch(`${endpointPartial}/register`, {
       method: "POST",
@@ -83,7 +83,7 @@ exports.registerUser = async (req, res) => {
     // Else set the session data
     req.session.username = username;
     req.session.loggedIn = true;
-    req.session.userID = insertResults.insertId;
+    req.session.userID = data.userID;
     // console.log("Session on Register:", req.session);
 
     // Return the URL to redirect to the dashboard

@@ -90,7 +90,6 @@ function addShoppingListItemToTable(itemValue, countValue, storeValue) {
 
   const newCount = document.createElement("td");
   newCount.classList.add("column");
-  newCount.setAttribute("style", "text-align: right;");
   newCount.innerText = countValue;
 
   const newStore = document.createElement("td");
