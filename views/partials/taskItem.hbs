@@ -30,7 +30,8 @@
       <h2 class="task-title">{{task_title}}</h2>
     </div>
     <div style="display: flex; flex-direction: row; align-items: center; justify-content: space-between">
-      <h4 class="task-category" data-task-category="{{task_category_id}}" data-task-category-name="{{category_name}}" style="margin-right: 1rem;">
+      <h4 class="task-category" data-task-category="{{task_category_id}}" data-task-category-name="{{category_name}}"
+        style="margin-right: 1rem;">
         {{#if task_category_id}}
         <u>Category:</u> {{category_name}}
         {{/if}}
@@ -55,8 +56,8 @@
   {{/if}}
   {{#if (eq task_type_id 1)}}
   <div class="subtasks">
-    <details>
-      <summary role="button" class="secondary outline sub-item-dropdown">Subtasks</summary>
+    <details class="sub-item-dropdown">
+      <summary role="button" class="secondary outline">Subtasks</summary>
       {{#if (gt (length subtasks) 0)}}
       <table class="table">
         <thead>
@@ -79,6 +80,12 @@
               {{subtask_due_date_formatted}}</td>
             <td class="subtask-priority column" data-subtask-priority="{{subtask_priority_id}}">
               {{subtask_priority_text}}</td>
+            <td class="column column-buttons">
+              <button class="button-table edit-button-table primary outline"
+                data-subtask-id="{{subtask_id}}">Edit</button>
+              <button class="button-table delete-button-table secondary outline"
+                data-subtask-id="{{subtask_id}}">Delete</button>
+            </td>
             {{else}}
             <td class="column-checkbox"><input type="checkbox" class="toggle-complete" data-subtask-id="{{subtask_id}}"
                 checked /></td>
@@ -87,13 +94,14 @@
               {{subtask_due_date_formatted}}</td>
             <td class="subtask-priority checked-item column" data-subtask-priority="{{subtask_priority_id}}">
               {{subtask_priority_text}}</td>
-            {{/if}}
             <td class="column column-buttons">
               <button class="button-table edit-button-table primary outline"
-                data-subtask-id="{{subtask_id}}">Edit</button>
+                data-subtask-id="{{subtask_id}}" disabled>Edit</button>
               <button class="button-table delete-button-table secondary outline"
-                data-subtask-id="{{subtask_id}}">Delete</button>
+                data-subtask-id="{{subtask_id}}" disabled>Delete</button>
             </td>
+            {{/if}}
+
           </tr>
           {{/each}}
         </tbody>
@@ -136,19 +144,26 @@
           <td class="list-item-name column">{{list_item_name}}</td>
           <td class="list-item-store column">{{list_item_store}}</td>
           <td class="list-item-quantity column">{{list_item_quantity}}</td>
-          {{else}}
-          <td class="column-checkbox"><input type="checkbox" class="toggle-complete"
-              data-list-item-id="{{list_item_id}}" checked /></td>
-          <td class="list-item-name column checked-item">{{list_item_name}}</td>
-          <td class="list-item-store column checked-item">{{list_item_store}}</td>
-          <td class="list-item-quantity column checked-item">{{list_item_quantity}}</td>
-          {{/if}}
           <td class="column column-buttons">
             <button class="button-table edit-button-table primary outline"
               data-list-item-id="{{list_item_id}}">Edit</button>
             <button class="button-table delete-button-table secondary outline"
               data-list-item-id="{{list_item_id}}">Delete</button>
           </td>
+          {{else}}
+          <td class="column-checkbox"><input type="checkbox" class="toggle-complete"
+              data-list-item-id="{{list_item_id}}" checked /></td>
+          <td class="list-item-name column checked-item">{{list_item_name}}</td>
+          <td class="list-item-store column checked-item">{{list_item_store}}</td>
+          <td class="list-item-quantity column checked-item">{{list_item_quantity}}</td>
+          <td class="column column-buttons">
+            <button class="button-table edit-button-table primary outline" data-list-item-id="{{list_item_id}}"
+              disabled>Edit</button>
+            <button class="button-table delete-button-table secondary outline" data-list-item-id="{{list_item_id}}"
+              disabled>Delete</button>
+          </td>
+          {{/if}}
+
         </tr>
         {{/each}}
       </tbody>

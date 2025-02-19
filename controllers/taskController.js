@@ -49,6 +49,7 @@ exports.addTask = async (req, res) => {
 
     // Return success message
     res.status(201).json({ message: "Task added successfully", task: data.task });
+    
   } catch (err) {
     console.error("Error adding task:", err);
     res.status(500).json({ message: "Failed to add task" });

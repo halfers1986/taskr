@@ -51,7 +51,6 @@ function getAndStoreInitialValues() {
   if (taskType !== "2") {
     // Shopping list does not have a due date
     taskDueDateValue = taskDueDateElement.dataset.taskDueDate.split('T')[0];
-    console.log("Task Due Date Value: ", taskDueDateValue);
   }
   let taskDescriptionText;
   if (taskDescriptionElement) {
@@ -87,7 +86,6 @@ function getAndStoreInitialValues() {
   }
   // Store the initial values of the task elements in global array variable
   initialTaskValues = { taskTitleText, taskDueDateValue, taskDescriptionText, taskPriorityValue, taskCategoryValue };
-  console.log("Initial Category Value: ", initialTaskValues.taskCategoryValue);
 }
 
 function makeTitleInput() {
@@ -174,7 +172,6 @@ function makeCategoryInput() {
     categoryOption.textContent = category.name;
     categoryOption.value = category.id;
     if (categoryOption.value == initialTaskValues.taskCategoryValue) { // Ensure correct selection
-      console.log("Category Option Value: ", categoryOption.value, " = Initial Category Value: ", initialTaskValues.taskCategoryValue);
       categoryOption.selected = true;
     }
     taskCategoryInput.appendChild(categoryOption);
@@ -228,8 +225,6 @@ async function saveChanges() {
     requestData.category = newCategory;
   }
 
-  console.log("Request Data: ", requestData);
-
   const taskID = task.dataset.taskId;
 
   // Send PATCH request to update task
@@ -282,7 +277,13 @@ async function saveChanges() {
   }
   inputFields.categoryInput.replaceWith(taskCategoryElement);
   if (newCategory) {
-    const categoryText = categoryOptions[newCategory];
+    const categoryId = parseInt(newCategory);
+    let categoryText;
+    categoryOptions.forEach((category) => {
+      if (parseInt(category.id) === categoryId) {
+        categoryText = category.name;
+      }
+    });
     taskCategoryElement.innerHTML = "<u>Category:</u> " + categoryText;
   }
 

@@ -5,25 +5,7 @@ import addTask from "./addTask.js";
 import editTask from "./editTask.js";
 import { reopenTask, setTaskComplete } from "./setTaskComplete.js";
 import deleteTableItem from "./deleteTableItem.js";
-
-// Logout function
-async function logout() {
-  try {
-    const response = await fetch("/logout", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
-    if (!response.ok) {
-      throw new Error("Failed to log out.");
-    }
-    const data = await response.json();
-    window.location.href = data.url;
-  } catch (err) {
-    console.error("Error logging out:", err);
-  }
-}
+import editSubItem from "./editSubItem.js";
 
 document.addEventListener("DOMContentLoaded", () => {
   // Add event listeners to all task elements
@@ -44,8 +26,7 @@ document.addEventListener("DOMContentLoaded", () => {
         deleteTableItem(event);
       }
       if (event.target.classList.contains("edit-button-table")) {
-        // TODO: Implement editTableItem(event);
-        // editTableItem(event);
+        editSubItem(event);
       }
       if (event.target.classList.contains("add-subtask-button") || event.target.classList.contains("add-list-item-button")) {
         event.preventDefault();

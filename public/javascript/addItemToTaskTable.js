@@ -33,7 +33,7 @@ export default async function addItemToTaskTable(event) {
         body: JSON.stringify({ taskID, taskType, item1, item2, item3 }),
       });
 
-      
+
       const data = await response.json();
 
       if (!response.ok) {
@@ -80,7 +80,11 @@ export default async function addItemToTaskTable(event) {
           tableBody.className = "shopping-list-table-body";
         }
         newTable.appendChild(tableBody);
-        container.appendChild(newTable);
+        if (taskType === "1") {
+          container.insertBefore(newTable, container.children[1]);
+        } else {
+          container.prepend(newTable);
+        }
       }
 
       // Create a new row in the subtask table
@@ -132,11 +136,12 @@ export default async function addItemToTaskTable(event) {
         let dueDate;
         if (item2 !== "") {
           dueDate = new Date(item2);
-          cell2.textContent = dueDate.toLocaleDateString("en-UK", { day: "numeric", month: "short", year: "numeric" });
+          cell2.textContent = dueDate.toLocaleDateString("en-GB");
         } else {
           cell2.textContent = "";
         }
-        const priority = item3 === 3 ? "High" : item3 === 2 ? "Medium" : item3 === 1 ? "Low" : "";
+        console.log("Priority:", item3); // Debugging log
+        const priority = item3 === "3" ? "High" : item3 === "2" ? "Medium" : item3 === "1" ? "Low" : "";
         cell3.textContent = priority;
       } else {
         cell2.textContent = item2;
@@ -166,7 +171,7 @@ export default async function addItemToTaskTable(event) {
       table = task.querySelector("table");
       const tbody = table.querySelector("tbody");
       tbody.appendChild(newRow);
-      
+
 
       // Clear the value of the new subtask input element
       if (taskType === "1") {

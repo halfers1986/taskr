@@ -38,6 +38,7 @@ async function confirmDeleteAction() {
 
     // Replace the task with the placeholder
     task.replaceWith(placeholder);
+    task.remove();
 
     // Apply fade-out effect
     setTimeout(() => {

@@ -1,7 +1,34 @@
 const endpointPartial = "http://localhost:3001";
 
-// Handles POST /:type/:id route
-// Consumes the POST /:type/:id endpoint from the API
+// Handles PATCH /edit-sub-item route
+// Consumes the PATCH /edit-sub-item endpoint from the API
+exports.editSubItem = async (req, res) => {
+  const userID = req.session.userID;
+  const { taskId, subItemId, taskType, column1Value, column2Value, column3Value } = req.body;
+
+  try {
+    const response = await fetch(`${endpointPartial}/edit-sub-item/${userID}/${taskId}/${subItemId}`, {
+      method: "PATCH",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ taskType, column1Value, column2Value, column3Value })
+    });
+    const data = await response.json();
+    if (!response.ok) {
+      console.error("Error saving sub-item. Message from API: ", data.message);
+      return res.status(response.status).json({ message: data.message });
+    }
+
+    res.status(200).json({ message: data.message });
+
+  } catch (error) {
+    console.error("Error saving sub-item: ", error);
+    res.status(500).json({ message: "Failed to save sub-item" });
+  }
+};
+
+
+// Handles PATCH /:type/:id route
+// Consumes the PATCH /:type/:id endpoint from the API
 exports.updateSubItemStatus = async (req, res) => {
   const userID = req.session.userID;
   const { type, id } = req.params;

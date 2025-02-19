@@ -23,7 +23,15 @@ export default async function deleteTableItem(event) {
             throw new Error(data.message || "Failed to delete item.");
         }
 
-        tableRow.remove();
+        // If the table row is the last one, remove the entire table
+        const parentTable = tableRow.closest("table");
+        if (parentTable.querySelectorAll("tr").length === 2) {
+            parentTable.remove();
+        } else { // Else, remove the row
+           tableRow.remove(); 
+        }
+        
+        
     } catch (error) {
         console.error(error);
     }

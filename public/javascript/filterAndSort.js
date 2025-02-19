@@ -12,6 +12,7 @@ document.addEventListener("DOMContentLoaded", () => {
     sortSelect.forEach((sort) => {
         sort.addEventListener("change", sortTasks);
     });
+    document.getElementById("clear-filters").addEventListener("click", clearFilters);
 });
 
 // Helper function to get the week number of a date
@@ -58,7 +59,17 @@ function filterTasks() {
 
     // Get the selected filter values
     const filters = getFilterValues();
-    console.log("Filters: ", filters); // Debugging log
+    // console.log("Filters: ", filters); // Debugging log
+
+    // Group filters by type
+    let groupedFilters = {};
+    filters.forEach((filter) => {
+        if (!groupedFilters[filter.filterType]) {
+            groupedFilters[filter.filterType] = [];
+        }
+        groupedFilters[filter.filterType].push(filter.filterValue);
+    });
+
 
     tasks.forEach((task) => {
         const taskType = task.getAttribute("data-task-type");
@@ -75,96 +86,89 @@ function filterTasks() {
             taskCategory
         };
 
-        var matches = false;
-        for (var i = 0; i < filters.length; i++) {
-            var filter = filters[i];
-            console.log(`Comparing task detail ${taskDetails[filter.filterType]} with filter value ${filter.filterValue}`); // Debugging log
-            if (filter.filterType === "taskDueDate") {
-                var formattedTaskDueDate = new Date(taskDueDate);
-                var currentDate = new Date();
-                switch (filter.filterValue) {
-                    case "Overdue":
-                        if (formattedTaskDueDate < currentDate) {
-                            matches = true;
-                        }
-                        break;
-                    case "Today":
-                        if (formattedTaskDueDate.getDate() === currentDate.getDate() || formattedTaskDueDate.getMonth() === currentDate.getMonth() || formattedTaskDueDate.getFullYear() === currentDate.getFullYear()) {
-                            matches = true;
-                        }
-                        break;
-                    case "Tomorrow":
-                        currentDate.setDate(currentDate.getDate() + 1);
-                        if (formattedTaskDueDate.getDate() === currentDate.getDate() || formattedTaskDueDate.getMonth() === currentDate.getMonth() || formattedTaskDueDate.getFullYear() === currentDate.getFullYear()) {
-                            matches = true;
-                        }
-                        break;
-                    case "This Week":
-                        var currentWeek = getWeekNumber(currentDate);
-                        var taskWeek = getWeekNumber(formattedTaskDueDate);
-                        if (taskWeek === currentWeek) {
-                            matches = true;
-                        }
-                        break;
-                    case "Next Week":
-                        var currentWeek = getWeekNumber(currentDate);
-                        var taskWeek = getWeekNumber(formattedTaskDueDate);
-                        if (taskWeek === currentWeek + 1) {
-                            matches = true;
-                        }
-                        break;
-                    case "This Month":
-                        if (formattedTaskDueDate.getMonth() === currentDate.getMonth() || formattedTaskDueDate.getFullYear() === currentDate.getFullYear()) {
-                            matches = true;
-                        }
-                        break;
-                    case "Next Month":
-                        if (formattedTaskDueDate.getMonth() === currentDate.getMonth() + 1 || formattedTaskDueDate.getFullYear() === currentDate.getFullYear()) {
-                            matches = true;
-                        }
-                        break;
-                    case "This Year":
-                        if (formattedTaskDueDate.getFullYear() === currentDate.getFullYear()) {
-                            matches = true;
-                        }
-                        break;
-                    default:
-                        matches = false;
-                        break;
-                }
+        // Variable to check if the task matches all categories
+        let matchesAllCategories = true;
+
+        for (const filterType in groupedFilters) {
+            const filterValues = groupedFilters[filterType];
+            let matchesCategory = false;
+
+            if (filterType === "taskDueDate") {
+                const formattedTaskDueDate = new Date(taskDueDate);
+                const currentDate = new Date();
+                filterValues.forEach((filterValue) => {
+                    switch (filterValue) {
+                        case "Overdue":
+                            if (formattedTaskDueDate < currentDate && taskStatus !== "Completed") {
+                                matchesCategory = true;
+                            }
+                            break;
+                        case "Today":
+                            if (formattedTaskDueDate.getDate() === currentDate.getDate() &&
+                                formattedTaskDueDate.getMonth() === currentDate.getMonth() &&
+                                formattedTaskDueDate.getFullYear() === currentDate.getFullYear()) {
+                                matchesCategory = true;
+                            }
+                            break;
+                        case "Tomorrow":
+                            currentDate.setDate(currentDate.getDate() + 1);
+                            if (formattedTaskDueDate.getDate() === currentDate.getDate() &&
+                                formattedTaskDueDate.getMonth() === currentDate.getMonth() &&
+                                formattedTaskDueDate.getFullYear() === currentDate.getFullYear()) {
+                                matchesCategory = true;
+                            }
+                            break;
+                        case "This Week":
+                            const currentWeek = getWeekNumber(currentDate);
+                            const taskWeek = getWeekNumber(formattedTaskDueDate);
+                            if (taskWeek === currentWeek) {
+                                matchesCategory = true;
+                            }
+                            break;
+                        case "Next Week":
+                            const nextWeek = getWeekNumber(currentDate) + 1;
+                            const taskNextWeek = getWeekNumber(formattedTaskDueDate);
+                            if (taskNextWeek === nextWeek) {
+                                matchesCategory = true;
+                            }
+                            break;
+                        case "This Month":
+                            if (formattedTaskDueDate.getMonth() === currentDate.getMonth() &&
+                                formattedTaskDueDate.getFullYear() === currentDate.getFullYear()) {
+                                matchesCategory = true;
+                            }
+                            break;
+                        case "Next Month":
+                            if (formattedTaskDueDate.getMonth() === currentDate.getMonth() + 1 &&
+                                formattedTaskDueDate.getFullYear() === currentDate.getFullYear()) {
+                                matchesCategory = true;
+                            }
+                            break;
+                        case "This Year":
+                            if (formattedTaskDueDate.getFullYear() === currentDate.getFullYear()) {
+                                matchesCategory = true;
+                            }
+                            break;
+                        default:
+                            matchesCategory = false;
+                            break;
+                    }
+                });
+            } else {
+                filterValues.forEach((filterValue) => {
+                    if (taskDetails[filterType] === filterValue) {
+                        matchesCategory = true;
+                    }
+                });
             }
-            if (filter.filterType === "taskPriority") {
-                if (taskPriority === filter.filterValue) {
-                    matches = true;
-                    break;
-                }
-            }
-            if (filter.filterType === "taskType") {
-                if (taskType === filter.filterValue) {
-                    matches = true;
-                    break;
-                }
-            }
-            if (filter.filterType === "taskStatus") {
-                if (taskStatus === filter.filterValue) {
-                    matches = true;
-                    break;
-                }
-            }
-            if (filter.filterType === "taskCategory") {
-                if (taskCategory === filter.filterValue) {
-                    matches = true;
-                    break;
-                }
+
+            if (!matchesCategory) {
+                matchesAllCategories = false;
+                break;
             }
         }
 
-        // If no filters are selected, show all tasks
-        if (filters.length === 0) {
-            matches = true;
-        }
-
-        if (matches) {
+        if (matchesAllCategories) {
             // Show the task if it matches any filter values
             task.classList.remove("hidden");
         } else {
@@ -346,3 +350,12 @@ getStatusValue = (task) => {
     }
     return taskStatus;
 }
+
+function clearFilters() {
+    filters.forEach((filter) => {
+        filter.checked = false;
+    });
+    filterTasks();
+}
+
+

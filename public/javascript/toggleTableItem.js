@@ -1,4 +1,4 @@
- export default async function toggleTableItem(event) {
+export default async function toggleTableItem(event) {
   const row = event.target.closest("tr");
   const checkbox = event.target.closest("input[type='checkbox']");
   const rowElements = Array.from(row.children);
@@ -34,9 +34,16 @@
     if (!response.ok) {
       throw new Error(data.message || "Failed to update item.");
     }
+    console.log(rowElements);
     rowElements.forEach((element) => {
       if (element.classList.contains("column")) {
         element.classList.toggle("checked-item");
+      }
+      // Find buttons inside the final column and toggle disabled state
+      if (element.classList.contains("column-buttons")) {
+        element.querySelectorAll("button").forEach((button) => {
+          button.disabled = !button.disabled;
+        });
       }
     });
   } catch (error) {

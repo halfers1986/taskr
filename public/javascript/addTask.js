@@ -1,6 +1,8 @@
 import { closeModal, openModal } from "./modal.js";
 import { addShoppingListItemToNewList, resetShoppingListForm } from "./addShoppingListItemToNewList.js";
 import { addSubtaskToNewTask, resetSubtaskForm } from "./addSubtaskToNewTask.js";
+import deleteTask from "./deleteTask.js";
+import editTask from "./editTask.js";
 
 // -- CONFIG --
 // modal
@@ -125,7 +127,7 @@ async function confirmAddAction(event) {
 
   // Get the sub-form values
   if (taskType.value === "2") {
-    shoppingListContainer.querySelectorAll(".shopping-list-row").forEach((row) => {
+    shoppingListContainer.querySelectorAll(".modal-row").forEach((row) => {
       // Create the shopping list item object
       let item = {
         name: row.children[0].textContent,
@@ -195,18 +197,18 @@ async function confirmAddAction(event) {
       errorElement.textContent = "Failed to add task. This one's our fault, not yours.";
     }
     return;
-  } else {
-    // Add the new task to the DOM
-    addTaskToDOM(responseData.task);
-
-    // Remove the "No tasks" message if it exists
-    if (document.querySelector(".no-tasks")) {
-      document.querySelector(".no-tasks").remove();
-    }
-    
-    // Close the modal
-    closeAction();
   }
+  // Add the new task to the DOM
+  addTaskToDOM(responseData.task);
+
+  // Remove the "No tasks" message if it exists
+  if (document.querySelector(".no-tasks")) {
+    document.querySelector(".no-tasks").remove();
+  }
+
+  // Close the modal
+  closeAction();
+
 }
 
 // Add the new task to the DOM using a Handlebars template
@@ -223,6 +225,15 @@ function addTaskToDOM(task) {
   // Add the task to the DOM
   const taskContainer = document.getElementById("task-list");
   taskContainer.insertAdjacentHTML('afterbegin', taskHTML);
+
+  // Get the newly added task
+  const newTask = document.querySelector(".primary-content").firstElementChild;
+  const deleteButton = newTask.querySelector(".delete-button");
+  const editButton = newTask.querySelector(".edit-button");
+
+  // Add event listeners to the new task
+  deleteButton.addEventListener("click", deleteTask);
+  editButton.addEventListener("click", editTask);
 }
 
 // Close the modal
