@@ -46,8 +46,8 @@ exports.updateUserDetails = async (req, res) => {
       console.error("Settings controller: Failed to update user details: Message returned from API:", data.message);
       return res.status(response.status).json({ message: data.message });
     }
-6
-    res.status(200).json( { message: "User details updated" });
+    6
+    res.status(200).json({ message: "User details updated" });
 
   } catch (err) {
     console.error("Error updating user details:", err);
@@ -152,6 +152,9 @@ exports.deleteAccount = async (req, res) => {
     const data = await response.json();
 
     if (!response.ok) {
+      if (err.status === 409) {
+        return res.status(409).json({ message: data.message });
+      }
       console.error("Settings controller: Failed to delete account: Message returned from API:", data.message);
       return res.status(response.status).json({ message: data.message });
     }

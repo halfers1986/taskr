@@ -3,6 +3,7 @@ import { addShoppingListItemToNewList, resetShoppingListForm } from "./addShoppi
 import { addSubtaskToNewTask, resetSubtaskForm } from "./addSubtaskToNewTask.js";
 import deleteTask from "./deleteTask.js";
 import editTask from "./editTask.js";
+import { setTaskComplete } from "./setTaskComplete.js";
 
 // -- CONFIG --
 // modal
@@ -230,10 +231,12 @@ function addTaskToDOM(task) {
   const newTask = document.querySelector(".primary-content").firstElementChild;
   const deleteButton = newTask.querySelector(".delete-button");
   const editButton = newTask.querySelector(".edit-button");
+  const markCompleteButton = newTask.querySelector(".mark-complete-button");
 
   // Add event listeners to the new task
   deleteButton.addEventListener("click", deleteTask);
   editButton.addEventListener("click", editTask);
+  markCompleteButton.addEventListener("click", setTaskComplete);
 }
 
 // Close the modal

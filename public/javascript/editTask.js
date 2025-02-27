@@ -115,29 +115,11 @@ function makeDueDateInput() {
 function makePriorityInput() {
   const taskPriorityInput = document.createElement("select");
   taskPriorityInput.classList.add("task-priority-input");
-  taskPriorityInput.setAttribute("value", initialTaskValues.taskPriorityValue);
-  const priorityOptions = ["Low", "Medium", "High"];
-  priorityOptions.forEach((option) => {
-    const priorityOption = document.createElement("option");
-    priorityOption.textContent = option;
-    switch (option) {
-      case "Low":
-        priorityOption.value = "1";
-        break;
-      case "Medium":
-        priorityOption.value = "2";
-        break;
-      case "High":
-        priorityOption.value = "3";
-        break;
-      default:
-        priorityOption.value = "0";
-    }
-    if (priorityOption.value === initialTaskValues.taskPriorityValue) {
-      priorityOption.selected = true;
-    }
-    taskPriorityInput.appendChild(priorityOption);
-  });
+  taskPriorityInput.innerHTML = `<option value="0" ${initialTaskValues.taskPriorityValue === "0" ? "selected " : ""}disabled>Priority (optional)</option>
+                                <option value="1" ${initialTaskValues.taskPriorityValue === "1" ? "selected" : ""}>Low</option>
+                                <option value="2" ${initialTaskValues.taskPriorityValue === "2" ? "selected" : ""}>Medium</option>
+                                <option value="3" ${initialTaskValues.taskPriorityValue === "3" ? "selected" : ""}>High</option>`;
+  taskPriorityInput.value = initialTaskValues.taskPriorityValue;
   return taskPriorityInput;
 }
 
@@ -285,6 +267,8 @@ async function saveChanges() {
       }
     });
     taskCategoryElement.innerHTML = "<u>Category:</u> " + categoryText;
+    taskCategoryElement.dataset.taskCategory = newCategory;
+    taskCategoryElement.dataset.taskCategoryName = categoryText;
   }
 
   // Replace the save and cancel buttons with the edit and delete buttons

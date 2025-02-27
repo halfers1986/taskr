@@ -30,7 +30,8 @@ export async function setTaskComplete(event) {
   // Create a div to contain the task name, completion timestamp & reopen button
   const reopenTaskContainer = document.createElement("div");
   reopenTaskContainer.classList.add("completed-task-label");
-  reopenTaskContainer.innerHTML = `<h2>Task "${taskTitle}" completed on ${data.taskCompletedTimestamp}</h2>`;
+  const formattedDate = new Date(data.taskCompletedTimestamp).toLocaleString();
+  reopenTaskContainer.innerHTML = `<h2>Task "${taskTitle}" completed on ${formattedDate}</h2>`;
   task.appendChild(reopenTaskContainer);
 
   // Create a button to reopen the task
@@ -38,6 +39,7 @@ export async function setTaskComplete(event) {
   reopenButton.classList.add("reopen-task-button");
   reopenButton.textContent = "Reopen Task";
   reopenTaskContainer.appendChild(reopenButton);
+  reopenButton.addEventListener("click", reopenTask);
 }
 
 export async function reopenTask(event) {

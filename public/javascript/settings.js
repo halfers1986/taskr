@@ -312,6 +312,10 @@ async function deleteCategory(event) {
 
         // If the request failed, log the error and return
         if (!response.ok) {
+            if (response.status === 409) { // Status 409: Conflict - category is in use
+                // Show an error message
+                document.getElementById("category-delete-conflict").style.display = "block";
+            }
             console.error("settings.js: Failed to delete category:", data.message);
             return;
         }

@@ -49,7 +49,6 @@ export function editSubItem(event) {
     if (taskType === "1") {
         input2.type = "date";
         input3 = document.createElement("select");
-        console.log("About to set default value for priority as: ", column3Value);
         input3.innerHTML = `<option value="0" ${column3Value === "0" ? "selected " : ""}disabled>Priority (optional)</option>
                             <option value="1" ${column3Value === "1" ? "selected" : ""}>Low</option>
                             <option value="2" ${column3Value === "2" ? "selected" : ""}>Medium</option>

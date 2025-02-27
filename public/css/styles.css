@@ -245,7 +245,7 @@ svg.tile-icon {
 
 /* -- MODALS -- */
 
-.modal-header.grid {
+.modal-header {
     display: flex;
     /* Use flexbox for alignment */
     align-items: flex-end;
@@ -263,6 +263,7 @@ svg.tile-icon {
 
 article.modal {
     padding: 0;
+    overflow-y: auto;
 }
 
 .modal-header,
@@ -335,6 +336,13 @@ article.modal {
 .modal-subsection {
     padding-left: 0.5rem;
     padding-right: 0.5rem;
+}
+
+#shopping-list-container {
+    display: block;
+    max-height: 200px;
+    overflow-y: auto;
+    overflow-x: hidden;
 }
 
 
