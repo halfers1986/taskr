@@ -76,6 +76,8 @@ exports.getAverageCompletionTime = async (req, res) => {
       return res.status(response.status).json({ message: data.message });
     }
 
+    console.log("Data:", data);
+
     // Else on successful request, return the data
     res.status(200).json(data);
 
