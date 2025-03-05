@@ -9,10 +9,26 @@ exports.getTasks = async (req, res) => {
 
     const response = await fetch(`${endpointPartial}/tasks/${userID}`, {
       method: "GET",
-      headers: { "Content-Type": "application/json" }
+      headers: { 
+        "Content-Type": "application/json", 
+        "Authorization": `Bearer ${req.session.token}`
+      }
     });
 
     const data = await response.json();
+
+    if (!response.ok) {
+      if (response.status === 401) {
+        console.error("Unauthorized access");
+        return res.status(401).send("Unauthorized access");
+      }
+      if (response.status === 403) {
+        console.error("Forbidden access");
+        return res.status(403).send("Forbidden access");
+      }
+      console.error("Failed to fetch tasks:", data.message);
+      return res.status(response.status).send("An error occurred");
+    }
 
     // console.log(data);
 
@@ -35,7 +51,7 @@ exports.addTask = async (req, res) => {
   try {
     const response = await fetch(`${endpointPartial}/add-task`, {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
+      headers: { "Content-Type": "application/json", "Authorization": `Bearer ${req.session.token}` },
       body: JSON.stringify({ ...req.body, userID })
     });
 
@@ -65,7 +81,7 @@ exports.updateTask = async (req, res) => {
   try {
     const response = await fetch(`${endpointPartial}/edit-task/${id}`, {
       method: "PATCH",
-      headers: { "Content-Type": "application/json" },
+      headers: { "Content-Type": "application/json", "Authorization": `Bearer ${req.session.token}` },
       body: JSON.stringify({ ...req.body, userID })
     });
 
@@ -95,7 +111,7 @@ exports.updateTaskCompletion = async (req, res) => {
   try {
     const response = await fetch(`${endpointPartial}/task-status/${taskID}`, {
       method: "PATCH",
-      headers: { "Content-Type": "application/json" },
+      headers: { "Content-Type": "application/json", "Authorization": `Bearer ${req.session.token}` },
       body: JSON.stringify({ ...req.body, userID })
     });
 
@@ -125,7 +141,7 @@ exports.deleteTask = async (req, res) => {
   try {
     const response = await fetch(`${endpointPartial}/delete-task/${taskID}`, {
       method: "DELETE",
-      headers: { "Content-Type": "application/json" },
+      headers: { "Content-Type": "application/json", "Authorization": `Bearer ${req.session.token}` },
       body: JSON.stringify({ taskType, userID })
     });
 

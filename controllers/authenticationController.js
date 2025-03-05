@@ -40,6 +40,7 @@ exports.logInUser = async (req, res) => {
     req.session.username = username;
     req.session.loggedIn = true;
     req.session.userID = data.userID;
+    req.session.token = data.token;
 
     // Return the URL to redirect to the dashboard
     res.status(200).json({ url: "/" });
@@ -84,6 +85,7 @@ exports.registerUser = async (req, res) => {
     req.session.username = username;
     req.session.loggedIn = true;
     req.session.userID = data.userID;
+    req.session.token = data.token;
     // console.log("Session on Register:", req.session);
 
     // Return the URL to redirect to the dashboard

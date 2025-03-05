@@ -7,7 +7,7 @@ exports.getSettings = async (req, res) => {
   try {
     const response = await fetch(`${endpointPartial}/settings/${userID}`, {
       method: "GET",
-      headers: { "Content-Type": "application/json" }
+      headers: { "Content-Type": "application/json", "Authorization": `Bearer ${req.session.token}` }
     });
 
     const data = await response.json();
@@ -36,7 +36,7 @@ exports.updateUserDetails = async (req, res) => {
   try {
     const response = await fetch(`${endpointPartial}/update-user-details/${userID}`, {
       method: "PATCH",
-      headers: { "Content-Type": "application/json" },
+      headers: { "Content-Type": "application/json", "Authorization": `Bearer ${req.session.token}` },
       body: JSON.stringify(changes)
     });
 
@@ -63,7 +63,7 @@ exports.updatePassword = async (req, res) => {
   try {
     const response = await fetch(`${endpointPartial}/update-password/${userID}`, {
       method: "PATCH",
-      headers: { "Content-Type": "application/json" },
+      headers: { "Content-Type": "application/json", "Authorization": `Bearer ${req.session.token}` },
       body: JSON.stringify(changes)
     });
 
@@ -91,7 +91,7 @@ exports.addCategory = async (req, res) => {
   try {
     const response = await fetch(`${endpointPartial}/add-category/${userID}`, {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
+      headers: { "Content-Type": "application/json", "Authorization": `Bearer ${req.session.token}` },
       body: JSON.stringify(newCategory)
     });
 
@@ -118,7 +118,7 @@ exports.deleteCategory = async (req, res) => {
   try {
     const response = await fetch(`${endpointPartial}/delete-category/${userID}`, {
       method: "DELETE",
-      headers: { "Content-Type": "application/json" },
+      headers: { "Content-Type": "application/json", "Authorization": `Bearer ${req.session.token}` },
       body: JSON.stringify({ categoryID })
     });
 
@@ -145,7 +145,7 @@ exports.deleteAccount = async (req, res) => {
   try {
     const response = await fetch(`${endpointPartial}/delete-account/${userID}`, {
       method: "DELETE",
-      headers: { "Content-Type": "application/json" },
+      headers: { "Content-Type": "application/json", "Authorization": `Bearer ${req.session.token}` },
       body: JSON.stringify({ password })
     });
 

@@ -14,7 +14,7 @@ exports.getBasicDashboard = async (req, res) => {
   try {
     const response = await fetch(`${endpointPartial}/basic-dashboard/${userID}?timePeriod=${encodeURIComponent(timePeriod)}`, {
       method: "GET",
-      headers: { "Content-Type": "application/json" }
+      headers: { "Content-Type": "application/json", "Authorization": `Bearer ${req.session.token}` }
     });
 
     const data = await response.json();
@@ -40,7 +40,7 @@ exports.getCompletedByType = async (req, res) => {
   try {
     const response = await fetch(`${endpointPartial}/completed-by-type/${userID}?timePeriod=${encodeURIComponent(timePeriod)}`, {
       method: "GET",
-      headers: { "Content-Type": "application/json" }
+      headers: { "Content-Type": "application/json", "Authorization": `Bearer ${req.session.token}` }
     });
 
     const data = await response.json();
@@ -66,7 +66,7 @@ exports.getAverageCompletionTime = async (req, res) => {
   try {
     const response = await fetch(`${endpointPartial}/avg-completion-time/${userID}?timePeriod=${encodeURIComponent(timePeriod)}`, {
       method: "GET",
-      headers: { "Content-Type": "application/json" }
+      headers: { "Content-Type": "application/json", "Authorization": `Bearer ${req.session.token}` }
     });
 
     const data = await response.json();
@@ -94,7 +94,7 @@ exports.getCategoriesByType = async (req, res) => {
   try {
     const response = await fetch(`${endpointPartial}/categories-by-type/${userID}?timePeriod=${encodeURIComponent(timePeriod)}`, {
       method: "GET",
-      headers: { "Content-Type": "application/json" }
+      headers: { "Content-Type": "application/json", "Authorization": `Bearer ${req.session.token}` }
     });
 
     const data = await response.json();

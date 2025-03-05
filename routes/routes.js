@@ -68,8 +68,6 @@ router.delete("/delete-account", ensureAuthenticated, settingsController.deleteA
 router.patch("/edit-sub-item", ensureAuthenticated, subItemController.editSubItem);
 // Patch route to update the status of a subtask or shopping list item
 router.patch("/:type/:id", ensureAuthenticated, subItemController.updateSubItemStatus);
-// Patch route to update the content of a subtask or shopping list item
-router.post("/update-subitem", ensureAuthenticated, subItemController.updateSubItem); // TODO
 // Post route to add a new subtask or shopping list item
 router.post("/new-table-item", ensureAuthenticated, subItemController.addSubItem);
 // Delete route to delete a subtask or shopping list item

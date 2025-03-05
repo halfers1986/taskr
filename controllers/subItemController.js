@@ -9,7 +9,7 @@ exports.editSubItem = async (req, res) => {
   try {
     const response = await fetch(`${endpointPartial}/edit-sub-item/${userID}/${taskId}/${subItemId}`, {
       method: "PATCH",
-      headers: { "Content-Type": "application/json" },
+      headers: { "Content-Type": "application/json", "Authorization": `Bearer ${req.session.token}` },
       body: JSON.stringify({ taskType, column1Value, column2Value, column3Value })
     });
     const data = await response.json();
@@ -26,7 +26,6 @@ exports.editSubItem = async (req, res) => {
   }
 };
 
-
 // Handles PATCH /:type/:id route
 // Consumes the PATCH /:type/:id endpoint from the API
 exports.updateSubItemStatus = async (req, res) => {
@@ -36,7 +35,7 @@ exports.updateSubItemStatus = async (req, res) => {
   try {
     const response = await fetch(`${endpointPartial}/${type}/${id}`, {
       method: "PATCH",
-      headers: { "Content-Type": "application/json" },
+      headers: { "Content-Type": "application/json", "Authorization": `Bearer ${req.session.token}` },
       body: JSON.stringify({ ...req.body, userID })
     });
 
@@ -57,12 +56,6 @@ exports.updateSubItemStatus = async (req, res) => {
   }
 };
 
-// Handles POST /update-subitem route
-// Consumes the POST /update-subitem endpoint from the API
-exports.updateSubItem = async (req, res) => {
-  //TODO: Implement this function
-};
-
 // Handles POST /new-table-item route
 // Consumes the POST /new-table-item endpoint from the API
 exports.addSubItem = async (req, res) => {
@@ -71,7 +64,7 @@ exports.addSubItem = async (req, res) => {
   try {
     const response = await fetch(`${endpointPartial}/new-table-item`, {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
+      headers: { "Content-Type": "application/json", "Authorization": `Bearer ${req.session.token}` },
       body: JSON.stringify({ ...req.body, userID })
     });
 
@@ -101,7 +94,7 @@ exports.deleteSubItem = async (req, res) => {
   try {
     const response = await fetch(`${endpointPartial}/delete-table-item`, {
       method: "DELETE",
-      headers: { "Content-Type": "application/json" },
+      headers: { "Content-Type": "application/json", "Authorization": `Bearer ${req.session.token}` },
       body: JSON.stringify({ ...req.body, userID })
     });
 
