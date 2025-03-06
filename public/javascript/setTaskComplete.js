@@ -30,7 +30,7 @@ export async function setTaskComplete(event) {
   // Create a div to contain the task name, completion timestamp & reopen button
   const reopenTaskContainer = document.createElement("div");
   reopenTaskContainer.classList.add("completed-task-label");
-  const formattedDate = new Date(data.taskCompletedTimestamp).toLocaleString();
+  const formattedDate = new Date(data.taskCompletedTimestamp).toLocaleDateString("en-GB");
   reopenTaskContainer.innerHTML = `<h2>Task "${taskTitle}" completed on ${formattedDate}</h2>`;
   task.appendChild(reopenTaskContainer);
 

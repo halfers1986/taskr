@@ -5,7 +5,6 @@ body, html {
     padding: 0;
 }
 
-
 .error {
     color: var(--pico-form-element-invalid-active-border-color);
     font-weight: bold;
