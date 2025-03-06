@@ -56,25 +56,27 @@
         </svg>
       </div>
       <div>
-        <form id="register" method="POST" action="/main">
-          <h3>Register</h3>
+        <form id="register" method="POST" action="/register">
+          <div style="display: flex; align-items: flex-end; justify-content: flex-start">
+            <h3 style="margin-right: 10px;">Register</h3>
+            <p class="error" id="error"></p>
+          </div>
           <label>Name</label>
           <fieldset role="group">
-            <input id="firstname" type="text" placeholder="First name" />
-            <input id="lastname" type="text" placeholder="Last name">
+            <input id="firstname" type="text" placeholder="First name" autocomplete="given-name"/>
+            <input id="lastname" type="text" placeholder="Last name" autocomplete="family-name">
           </fieldset>
           <label for="username">Username</label>
-          <input id="username" type="text" placeholder="Username">
+          <input id="username" type="text" placeholder="Username" autocomplete="username">
           <label>Date of birth</label>
-          <input id="DOB" type="date" placeholder="Your date of birth" />
+          <input id="DOB" type="date" placeholder="Your date of birth" autocomplete="bday-day"/>
           <label>Email</label>
-          <input id="email" type="email" placeholder="Email" />
+          <input id="email" type="email" placeholder="Email" autocomplete="email"/>
           <label>Password</label>
           <fieldset role="group">
-            <input id="password" type="password" placeholder="Password" />
-            <input id="confirm-password" type="password" placeholder="Confirm password" />
+            <input id="password" type="password" placeholder="Password" autocomplete="new-password"/>
+            <input id="confirm-password" type="password" placeholder="Confirm password" autocomplete="new-password"/>
           </fieldset>
-          <p class="error" id="error"></p>
           <div><button id="submit-button" class="primary" type="submit">Register</button></div>
           <!-- <div class="g-signin2" data-onsuccess="onSignIn"></div> -->
           <p class="secondary">
@@ -86,19 +88,19 @@
     </article>
   </main>
   <footer class="container front-page-footer">
-      <p class="copy">&copy; 2024 Taskr</p>
-      <div>
-        <form>
-          <label for="theme-switcher" style="padding-right: 0.5em"><small> </small></label>
-          <input type="checkbox" role="switch" id="theme-switcher"/>
-        </form>
-      </div>
-    </footer>
+    <p class="copy">&copy; 2024 Taskr</p>
+    <div>
+      <form>
+        <label for="theme-switcher" style="padding-right: 0.5em"><small> </small></label>
+        <input type="checkbox" role="switch" id="theme-switcher" />
+      </form>
+    </div>
+  </footer>
   <!-- validator.js -->
   <script src="https://cdn.jsdelivr.net/npm/validator/validator.min.js"></script>
   <!-- Include the theme-switcher.js script -->
   <script src="/javascript/themeSwitcher.js"></script>
-  <script src="/javascript/register.js"></script>
+  <script src="/javascript/register.js" type="module"></script>
 </body>
 
 </html>

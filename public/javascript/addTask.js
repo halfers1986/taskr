@@ -4,6 +4,10 @@ import { addSubtaskToNewTask, resetSubtaskForm } from "./addSubtaskToNewTask.js"
 import deleteTask from "./deleteTask.js";
 import editTask from "./editTask.js";
 import { setTaskComplete } from "./setTaskComplete.js";
+import deleteTableItem from "./deleteTableItem.js";
+import editSubItem from "./editSubItem.js";
+import toggleTableItem from "./toggleTableItem.js";
+import addItemToTaskTable from "./addItemToTaskTable.js";
 
 // -- CONFIG --
 // modal
@@ -32,6 +36,7 @@ const addItemButton = document.getElementById("add-shopping-list-item-button");
 const descDatePriority = document.getElementById("description-due-date-priority");
 const dueDate = document.getElementById("task-due-date");
 const priority = document.getElementById("task-priority");
+const category = document.getElementById("task-category");
 const description = document.getElementById("task-description");
 
 function validateForm() {
@@ -112,6 +117,7 @@ async function confirmAddAction(event) {
   let formTitle = title.value;
   let formDescription = description.value;
   let formPriority = priority.value;
+  let formCategory = category.value;
   let formDueDate;
   let formSubtasks = [];
   let formShoppingListItems = [];
@@ -124,7 +130,9 @@ async function confirmAddAction(event) {
   }
 
   // Convert the priority value to a number
-  formPriority = formPriority === "High" ? 3 : formPriority === "Medium" ? 2 : formPriority === "Low" ? 1 : null;
+  formPriority = formPriority === "0" ? null : formPriority;
+
+  formCategory = formCategory === "0" ? null : formCategory;
 
   // Get the sub-form values
   if (taskType.value === "2") {
@@ -161,6 +169,7 @@ async function confirmAddAction(event) {
     title: formTitle,
     description: formDescription,
     priority: formPriority,
+    category: formCategory,
     dueDate: formDueDate,
   };
 
@@ -227,16 +236,32 @@ function addTaskToDOM(task) {
   const taskContainer = document.getElementById("task-list");
   taskContainer.insertAdjacentHTML('afterbegin', taskHTML);
 
-  // Get the newly added task
+  // Get the newly added task & task type
   const newTask = document.querySelector(".primary-content").firstElementChild;
+  const taskType = newTask.dataset.taskType;
+
+  // Get the interactive elements of the new task
   const deleteButton = newTask.querySelector(".delete-button");
   const editButton = newTask.querySelector(".edit-button");
   const markCompleteButton = newTask.querySelector(".mark-complete-button");
+  const toggleSubtaskElement = newTask.querySelectorAll(".toggle-complete");
+  const deleteSubtaskElement = newTask.querySelectorAll(".delete-button-table");
+  const editSubtaskElement = newTask.querySelectorAll(".edit-button-table");
+  const addSubtaskButton = newTask.querySelector(".add-subtask-button");
+  const addListItemButton = newTask.querySelector(".add-list-item-button");
 
   // Add event listeners to the new task
   deleteButton.addEventListener("click", deleteTask);
   editButton.addEventListener("click", editTask);
   markCompleteButton.addEventListener("click", setTaskComplete);
+  toggleSubtaskElement.forEach((element) => element.addEventListener("click", toggleTableItem));
+  deleteSubtaskElement.forEach((element) => element.addEventListener("click", deleteTableItem));
+  editSubtaskElement.forEach((element) => element.addEventListener("click", editSubItem));
+  if (taskType === "1") {
+    addSubtaskButton.addEventListener("click", addItemToTaskTable);
+  } else if (taskType === "2") {
+    addListItemButton.addEventListener("click", addItemToTaskTable);
+  }
 }
 
 // Close the modal

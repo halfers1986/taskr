@@ -1,3 +1,5 @@
+import showError from "./showError.js";
+
 const firstnameElement = document.getElementById("firstname");
 const lastnameElement = document.getElementById("lastname");
 const usernameElement = document.getElementById("username");
@@ -8,134 +10,76 @@ const dobElement = document.getElementById("DOB");
 const submitButton = document.getElementById("submit-button");
 const errorElement = document.getElementById("error");
 
-// Error checker
-var nameError = false;
-var usernameError = false;
-var emailError = false;
-var dobError = false;
-var passwordError = false;
-
-
-
-
-function validateName() {
-  if (firstnameElement.value === "" || lastnameElement.value === "") {
-    if (firstnameElement.value === "") {
-      firstnameElement.setAttribute("aria-invalid", "true");
-    }
-    if (lastnameElement.value === "") {
-      lastnameElement.setAttribute("aria-invalid", "true");
-    }
-    errorElement.textContent = "Please complete all fields.";
-    nameError = true;
-    return false;
-  } else {
-    firstnameElement.setAttribute("aria-invalid", "false");
-    lastnameElement.setAttribute("aria-invalid", "false");
-    nameError = false;
-    if (nameError === false && usernameError === false && emailError === false && dobError === false && passwordError === false) {
-      errorElement.textContent = "";
-    }
-    return true;
-  }
+// Validation functions
+function isValidLength(value, min, max) {
+  return value.length >= min && value.length <= max;
 }
 
-function validateUsername() {
-  if (usernameElement.value === "") {
-    usernameElement.setAttribute("aria-invalid", "true");
-    errorElement.textContent = "Please complete all fields.";
-    usernameError = true;
-    return false;
-  } else {
-    usernameElement.setAttribute("aria-invalid", "false");
-    usernameError = false;
-    if (nameError === false && usernameError === false && emailError === false && dobError === false && passwordError === false) {
-      errorElement.textContent = "";
-    }
-    return true;
-  }
+function isValidEmail(email) {
+  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 }
 
-function validateEmail() {
-  if (emailElement.value === "") {
-    emailElement.setAttribute("aria-invalid", "true");
-    errorElement.textContent = "Please complete all fields.";
-    emailError = true;
-    return false;
-  } else if (validator.isEmail(emailElement.value) === false) {
-    emailElement.setAttribute("aria-invalid", "true");
-    errorElement.textContent = "Invalid email address.";
-    emailError = true;
-    return false;
+// Field validation logic
+function validateField(input, message, min, max) {
+  if (!isValidLength(input.value, min, max)) {
+    input.setAttribute("aria-invalid", "true");
+    showError(message, errorElement);
   } else {
-    emailElement.setAttribute("aria-invalid", "false");
-    emailError = false;
-    if (nameError === false && usernameError === false && emailError === false && dobError === false && passwordError === false) {
-      errorElement.textContent = "";
-    }
-    return true;
+    input.setAttribute("aria-invalid", "false");
+    errorElement.textContent = ""; // Clear error
   }
+  checkFormValidity();
+}
+
+function validateEmailField(input, message) {
+  if (!isValidEmail(input.value)) {
+    input.setAttribute("aria-invalid", "true");
+    showError(message, errorElement);
+  } else {
+    input.setAttribute("aria-invalid", "false");
+    errorElement.textContent = ""; // Clear error
+  }
+  checkFormValidity();
+}
+
+function validatePasswordMatch() {
+  if (confirmPasswordElement.value !== passwordElement.value) {
+    confirmPasswordElement.setAttribute("aria-invalid", "true");
+    showError("Passwords do not match.", errorElement);
+  } else {
+    confirmPasswordElement.setAttribute("aria-invalid", "false");
+    errorElement.textContent = "";
+  }
+  checkFormValidity();
 }
 
 function validateDOB() {
-  if (dobElement.value === "") {
+  if (!dobElement.value) {
     dobElement.setAttribute("aria-invalid", "true");
-    errorElement.textContent = "Please complete all fields.";
-    dobError = true;
-    return false;
+    showError("Date of birth is required.", errorElement);
   } else {
     dobElement.setAttribute("aria-invalid", "false");
-    dobError = false;
-    if (nameError === false && usernameError === false && emailError === false && dobError === false && passwordError === false) {
-      errorElement.textContent = "";
-    }
-    return true;
+    errorElement.textContent = "";
   }
+  checkFormValidity();
 }
 
-function validatePassword() {
-  if (passwordElement.value === "" || confirmPasswordElement.value === "") {
-    if (passwordElement.value === "") {
-      passwordElement.setAttribute("aria-invalid", "true");
-    }
-    if (confirmPasswordElement.value === "") {
-      confirmPasswordElement.setAttribute("aria-invalid", "true");
-    }
-    errorElement.textContent = "Please complete all fields.";
-    passwordError = true;
-    return false;
-  } else if (passwordElement.value !== confirmPasswordElement.value) {
-    passwordElement.setAttribute("aria-invalid", "true");
-    confirmPasswordElement.setAttribute("aria-invalid", "true");
-    passwordError = true;
-    errorElement.textContent = "Passwords do not match.";
-  } else if (passwordElement.value.length < 8) {
-    passwordElement.setAttribute("aria-invalid", "true");
-    confirmPasswordElement.setAttribute("aria-invalid", "true");
-    passwordError = true;
-    errorElement.textContent = "Password must be at least 8 characters long.";
-    return false;
-  } else {
-    passwordElement.setAttribute("aria-invalid", "false");
-    confirmPasswordElement.setAttribute("aria-invalid", "false");
-    passwordError = false;
-    if (nameError === false && usernameError === false && emailError === false && dobError === false && passwordError === false) {
-      errorElement.textContent = "";
-    }
-    return true;
-  }
+// Enable/disable submit button
+function checkFormValidity() {
+  submitButton.disabled = !(
+    isValidLength(firstnameElement.value.trim(), 2, 50) &&
+    isValidLength(lastnameElement.value.trim(), 2, 50) &&
+    isValidLength(usernameElement.value.trim(), 3, 20) &&
+    isValidEmail(emailElement.value.trim()) &&
+    isValidLength(passwordElement.value.trim(), 6, 20) &&
+    isValidLength(confirmPasswordElement.value.trim(), 6, 20) &&
+    confirmPasswordElement.value.trim() === passwordElement.value.trim() &&
+    dobElement.value
+  );
 }
 
-function validateForm() {
-  if (validateName() && validateEmail() && validateDOB() && validatePassword() && validateUsername()) {
-    return true;
-  } else {
-    return false;
-  }
-}
-
+// Register function
 async function register() {
-  // Register the user
   try {
     const response = await fetch("/register", {
       method: "POST",
@@ -143,48 +87,67 @@ async function register() {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        firstName: firstnameElement.value,
-        lastName: lastnameElement.value,
-        username: usernameElement.value,
-        email: emailElement.value,
-        password: passwordElement.value,
-        dob: dobElement.value
+        firstname: firstnameElement.value.trim(),
+        lastname: lastnameElement.value.trim(),
+        username: usernameElement.value.trim(),
+        email: emailElement.value.trim(),
+        password: passwordElement.value.trim(),
+        dob: dobElement.value,
       }),
     });
 
-    // Parse the JSON response
     const data = await response.json();
 
-    // If the registration failed, show an error message and return
     if (!response.ok) {
-      errorElement.textContent = data.message || "An unexpected error occurred. Please try again.";
+      showError(data.message, errorElement);
       return;
     }
 
-    // Else redirect the user to the dashboard
     window.location.href = data.url;
-
   } catch (error) {
-    console.error("Failed to register user:", error.message);
-    errorElement.textContent = "An unexpected error occurred. Please try again.";
+    console.error("Registration failed:", error);
   }
 }
 
-document.addEventListener("DOMContentLoaded", () => {
-  // firstnameElement.onblur = validateName;
-  lastnameElement.onblur = validateName;
-  emailElement.onblur = validateEmail;
-  dobElement.onblur = validateDOB;
-  // passwordElement.onblur = validatePassword;
-  confirmPasswordElement.onblur = validatePassword;
-  usernameElement.onblur = validateUsername;
+// Event listeners
+firstnameElement.addEventListener("blur", () => validateField(firstnameElement, "First name must be at least 2 characters", 2, 50));
+lastnameElement.addEventListener("blur", () => validateField(lastnameElement, "Last name must be at least 2 characters", 2, 50));
+usernameElement.addEventListener("blur", () => validateField(usernameElement, "Username must be 3-20 characters", 3, 20));
+emailElement.addEventListener("blur", () => validateEmailField(emailElement, "Enter a valid email"));
+passwordElement.addEventListener("blur", () => validateField(passwordElement, "Password must be 6-20 characters", 6, 20));
+confirmPasswordElement.addEventListener("blur", () => {
+  if (validatePasswordMatch) {
+    validateField(confirmPasswordElement, "Password must be 6-20 characters", 6, 20);
+  }
+});
+dobElement.addEventListener("blur", validateDOB);
 
-  submitButton.addEventListener("click", (event) => {
-    event.preventDefault();
-    if (!validateForm()) {
-      return;
-    } else {
-      register();
-    }
-  });
+firstnameElement.addEventListener("input", checkFormValidity);
+lastnameElement.addEventListener("input", checkFormValidity);
+usernameElement.addEventListener("input", checkFormValidity);
+emailElement.addEventListener("input", checkFormValidity);
+passwordElement.addEventListener("input", checkFormValidity);
+confirmPasswordElement.addEventListener("input", checkFormValidity);
+dobElement.addEventListener("input", checkFormValidity);
+
+submitButton.addEventListener("click", (event) => {
+  event.preventDefault();
+  if (!isValidLength(firstnameElement.value, 2, 50)) {
+    showError("First name must be at least 2 characters.", errorElement);
+  } else if (!isValidLength(lastnameElement.value, 2, 50)) {
+    showError("Last name must be at least 2 characters.", errorElement);
+  } else if (!isValidLength(usernameElement.value, 3, 20)) {
+    showError("Username must be 3-20 characters.", errorElement);
+  } else if (!isValidEmail(emailElement.value)) {
+    showError("Enter a valid email.", errorElement);
+  } else if (!isValidLength(passwordElement.value, 6, 20)) {
+    showError("Password must be 6-20 characters.", errorElement);
+  } else if (confirmPasswordElement.value !== passwordElement.value) {
+    showError("Passwords do not match.", errorElement);
+  } else if (!dobElement.value) {
+    showError("Date of birth is required.", errorElement);
+  } else {
+    errorElement.textContent = ""; // Clear error message
+    register();
+  }
 });

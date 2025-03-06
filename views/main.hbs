@@ -300,15 +300,61 @@
           </header>
           <div class="modal-body">
             <form id="add-task-form" method="post" action="/add-task">
-              <label for="task-type">Type</label>
-              <select id="task-type" required>
-                <option value="" disabled selected>Select a type</option>
-                <option value="1">To-do</option>
-                <option value="2">Shopping list</option>
-                <option value="3">Note</option>
-              </select>
+              <div class="grid">
+                <div>
+                  <label for="task-type">Type</label>
+                  <select id="task-type" required>
+                    <option value="" disabled selected>Select a type</option>
+                    <option value="1">To-do</option>
+                    <option value="2">Shopping list</option>
+                    <option value="3">Note</option>
+                  </select>
+                </div>
+                <div>
+                  <label for="task-category">Category</label>
+                  <select id="task-category" required>
+                    <option value="0" disabled selected>Select a category</option>
+                    <option value="1">Work</option>
+                    <option value="2">Personal</option>
+                    <option value="3">Urgent</option>
+                    <option value="4">Home</option>
+                    <option value="5">Health</option>
+                    <option value="6">Shopping</option>
+                    <option value="7">Study</option>
+                    <option value="8">Hobby</option>
+                    {{#each categories as |category|}}
+                    <option value="{{category_id}}">{{category_name}}</option>
+                    {{/each}}
+                  </select>
+                </div>
+              </div>
               <label for="task-title">Title</label>
               <input type="text" id="task-title" required />
+              <fieldset class="show-hide" id="description-due-date-priority">
+                <label for="task-description">Description</label>
+                <textarea id="task-description" required></textarea>
+                <div class="grid">
+                  <div>
+                    <label for="task-due-date">Due Date <small>(optional)</small></label>
+                    <input type="date" id="task-due-date" />
+                  </div>
+                  <div>
+                    <label for="task-priority">Priority <small>(optional)</small></label>
+                    <select id="task-priority">
+                      <option value="0" disabled selected>Select a priority</option>
+                      <option value="1">Low</option>
+                      <option value="2">Medium</option>
+                      <option value="3">High</option>
+                    </select>
+                  </div>
+                </div>
+              </fieldset>
+              <fieldset class="show-hide" id="has-subtasks-fieldset">
+                <div class="show-subtasks-switch" style="margin-left: 0.5rem; margin-bottom: 0.1rem;">
+                  <input type="checkbox" role="switch" id="has-subtasks" />
+                  <label for="has-subtasks"><small>Has Subtasks</small></label>
+                </div>
+              </fieldset>
               <div class="show-hide modal-sub-section" id="shopping-list-container-modal">
                 <p>
                   Add items <small>(optional) <span class="error" id="shopping-list-item-error"></span></small>
@@ -321,47 +367,28 @@
                 </fieldset>
                 <div class="shopping-list-items"></div>
               </div>
-              <fieldset class="show-hide" id="description-due-date-priority">
-                <label for="task-description">Description</label>
-                <textarea id="task-description" required></textarea>
-                <fieldset class="show-hide" id="has-subtasks-fieldset">
-                  <div class="show-subtasks-switch" style="margin-left: 0.5rem; margin-bottom: 0.1rem;">
-                    <input type="checkbox" role="switch" id="has-subtasks" />
-                    <label for="has-subtasks"><small>Has Subtasks</small></label>
-                  </div>
-                  <div class="show-hide" id="subtask-container-modal">
-                    <fieldset id="add-subtask-fieldset" style="padding-bottom: 0; margin-bottom: 0;">
-                      <p>Add subtasks <small>(you can add/amend these later)</small></p>
-                      <div class="grid">
-                        <fieldset role="group">
-                          <input id="add-subtask-field" type="text" placeholder="Subtask" />
-                          <select id="add-subtask-priority">
-                            <option value="0" disabled selected>Priority (optional)</option>
-                            <option value="1">Low</option>
-                            <option value="2">Medium</option>
-                            <option value="3">High</option>
-                          </select>
-                        </fieldset>
-                      </div>
-                      <fieldset role="group">
-                        <label for="add-subtask-due-date">Due Date (optional)</label>
-                        <input type="date" id="add-subtask-due-date" placeholder="Due by..." />
-                        <button id="add-subtask-button-modal">Add</button>
-                      </fieldset>
-                      <p class="error" id="add-subtask-error-message"></p>
+              <div class="show-hide" id="subtask-container-modal">
+                <fieldset id="add-subtask-fieldset" style="padding-bottom: 0; margin-bottom: 0;">
+                  <p>Add subtasks <small>(you can add/amend these later)</small></p>
+                  <div class="grid">
+                    <fieldset role="group">
+                      <input id="add-subtask-field" type="text" placeholder="Subtask" />
+                      <select id="add-subtask-priority">
+                        <option value="0" disabled selected>Priority (optional)</option>
+                        <option value="1">Low</option>
+                        <option value="2">Medium</option>
+                        <option value="3">High</option>
+                      </select>
                     </fieldset>
                   </div>
+                  <fieldset role="group">
+                    <label for="add-subtask-due-date">Due Date (optional)</label>
+                    <input type="date" id="add-subtask-due-date" placeholder="Due by..." />
+                    <button id="add-subtask-button-modal">Add</button>
+                  </fieldset>
+                  <p class="error" id="add-subtask-error-message"></p>
                 </fieldset>
-                <label for="task-due-date">Due Date <small>(optional)</small></label>
-                <input type="date" id="task-due-date" />
-                <label for="task-priority">Priority <small>(optional)</small></label>
-                <select id="task-priority">
-                  <option value="0" disabled selected>Select a priority</option>
-                  <option value="1">Low</option>
-                  <option value="2">Medium</option>
-                  <option value="3">High</option>
-                </select>
-              </fieldset>
+              </div>
             </form>
           </div>
           <footer class="modal-footer">

@@ -5,6 +5,13 @@ body, html {
     padding: 0;
 }
 
+
+.error {
+    color: var(--pico-form-element-invalid-active-border-color);
+    font-weight: bold;
+    padding-bottom: 0;
+}
+
 /* Main container */
 main {
     display: flex;

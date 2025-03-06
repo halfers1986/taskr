@@ -33,6 +33,8 @@ exports.updateUserDetails = async (req, res) => {
   const userID = req.session.userID;
   const changes = req.body;
 
+  console.log("Settings controller: updateUserDetails called with userID:", userID, "and changes:", changes);
+
   try {
     const response = await fetch(`${endpointPartial}/update-user-details/${userID}`, {
       method: "PATCH",

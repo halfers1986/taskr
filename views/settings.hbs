@@ -142,7 +142,10 @@
         </div>
         <div class="user-detail-pair">
           <p>Full Name:</p>
-          <p id="name">{{settings.user_first_name}} {{settings.user_last_name}}</p>
+          <div id="name-container">
+            <p id="firstName" style="display: inline;">{{settings.user_first_name}} </p>
+            <p id="lastName" style="display: inline;">{{settings.user_last_name}}</p>
+          </div>
         </div>
         <div class="user-detail-pair">
           <p>Email:</p>
@@ -184,10 +187,11 @@
         {{else}}
         <p>No categories found</p>
         {{/if}}
-        <p id="category-delete-conflict" class="error" style="display: none;">Error: cannot delete a category that is in use.</p>
+        <p id="category-delete-conflict" class="error" style="display: none;">Error: cannot delete a category that is in
+          use.</p>
         <form id="add-category-form">
           <fieldset role="group">
-            
+
             <input type="text" id="new-category" name="new-category" placeholder="Add custom category" required>
             <button id="add-category" type="submit">Add</button>
           </fieldset>

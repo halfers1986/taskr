@@ -16,14 +16,17 @@ const confirmDeleteButton = modal.querySelector("#confirm-delete-account");
 function editDetails() {
     // Get the elements to replace
     const usernameElement = document.getElementById('username');
-    const nameElement = document.getElementById('name');
+    const nameContainer = document.getElementById('name-container');
+    const firstNameElement = document.getElementById('firstName');
+    const lastNameElement = document.getElementById('lastName');
     const emailElement = document.getElementById('email');
     const editButton = document.getElementById('edit-details');
 
     // Get the current values
-    const currentUsername = usernameElement.textContent;
-    const currentName = nameElement.textContent;
-    const currentEmail = emailElement.textContent;
+    let currentUsername = usernameElement.textContent;
+    let currentFirstName = firstNameElement.textContent;
+    let currentLastName = lastNameElement.textContent;
+    let currentEmail = emailElement.textContent;
 
     // Create the form elements
     const usernameInput = document.createElement('input');
@@ -33,9 +36,9 @@ function editDetails() {
     const firstNameInput = document.createElement('input');
     const lastNameInput = document.createElement('input');
     firstNameInput.type = 'text';
-    firstNameInput.value = nameElement.textContent.split(' ')[0];
+    firstNameInput.value = currentFirstName;
     lastNameInput.type = 'text';
-    lastNameInput.value = nameElement.textContent.split(' ')[1];
+    lastNameInput.value = currentLastName;
     nameDiv.appendChild(firstNameInput);
     nameDiv.appendChild(lastNameInput);
     const emailInput = document.createElement('input');
@@ -55,37 +58,41 @@ function editDetails() {
 
     // Replace the elements
     usernameElement.replaceWith(usernameInput);
-    nameElement.replaceWith(nameDiv);
+    nameContainer.replaceWith(nameDiv);
     emailElement.replaceWith(emailInput);
     editButton.replaceWith(buttonDiv);
 
-    // Get the input values
-    const newUsername = usernameInput.value;
-    const newFirstName = firstNameInput.value;
-    const newLastName = lastNameInput.value;
-    const newEmail = emailInput.value;
-
-    const toChange = []
-
-    if (newUsername !== currentUsername) {
-        toChange.push({ key: 'username', value: newUsername });
-    }
-    if (newFirstName !== currentName.split(' ')[0] || newLastName !== currentName.split(' ')[1]) {
-        toChange.push({ key: 'firstName', value: `${newFirstName}` });
-        toChange.push({ key: "lastName", value: `${newLastName}` });
-    }
-    if (newEmail !== currentEmail) {
-        toChange.push({ key: 'email', value: newEmail });
-    }
-
     function cancelEdit() {
         usernameInput.replaceWith(usernameElement);
-        nameDiv.replaceWith(nameElement);
+        nameDiv.replaceWith(nameContainer);
         emailInput.replaceWith(emailElement);
         buttonDiv.replaceWith(editButton);
     }
 
-    async function saveDetails(toChange) {
+    async function saveDetails() {
+
+        // Get the input values
+        const newUsername = usernameInput.value.trim();
+        const newFirstName = firstNameInput.value.trim();
+        const newLastName = lastNameInput.value.trim();
+        const newEmail = emailInput.value.trim();
+
+        const toChange = {};
+
+        if (newUsername !== currentUsername) {
+            toChange.username = newUsername;
+        }
+        if (newFirstName !== currentFirstName) {
+            toChange.firstName = newFirstName;
+        }
+        if (newLastName !== currentLastName) {
+            toChange.lastName = newLastName;
+        }
+        if (newEmail !== currentEmail) {
+            toChange.email = newEmail;
+        }
+
+
         try {
             const response = await fetch("/update-user-details", {
                 method: "PATCH",
@@ -102,19 +109,20 @@ function editDetails() {
             }
 
             // Else, update the elements and replace the form elements
-            toChange.forEach((change) => {
-                if (newUsername !== currentUsername) {
-                    currentUsername = newUsername;
-                }
-                if (newFirstName !== currentName.split(' ')[0] || newLastName !== currentName.split(' ')[1]) {
-                    currentName = `${newFirstName} ${newLastName}`;
-                }
-                if (newEmail !== currentEmail) {
-                    currentEmail = newEmail;
-                }
-            });
+            if (newUsername !== currentUsername) {
+                usernameElement.textContent = newUsername;
+            }
+            if (newFirstName !== currentFirstName) {
+                firstNameElement.textContent = newFirstName;
+            }
+            if (newLastName !== currentLastName) {
+                lastNameElement.textContent = newLastName;
+            }
+            if (newEmail !== currentEmail) {
+                emailElement.textContent = newEmail;
+            }
             usernameInput.replaceWith(usernameElement);
-            nameDiv.replaceWith(nameElement);
+            nameDiv.replaceWith(nameContainer);
             emailInput.replaceWith(emailElement);
             buttonDiv.replaceWith(editButton);
 
@@ -125,7 +133,7 @@ function editDetails() {
     }
 
     // Add event listeners to the buttons
-    saveButton.addEventListener('click', () => saveDetails(toChange));
+    saveButton.addEventListener('click', () => saveDetails());
     cancelButton.addEventListener('click', () => cancelEdit());
 }
 

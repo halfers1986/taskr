@@ -27,6 +27,12 @@
     text-decoration: underline;
 }
 
+.error {
+    color: var(--pico-form-element-invalid-active-border-color);
+    font-weight: bold;
+    padding-bottom: 0;
+}
+
 /* Header */
 header {
     position: sticky;
@@ -331,6 +337,7 @@ article.modal {
     overflow: hidden;
     /* Hide overflowing content */
     transition: transform 0.3s ease, opacity 0.1s ease, max-height 0.3s ease;
+    margin: 0;
 }
 
 .modal-subsection {

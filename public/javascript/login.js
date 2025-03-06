@@ -1,100 +1,85 @@
+import showError from "./showError.js";
+
 const loginButton = document.getElementById("login-button");
 const usernameInput = document.getElementById("username");
 const passwordInput = document.getElementById("password");
 const errorElement = document.getElementById("error");
 
-function showError(errorType) {
-  if (errorType === "invalid") {
-    errorElement.textContent = "Invalid username or password.";
-    usernameInput.setAttribute("aria-invalid", "true");
-    passwordInput.setAttribute("aria-invalid", "true");
-  } else if (errorType === "empty") {
-    errorElement.textContent = "Please enter your username and password.";
-    usernameInput.setAttribute("aria-invalid", "true");
-    passwordInput.setAttribute("aria-invalid", "true");
-  } else if (errorType === "empty-email") {
-    errorElement.textContent = "Please enter your email.";
-    usernameInput.setAttribute("aria-invalid", "true");
-  } else if (errorType === "empty-password") {
-    errorElement.textContent = "Please enter your password.";
-    passwordInput.setAttribute("aria-invalid", "true");
-  } else if (errorType === "server") {
-    errorElement.textContent = "Server error. Please try again later.";
+// Function to validate input length
+function isValidLength(value) {
+  return value.length >= 3 && value.length <= 20;
+}
+
+// Function to handle field validation
+function validateLength(input, message) {
+  if (!isValidLength(input.value)) {
+    input.setAttribute("aria-invalid", "true");
+    showError(message, errorElement);
   } else {
-    errorElement.textContent = "Unknown error. Please try again.";
+    input.setAttribute("aria-invalid", "false");
+    errorElement.textContent = ""; // Clear error message
+  }
+  checkFormValidity();
+}
+
+// Function to handle field validation
+function validateIncluded(input, message) {
+  if (!input.value) {
+    input.setAttribute("aria-invalid", "true");
+    showError(message, errorElement);
+  } else {
+    input.setAttribute("aria-invalid", "false");
+    errorElement.textContent = ""; // Clear error message
+  }
+  checkFormValidity();
+}
+
+// Function to enable/disable login button
+function checkFormValidity() {
+  loginButton.disabled = !(isValidLength(usernameInput.value) && passwordInput.value);
+}
+
+async function login() {
+  try {
+    const response = await fetch("/login", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        username: usernameInput.value,
+        password: passwordInput.value,
+      }),
+    });
+
+    const data = await response.json();
+
+    if (!response.ok) {
+      showError(data.message, errorElement);
+      return;
+    }
+
+    window.location.href = data.url;
+  } catch (error) {
+    console.error("Login failed:", error);
   }
 }
 
-async function tryLogin(event) {
+// Event listeners
+usernameInput.addEventListener("blur", () => validateLength(usernameInput, "Username must be 3-20 characters."));
+passwordInput.addEventListener("blur", () => validateIncluded(passwordInput, "Password is required."));
+usernameInput.addEventListener("input", checkFormValidity);
+passwordInput.addEventListener("input", checkFormValidity);
+loginButton.addEventListener("click", (event) => {
   event.preventDefault();
-
-  // Reset error messages
-  usernameInput.setAttribute("aria-valid", "true");
-  passwordInput.setAttribute("aria-valid", "true");
-
-  // Get the email and password values
-  const username = usernameInput.value;
-  const password = passwordInput.value;
-
-  // Validate the email and password
-  if (username === "" && password === "") {
-    showError("empty");
+  if (!isValidLength(usernameInput.value)) {
+    showError("Username must be 3-20 characters.", errorElement);
     return;
-  } else if (username === "") {
-    showError("empty-email");
-    return;
-  } else if (password === "") {
-    showError("empty-password");
+  } else if (!passwordInput.value) {
+    showError("Password is required.", errorElement);
     return;
   } else {
-    // Send the login request to the server
-    try {
-      const response = await fetch("/login", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ username, password }),
-        credentials: "include" // Send session cookies
-      });
-
-      // Parse the JSON response
-      const data = await response.json();
-
-      // If the login failed, show an error message and return
-      if (!response.ok) {
-        showError(data.message || "An unexpected error occurred. Please try again.");
-        return;
-      }
-
-      // Else redirect the user to the dashboard
-      window.location.href = data.url;
-
-    } catch (error) {
-      console.error("Failed to login user:", error.message);
-      showError("An unexpected error occurred. Please try again.");
-    }
-  }
-}
-
-document.addEventListener("DOMContentLoaded", () => {
-  usernameInput.onblur = function () {
-    if (JSON.stringify(usernameInput.value).includes("@") === false) {
-      usernameInput.setAttribute("aria-invalid", "true");
-    } else if (usernameInput.value === "") {
-      usernameInput.setAttribute("aria-invalid", "true");
-    } else {
-      usernameInput.setAttribute("aria-invalid", "false");
-    }
-  };
-
-  passwordInput.onblur = function () {
-    if (passwordInput.value === "") {
-      passwordInput.setAttribute("aria-invalid", "true");
-    } else {
-      passwordInput.setAttribute("aria-invalid", "false");
-    }
-  };
-
-  if (loginButton) {
-    loginButton.addEventListener("click", tryLogin);
+    errorElement.textContent = ""; // Clear error message
+    login();
   }
 });

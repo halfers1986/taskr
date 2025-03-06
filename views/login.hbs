@@ -1,78 +1,91 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Taskr</title>
-  
-    <!-- Favicons -->
-    <link rel="icon" type="image/png" href="/imgs/favicon-32x32.png" sizes="32x32" />
-    <link rel="icon" type="image/png" href="/imgs/favicon-16x16.png" sizes="16x16" />
-  
-    <!-- Pico.css -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2.0.6/css/pico.blue.min.css" />
-    <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.colors.min.css" /> -->
-  
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Taskr</title>
+
+  <!-- Favicons -->
+  <link rel="icon" type="image/png" href="/imgs/favicon-32x32.png" sizes="32x32" />
+  <link rel="icon" type="image/png" href="/imgs/favicon-16x16.png" sizes="16x16" />
+
+  <!-- Pico.css -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2.0.6/css/pico.blue.min.css" />
+  <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.colors.min.css" /> -->
+
   <!-- Personal css -->
   {{!--
   <link rel="stylesheet" href="/css/mystyles.css" /> --}}
   <link rel="stylesheet" href="/css/loginRegister.css" />
-  
-    <!-- Logo font -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Prompt:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet" />
-  </head>
-  <body>
-    <main class="container front-page overflow-auto">
-      <article class="login">
-        <div class="logo-container">
-          <svg class="logo" id="eFG6uYEB0Sx1" width="400" height="200" preserveAspectRatio="xMidYMid meet" viewBox="0 40 100 100" shape-rendering="geometricPrecision" text-rendering="geometricPrecision">
-            <g>
-              <!--Icon shape-->
-              <rect width="77" height="77" x="-40" y="50.5" rx="13" ry="13" fill="none" stroke-width="6" />
-              <!--Tick-->
-              <path d="M34.264179,87.977264c5.923501,2.240505,14.069886,12.381528,17.2989,19.275918C58.060229,96.515478,73.388151,78.067343,82.7011,70.678364" transform="translate(-59.5, 3)" fill="none" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" />
-            </g>
-            <g>
-              <!--"Taskr" text-->
-              <text dx="-18" dy="1" font-family="Prompt" font-size="12" font-weight="400" transform="matrix(3.379208 0 0 3.832362 107.691444 91.051542)" stroke-width="0">
-                <tspan y="0" font-family="Prompt" font-weight="600" stroke-width="0">Taskr</tspan>
-                <tspan x="0" y="10" font-family="Roboto" font-weight="400" stroke-width="0" />
-              </text>
-              <!--"Get shit done" text-->
-              <text dx="-59.5" dy="0" font-family="Prompt" font-size="11" text-decoration="overline" font-weight="700" transform="translate(113.355163 110.983429)" stroke-width="0">
-                <tspan y="4" font-weight="700" stroke-width="0">GET SHIT DONE</tspan>
-              </text>
-            </g>
-          </svg>
-        </div>
-        <div>
-          <form id="login" method="POST" action="/main">
-            <h3>Login</h3>
-            <input id="username" type="text" placeholder="username" />
-            <input id="password" type="password" placeholder="Password" />
-            <p class="error" id="error"></p>
-            <div><button id="login-button" class="round-button" type="submit">Login</button></div>
-            <p class="secondary">
-              Don't have an account?
-              <strong><a href="/register">Register</a></strong>
-            </p>
-          </form>
-        </div>
-      </article>
-    </main>
-    <footer class="container front-page-footer">
-      <p class="copy">&copy; 2024 Taskr</p>
-      <div>
-        <form>
-          <label for="theme-switcher" style="padding-right: 0.5em"><small> </small></label>
-          <input type="checkbox" role="switch" id="theme-switcher"/>
-        </form>
+
+  <!-- Logo font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Prompt:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+    rel="stylesheet" />
+</head>
+
+<body>
+  <main class="container front-page overflow-auto">
+    <article class="login">
+      <div class="logo-container">
+        <svg class="logo" id="eFG6uYEB0Sx1" width="400" height="200" preserveAspectRatio="xMidYMid meet"
+          viewBox="0 40 100 100" shape-rendering="geometricPrecision" text-rendering="geometricPrecision">
+          <g>
+            <!--Icon shape-->
+            <rect width="77" height="77" x="-40" y="50.5" rx="13" ry="13" fill="none" stroke-width="6" />
+            <!--Tick-->
+            <path
+              d="M34.264179,87.977264c5.923501,2.240505,14.069886,12.381528,17.2989,19.275918C58.060229,96.515478,73.388151,78.067343,82.7011,70.678364"
+              transform="translate(-59.5, 3)" fill="none" stroke-width="8" stroke-linecap="round"
+              stroke-linejoin="round" />
+          </g>
+          <g>
+            <!--"Taskr" text-->
+            <text dx="-18" dy="1" font-family="Prompt" font-size="12" font-weight="400"
+              transform="matrix(3.379208 0 0 3.832362 107.691444 91.051542)" stroke-width="0">
+              <tspan y="0" font-family="Prompt" font-weight="600" stroke-width="0">Taskr</tspan>
+              <tspan x="0" y="10" font-family="Roboto" font-weight="400" stroke-width="0" />
+            </text>
+            <!--"Get shit done" text-->
+            <text dx="-59.5" dy="0" font-family="Prompt" font-size="11" text-decoration="overline" font-weight="700"
+              transform="translate(113.355163 110.983429)" stroke-width="0">
+              <tspan y="4" font-weight="700" stroke-width="0">GET SHIT DONE</tspan>
+            </text>
+          </g>
+        </svg>
       </div>
-    </footer>
-    <!-- Include the theme-switcher.js script -->
-    <script src="/javascript/themeSwitcher.js"></script>
-    <script src="/javascript/login.js"></script>
-  </body>
+      <div>
+        <form id="login" method="POST" action="/login">
+          <div style="display: flex; align-items: flex-end; justify-content: flex-start">
+            <h3 style="margin-right: 10px;">Login</h3>
+            <p class="error" id="error"></p>
+          </div>
+          <input id="username" type="text" placeholder="username" autocomplete="username"/>
+          <input id="password" type="password" placeholder="Password" autocomplete="current-password" />
+          <div><button id="login-button" class="round-button" type="submit" disabled>Login</button></div>
+        </form>
+        <p class="secondary">
+          Don't have an account?
+          <strong><a href="/register">Register</a></strong>
+        </p>
+      </div>
+    </article>
+  </main>
+  <footer class="container front-page-footer">
+    <p class="copy">&copy; 2024 Taskr</p>
+    <div>
+      <form>
+        <label for="theme-switcher" style="padding-right: 0.5em"><small> </small></label>
+        <input type="checkbox" role="switch" id="theme-switcher" />
+      </form>
+    </div>
+  </footer>
+  <!-- Include the theme-switcher.js script -->
+  <script src="/javascript/themeSwitcher.js"></script>
+  <script src="/javascript/login.js" type="module"></script>
+</body>
+
 </html>
