@@ -299,6 +299,10 @@ async function addCategory(event) {
         deleteButton.className = 'custom-categories-delete';
         deleteButton.addEventListener('click', deleteCategory);
         newCategory.appendChild(deleteButton);
+        const noCategoriesMessage = document.getElementById('no-categories-message');
+        if (noCategoriesMessage) {
+            noCategoriesMessage.remove();
+        }
         categoryList.appendChild(newCategory);
     } catch (err) {
         console.error("Error adding category:", err);
@@ -384,16 +388,8 @@ async function confirmDelete(password) {
 
         console.log(data.message);
 
-        // Else, clear session and redirect to the login page
-        req.session.destroy((err) => {
-            if (err) {
-                console.error("Error destroying session:", err);
-                return res.status(500).json({ message: "Failed to log out" });
-            }
-            res.clearCookie("connect.sid");
-            window.location.href = "/login";
-        });
-
+        // Account deleted - redirect to the login page
+        window.location.href = data.url;
 
     } catch (error) {
         console.error("Error deleting account:", error);

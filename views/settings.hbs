@@ -183,22 +183,22 @@
           <li class="category-list-item" data-category-id="{{category_id}}">{{category_name}} <button
               class="custom-categories-delete">X</button></li>
           {{/each}}
+
+          {{else}}
+          <p id="no-categories-message">No categories found</p>
+          {{/if}}
         </ul>
-        {{else}}
-        <p>No categories found</p>
-        {{/if}}
         <p id="category-delete-conflict" class="error" style="display: none;">Error: cannot delete a category that is in
           use.</p>
         <form id="add-category-form">
           <fieldset role="group">
-
             <input type="text" id="new-category" name="new-category" placeholder="Add custom category" required>
             <button id="add-category" type="submit">Add</button>
           </fieldset>
         </form>
       </div>
       <div class="delete-account">
-        <h2 style="margin-top: 2rem">Account</h2>
+        <h2 style="margin-top: 1rem">Account</h2>
         <button id="delete-account-button">Delete Account</button>
       </div>
     </section>

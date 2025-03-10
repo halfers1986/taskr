@@ -6,6 +6,7 @@ const app = express();
 const path = require("path");
 const router = require("./routes/routes");
 const rootPath = path.join(__dirname);
+const dotenv = require("dotenv").config({ path: './config.env' });
 
 
 // -- HANDLEBARS CONFIGURATION -- //
@@ -53,7 +54,7 @@ app.use(cookieParser());
 // Middleware to manage sessions
 app.use(
   session({
-    secret: "supersecretpassword", // Secret password here
+    secret: process.env.SESSION_SECRET, // Secret password here
     resave: false, // Prevents session from being saved every time a request is made
     saveUninitialized: false, // GDPR compliance (only save cookies when user logs in)
     cookie: {
@@ -73,18 +74,6 @@ app.use((req, res, next) => {
 });
 
 app.use("/", router);
-
-// Middleware to log session data -- used for debugging
-// app.use((req, res, next) => {
-//   console.log("Session data:", req.session);
-//   next();
-// });
-
-// Middleware to log incoming requests -- used for debugging
-// app.use((req, res, next) => {
-//   console.log("Incoming request:", req.method, req.url);
-//   next();
-// });
 
 app.listen(3000, () => {
   console.log("Server is running on port 3000");

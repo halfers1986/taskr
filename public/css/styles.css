@@ -489,7 +489,8 @@ tr {
     gap: 1rem;
 }
 
-#delete-account-button {
+#delete-account-button,
+#confirm-delete-account {
     color: var(--pico-color);
     background-color: var(--pico-form-element-invalid-focus-color);
     border: 1px solid var(--pico-form-element-invalid-border-color);

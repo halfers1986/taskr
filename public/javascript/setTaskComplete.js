@@ -17,10 +17,13 @@ export async function setTaskComplete(event) {
     return console.error(data.message || "Failed to update task as complete.");
   }
 
+  console.log(data);
+
   // Update the task element in the DOM
   task.classList.add("completed");
   task.dataset.taskComplete = true;
   task.dataset.taskCompletedTimestamp = data.taskCompletedTimestamp;
+  console.log(task.dataset.taskCompletedTimestamp);
 
   // Create an overlay to blur the task
   const overlay = document.createElement("div");
@@ -31,7 +34,7 @@ export async function setTaskComplete(event) {
   const reopenTaskContainer = document.createElement("div");
   reopenTaskContainer.classList.add("completed-task-label");
   const formattedDate = new Date(data.taskCompletedTimestamp).toLocaleDateString("en-GB");
-  reopenTaskContainer.innerHTML = `<h2>Task "${taskTitle}" completed on ${formattedDate}</h2>`;
+  reopenTaskContainer.innerHTML = `<h4>Task "${taskTitle}" completed on ${formattedDate}</h4>`;
   task.appendChild(reopenTaskContainer);
 
   // Create a button to reopen the task

@@ -30,8 +30,6 @@ exports.getTasks = async (req, res) => {
       return res.status(response.status).send("An error occurred");
     }
 
-    // console.log(data);
-
     // Render the template with the returned data
     // layout: false prevents the default layout from being used (Handlebars) as we don't have one
     res.render("main", { tasks: data.tasks, categories: data.categories, layout: false });
@@ -124,7 +122,7 @@ exports.updateTaskCompletion = async (req, res) => {
     }
 
     // Else return success message
-    res.json({ message: data.message });
+    res.json({ message: data.message, taskCompletedTimestamp: data.taskCompletedTimestamp });
 
   } catch (err) {
     console.error("Error updating task:", err);

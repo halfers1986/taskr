@@ -87,8 +87,8 @@ async function register() {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        firstname: firstnameElement.value.trim(),
-        lastname: lastnameElement.value.trim(),
+        firstName: firstnameElement.value.trim(),
+        lastName: lastnameElement.value.trim(),
         username: usernameElement.value.trim(),
         email: emailElement.value.trim(),
         password: passwordElement.value.trim(),

@@ -7,7 +7,10 @@ const errorElement = document.getElementById("error");
 
 // Function to validate input length
 function isValidLength(value) {
-  return value.length >= 3 && value.length <= 20;
+  if (value.length >= 3 && value.length <= 20) {
+    return true;
+  }
+  return false;
 }
 
 // Function to handle field validation

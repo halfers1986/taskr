@@ -126,12 +126,13 @@ exports.deleteCategory = async (req, res) => {
 
     const data = await response.json();
 
+    // If the response is not okay, return the error message
     if (!response.ok) {
       console.error("Settings controller: Failed to delete category: Message returned from API:", data.message);
       return res.status(response.status).json({ message: data.message });
     }
 
-    res.status(200).json({ message: "Category deleted" });
+    res.status(200).json({ message: "Category deleted", url: "/login" });
 
   } catch (err) {
     console.error("Error deleting category:", err);
@@ -154,14 +155,22 @@ exports.deleteAccount = async (req, res) => {
     const data = await response.json();
 
     if (!response.ok) {
-      if (err.status === 409) {
+      if (response.status === 409) {
         return res.status(409).json({ message: data.message });
       }
       console.error("Settings controller: Failed to delete account: Message returned from API:", data.message);
       return res.status(response.status).json({ message: data.message });
     }
 
-    res.status(200).json({ message: "Account deleted" });
+    // Else, clear session and send response redirect to the login page
+    req.session.destroy((err) => {
+      if (err) {
+        console.error("Error destroying session:", err);
+        return res.status(500).json({ message: "Failed to log out" });
+      }
+      res.clearCookie("connect.sid");
+      res.status(200).json({ message: "Account deleted", url: "/login" });
+    });
 
   } catch (err) {
     console.error("Error deleting account:", err);

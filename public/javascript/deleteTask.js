@@ -9,10 +9,10 @@ const confirmDelete = modal.querySelector("#confirm-delete");
 // Handle confirm delete action
 async function confirmDeleteAction() {
   const task = visibleModal.task; // Store the task reference
+  const taskID = task.dataset.taskId;
+  const taskType = task.dataset.taskType;
 
   try {
-    const taskID = task.dataset.taskId;
-    const taskType = task.dataset.taskType;
 
     // Remove the task from the database
     const response = await fetch("/delete-task", {

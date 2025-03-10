@@ -29,16 +29,21 @@ function renderBasicStats(basicData) {
     let totalCompletedSubtasks = 0;
     let totalListItems = 0;
     let totalCompletedListItems = 0;
+    console.log("basicData: ", basicData);
     basicData.results.forEach((task) => {
         totalTasks++;
         completedTasks += task.task_complete;
         if (task.subtasks) {
             totalSubtasks += task.subtasks.subtask_count;
-            totalCompletedSubtasks += parseInt(task.subtasks.subtasks_completed);
+            if (task.subtasks.subtasks_completed) {
+                totalCompletedSubtasks += parseInt(task.subtasks.subtasks_completed);
+            }
         }
         if (task.listItems) {
             totalListItems += task.listItems.list_item_count;
-            totalCompletedListItems += parseInt(task.listItems.list_items_completed);
+            if (task.listItems.list_items_completed) {
+                totalCompletedListItems += parseInt(task.listItems.list_items_completed);
+            }
         }
     });
 

@@ -27,7 +27,7 @@
 
 <body id="register-body">
   <main class="container register-page">
-    <article class="register">
+    <article class="register" style="padding-bottom: 0">
       <div class="logo-container">
         <svg class="logo" id="eFG6uYEB0Sx1" width="400" height="200" preserveAspectRatio="xMidYMid meet"
           viewBox="0 40 100 100" shape-rendering="geometricPrecision" text-rendering="geometricPrecision">
@@ -63,19 +63,25 @@
           </div>
           <label>Name</label>
           <fieldset role="group">
-            <input id="firstname" type="text" placeholder="First name" autocomplete="given-name"/>
+            <input id="firstname" type="text" placeholder="First name" autocomplete="given-name" />
             <input id="lastname" type="text" placeholder="Last name" autocomplete="family-name">
           </fieldset>
-          <label for="username">Username</label>
-          <input id="username" type="text" placeholder="Username" autocomplete="username">
-          <label>Date of birth</label>
-          <input id="DOB" type="date" placeholder="Your date of birth" autocomplete="bday-day"/>
+          <div class="grid">
+            <div>
+              <label for="username">Username</label>
+              <input id="username" type="text" placeholder="Username" autocomplete="username">
+            </div>
+            <div>
+              <label>Date of birth</label>
+              <input id="DOB" type="date" placeholder="Your date of birth" autocomplete="bday-day" />
+            </div>
+          </div>
           <label>Email</label>
-          <input id="email" type="email" placeholder="Email" autocomplete="email"/>
+          <input id="email" type="email" placeholder="Email" autocomplete="email" />
           <label>Password</label>
           <fieldset role="group">
-            <input id="password" type="password" placeholder="Password" autocomplete="new-password"/>
-            <input id="confirm-password" type="password" placeholder="Confirm password" autocomplete="new-password"/>
+            <input id="password" type="password" placeholder="Password" autocomplete="new-password" />
+            <input id="confirm-password" type="password" placeholder="Confirm password" autocomplete="new-password" />
           </fieldset>
           <div><button id="submit-button" class="primary" type="submit">Register</button></div>
           <!-- <div class="g-signin2" data-onsuccess="onSignIn"></div> -->
