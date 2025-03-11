@@ -1,11 +1,9 @@
 # Task Management Web App
 
 ## Project Overview
-
-This is a full-stack task management web application that allows users to create, categorise, and manage tasks efficiently. The app provides different task types such as lists, notes, and to-dos, along with filtering and session persistence for user preferences.
+This is a full-stack task management web application that allows users to create, categorise, and manage tasks efficiently. The app provides different task types, including lists, notes, and to-dos, along with filtering and sorting, plus some visualisation of data.
 
 ## Tech Stack
-
 - **Frontend:** HTML, CSS, Handlebars.js
 - **Backend:** Node.js, Express
 - **Database:** mySQL
@@ -14,14 +12,12 @@ This is a full-stack task management web application that allows users to create
 ## Installation & Setup
 
 ### Prerequisites
-
 - Node.js installed
 
 ### Steps to Run Locally
-
 1. Clone the repository:
    ```sh
-   git clone <repository-url>
+   git clone `https://github.com/halfers1986/taskr`
    cd <repository-folder>
    ```
 2. Install dependencies:
@@ -34,18 +30,16 @@ This is a full-stack task management web application that allows users to create
    ```sh
    npm start
    ```
-5. Clone, install, and run the API node server ()
-
+5. Clone, install, and run the API node server (...)
 6. Open the app in your browser (default: `http://localhost:3000`).
 
 ## Usage Instructions
-
-- **Login/Register (if applicable)**
+- **Login/Register**
 - **Create Tasks:** Choose task type (list, note, to-do) and add details.
 - **Manage Tasks:** Edit, delete, or categorize tasks.
+- **View Data** See visualisations and numbers on the status and makeup of your tasks
 
 ## Project Structure
-
 ```
 ├── public/        # Static files (CSS, JS, images)
 │   ├── css/       # Stylesheets
@@ -60,7 +54,6 @@ This is a full-stack task management web application that allows users to create
 ```
 
 ## Known Issues & Future Improvements
-
 - Enhance user authentication (OAuth)
 - Optimize performance and UI responsiveness
 
