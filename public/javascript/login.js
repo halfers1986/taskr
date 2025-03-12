@@ -50,7 +50,7 @@ async function login() {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        username: usernameInput.value,
+        username: usernameInput.value.trim(),
         password: passwordInput.value,
       }),
     });

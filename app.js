@@ -7,6 +7,7 @@ const path = require("path");
 const router = require("./routes/routes");
 const rootPath = path.join(__dirname);
 const dotenv = require("dotenv").config({ path: './config.env' });
+const validator = require("express-validator");
 
 
 // -- HANDLEBARS CONFIGURATION -- //

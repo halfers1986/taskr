@@ -208,6 +208,7 @@ async function confirmAddAction(event) {
     }
     return;
   }
+  console.log("Task added successfully:", responseData.task);
   // Add the new task to the DOM
   addTaskToDOM(responseData.task);
 

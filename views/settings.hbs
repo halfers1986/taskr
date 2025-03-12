@@ -138,18 +138,18 @@
         <h2 style="margin-top: 2rem">Your Details</h2>
         <div class="user-detail-pair">
           <p>Username:</p>
-          <p id="username">{{settings.user_username}}</p>
+          <p id="username">{{{settings.user_username}}}</p>
         </div>
         <div class="user-detail-pair">
           <p>Full Name:</p>
           <div id="name-container">
-            <p id="firstName" style="display: inline;">{{settings.user_first_name}} </p>
-            <p id="lastName" style="display: inline;">{{settings.user_last_name}}</p>
+            <p id="firstName" style="display: inline;">{{{settings.user_first_name}}} </p>
+            <p id="lastName" style="display: inline;">{{{settings.user_last_name}}}</p>
           </div>
         </div>
         <div class="user-detail-pair">
           <p>Email:</p>
-          <p id="email">{{settings.user_email}}</p>
+          <p id="email">{{{settings.user_email}}}</p>
         </div>
         <button id="edit-details">Edit Details</button>
       </div>
@@ -180,7 +180,7 @@
         <ul id="custom-categories-list">
           {{#if categories.length}}
           {{#each categories}}
-          <li class="category-list-item" data-category-id="{{category_id}}">{{category_name}} <button
+          <li class="category-list-item" data-category-id="{{category_id}}">{{{category_name}}} <button
               class="custom-categories-delete">X</button></li>
           {{/each}}
 

@@ -1,3 +1,5 @@
+import decodeHTML from "./decodeHTML.js";
+
 export default async function addItemToTaskTable(event) {
   // Prevent the default behavior (form submission or page reload)
   event.preventDefault();
@@ -40,6 +42,9 @@ export default async function addItemToTaskTable(event) {
         throw new Error(data.message || "Failed to add new subtask.");
         // TODO: Display error message to user
       }
+
+      console.log("Sanitized input:", data.sanitizedInput); // Debugging log
+      const sanitizedInput = data.sanitizedInput;
 
       // Add the subtask to the DOM
       // If there is no subtask table, create one
@@ -131,7 +136,7 @@ export default async function addItemToTaskTable(event) {
       buttonsCell.appendChild(deleteButton);
 
       // Add the subtask description, due date, and priority to the cells
-      cell1.textContent = item1;
+      cell1.textContent = decodeHTML(sanitizedInput.item1);
       if (taskType === "1") {
         let dueDate;
         if (item2 !== "") {
@@ -144,8 +149,8 @@ export default async function addItemToTaskTable(event) {
         const priority = item3 === "3" ? "High" : item3 === "2" ? "Medium" : item3 === "1" ? "Low" : "";
         cell3.textContent = priority;
       } else {
-        cell2.textContent = item2;
-        cell3.textContent = item3;
+        cell2.textContent = decodeHTML(sanitizedInput.item2);
+        cell3.textContent = decodeHTML(sanitizedInput.item3);
       }
 
       // Add the data for date and priority to the cells

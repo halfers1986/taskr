@@ -1,3 +1,5 @@
+import decodeHTML from "./decodeHTML.js";
+
 // -- Declare global variables --
 // Find the closest (containing) task element
 let task;
@@ -63,26 +65,12 @@ function getAndStoreInitialValues() {
   } else {
     taskPriorityValue = taskPriorityElement.dataset.taskPriority;
   }
-  let taskPriorityText;
-  switch (taskPriorityValue) {
-    case "1":
-      taskPriorityText = "Low";
-      break;
-    case "2":
-      taskPriorityText = "Medium";
-      break;
-    case "3":
-      taskPriorityText = "High";
-      break;
-    default:
-      taskPriorityText = "";
-  }
 
   let taskCategoryValue;
   if (taskCategoryElement.dataset.taskCategory) {
     taskCategoryValue = taskCategoryElement.dataset.taskCategory;
   } else {
-    taskCategoryValue = null;
+    taskCategoryValue = "";
   }
   // Store the initial values of the task elements in global array variable
   initialTaskValues = { taskTitleText, taskDueDateValue, taskDescriptionText, taskPriorityValue, taskCategoryValue };
@@ -129,7 +117,7 @@ function makeCategoryInput() {
   taskCategoryInput.setAttribute("value", initialTaskValues.taskCategoryValue);
   // Standard category options
   categoryOptions = [
-    { id: null, name: "" },  // Blank option
+    { id: "", name: "" },  // Blank option
     { id: "1", name: "Work" },
     { id: "2", name: "Personal" },
     { id: "3", name: "Urgent" },
@@ -226,14 +214,17 @@ async function saveChanges() {
     return;
   }
 
+  const sanitizedInput = responseData.sanitizedInput;
+  console.log("Sanitized input:", sanitizedInput);
+
   // Replace the input fields with the original task elements, with the updated values
   inputFields.titleInput.replaceWith(taskTitleElement);
   if (newTitle) {
-    taskTitleElement.textContent = newTitle;
+    taskTitleElement.textContent = decodeHTML(sanitizedInput.title);
   }
   inputFields.descriptionInput.replaceWith(taskDescriptionElement);
   if (newDescription) {
-    taskDescriptionElement.textContent = newDescription;
+    taskDescriptionElement.textContent = decodeHTML(sanitizedInput.description);
   }
   inputFields.dueDateInput.replaceWith(taskDueDateElement);
   if (newDueDate) {

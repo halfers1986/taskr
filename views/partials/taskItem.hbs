@@ -27,7 +27,7 @@
         </svg>
         {{/if}}
       </div>
-      <h2 class="task-title">{{task_title}}</h2>
+      <h2 class="task-title">{{{task_title}}}</h2>
     </div>
     <div style="display: flex; flex-direction: row; align-items: center; justify-content: space-between">
       <h4 class="task-category" data-task-category="{{task_category_id}}" data-task-category-name="{{category_name}}"
@@ -52,7 +52,7 @@
     </div>
   </div>
   {{#if (or (eq task_type_id 1) (eq task_type_id 3))}}
-  <p class="task-description" style="white-space: pre-wrap;">{{task_description}}</p>
+  <p class="task-description" style="white-space: pre-wrap;">{{{task_description}}}</p>
   {{/if}}
   {{#if (eq task_type_id 1)}}
   <div class="subtasks">
@@ -75,7 +75,7 @@
             {{#if (eq subtask_complete 0)}}
             <td class="column-checkbox"><input type="checkbox" class="toggle-complete"
                 data-subtask-id="{{subtask_id}}" /></td>
-            <td class="subtask-description column">{{subtask_description}}</td>
+            <td class="subtask-description column">{{{subtask_description}}}</td>
             <td class="subtask-due-date column" data-subtask-due-date="{{subtask_due_date}}">
               {{subtask_due_date_formatted}}</td>
             <td class="subtask-priority column" data-subtask-priority="{{subtask_priority_id}}">
@@ -89,7 +89,7 @@
             {{else}}
             <td class="column-checkbox"><input type="checkbox" class="toggle-complete" data-subtask-id="{{subtask_id}}"
                 checked /></td>
-            <td class="subtask-description checked-item column">{{subtask_description}}</td>
+            <td class="subtask-description checked-item column">{{{subtask_description}}}</td>
             <td class="subtask-due-date checked-item column" data-subtask-due-date="{{subtask_due_date}}">
               {{subtask_due_date_formatted}}</td>
             <td class="subtask-priority checked-item column" data-subtask-priority="{{subtask_priority_id}}">
@@ -141,9 +141,9 @@
           {{#if (eq list_item_complete 0)}}
           <td class="column-checkbox"><input type="checkbox" class="toggle-complete"
               data-list-item-id="{{list_item_id}}" /></td>
-          <td class="list-item-name column">{{list_item_name}}</td>
-          <td class="list-item-store column">{{list_item_store}}</td>
-          <td class="list-item-quantity column">{{list_item_quantity}}</td>
+          <td class="list-item-name column">{{{list_item_name}}}</td>
+          <td class="list-item-store column">{{{list_item_store}}}</td>
+          <td class="list-item-quantity column">{{{list_item_quantity}}}</td>
           <td class="column column-buttons">
             <button class="button-table edit-button-table primary outline"
               data-list-item-id="{{list_item_id}}">Edit</button>
@@ -153,9 +153,9 @@
           {{else}}
           <td class="column-checkbox"><input type="checkbox" class="toggle-complete"
               data-list-item-id="{{list_item_id}}" checked /></td>
-          <td class="list-item-name column checked-item">{{list_item_name}}</td>
-          <td class="list-item-store column checked-item">{{list_item_store}}</td>
-          <td class="list-item-quantity column checked-item">{{list_item_quantity}}</td>
+          <td class="list-item-name column checked-item">{{{list_item_name}}}</td>
+          <td class="list-item-store column checked-item">{{{list_item_store}}}</td>
+          <td class="list-item-quantity column checked-item">{{{list_item_quantity}}}</td>
           <td class="column column-buttons">
             <button class="button-table edit-button-table primary outline" data-list-item-id="{{list_item_id}}"
               disabled>Edit</button>

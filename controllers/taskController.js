@@ -92,7 +92,7 @@ exports.updateTask = async (req, res) => {
     }
 
     // Else return success message
-    res.json({ message: data.message });
+    res.json({ message: data.message, sanitizedInput: req.body });
 
   } catch (err) {
     console.error("Error updating task:", err);

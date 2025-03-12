@@ -78,7 +78,7 @@ exports.addSubItem = async (req, res) => {
     }
 
     // Else return success message
-    res.json({ message: data.message, insertId: data.insertId });
+    res.json({ message: data.message, insertId: data.insertId, sanitizedInput: req.body });
 
     } catch (err) {
     console.error("Error adding item:", err);
