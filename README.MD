@@ -25,13 +25,16 @@ This is a full-stack task management web application that allows users to create
    npm install
    ```
 3. Configure environment variables:
-   - Create a `.env` file with the required variables (e.g., session secret, database connection)
+   - Create a `.env` file with the required variables (i.e. session secret)
 4. Run the application:
    ```sh
    npm start
    ```
-5. Clone, install, and run the API node server (...)
+5. Clone, install, and run the API node server (https://github.com/halfers1986/taskrAPI)
 6. Open the app in your browser (default: `http://localhost:3000`).
+8. Login with example user:
+   Username: spideyboy
+   Password: sausages
 
 ## Usage Instructions
 - **Login/Register**
